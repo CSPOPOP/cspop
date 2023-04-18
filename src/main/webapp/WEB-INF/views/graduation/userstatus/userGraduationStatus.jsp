@@ -513,12 +513,16 @@
         }
     });
     $(() => { // 기타 자격 progress bar 추가 함수
-        let percentage = 100; // percent가 동적으로 변경되어야 함
+        let count = <c:out value="${fn:length(notApprovalList)}" />
+        console.log(count);
+        let percentage = 100 - 30 * count; // percent가 동적으로 변경되어야 함
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#otherPercent').html(appendText)
     });
     $(() => { // 논문 progress bar 추가 함수
-        let percentage = 100; // percent가 동적으로 변경되어야 함
+        let count = <c:out value="${fn:length(notApprovalList)}" />
+        console.log(count);
+        let percentage = 100 - 25 * count; // percent가 동적으로 변경되어야 함
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#thesisPercent').html(appendText)
     });
