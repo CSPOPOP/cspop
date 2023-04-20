@@ -123,9 +123,6 @@
                                                                 <div class="th-inner sortable both">제출</div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner sortable both">이동</div>
-                                                            </th>
-                                                            <th>
                                                                 <div class="th-inner sortable both">비고</div>
                                                             </th>
                                                         </tr>
@@ -152,10 +149,6 @@
                                                                                 </button>
                                                                             </c:otherwise>
                                                                         </c:choose>
-<%--                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"--%>
-<%--                                                                            onclick="getSubmitForm(${userSubmitFormInfo.id})">--%>
-<%--                                                                            ${userSchedule.submitStatus}--%>
-<%--                                                                        </button>--%>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '제안서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
@@ -197,7 +190,6 @@
                                                                         </c:if>
                                                                     </c:if>
                                                                 </td>
-                                                                <td><a href="#">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
                                                             </tbody>
@@ -329,12 +321,26 @@
                                                                 <h3>신청접수 승인</h3>
                                                             </div>
                                                             <div class="modal-body">
-
+                                                                <label for="professorName">담당교수 :</label>
+                                                                <select id="professorName" name="professorName">
+                                                                    <option value="김도훈">김도훈</option>
+                                                                    <option value="이은정">이은정</option>
+                                                                    <option value="한상범">한상범</option>
+                                                                    <option value="권기현">권기현</option>
+                                                                    <option value="누구있더라">누구있더라</option>
+                                                                </select><br>
+                                                                <label for="graduationDate">졸업날짜 :</label>
+                                                                <input type="date" id="graduationDate" name="graduationDate"><br>
+                                                                <label>캡스톤 이수 여부:</label><br>
+                                                                <label for="capstoneCompletion-yes">이수</label>
+                                                                <input type="radio" id="capstoneCompletion-yes" name="capstoneCompletion" value=true>
+                                                                <label for="capstoneCompletion-no">미이수</label>
+                                                                <input type="radio" id="capstoneCompletion-no" name="capstoneCompletion" value=false>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary">반려</button>
-                                                                <button type="button" class="btn btn-primary">승인</button>
+                                                                <button type="button" class="btn btn-primary" onclick="ApplicationReceived(${userDetail.studentId})">승인</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -402,7 +408,7 @@
                                                             <h3>기타 자격</h3>
                                                         </div>
                                                         <div class="modal-body">
-                                                
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
