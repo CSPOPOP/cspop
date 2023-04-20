@@ -85,15 +85,15 @@ VALUES (1, NOW(), NOW(), '내용', '내용', '내용', '내용', '내용', '내�
 
 -- submit_form 데이터
 insert into submit_form
-values (1, NOW(), NOW(), '컴퓨터공학부', '201811612', '유명한', 1, 'THESIS', 0, null);
+values (1, NOW(), NOW(), '컴퓨터공학부', '201811612', '유명한', 1, 'THESIS');
 insert into submit_form
-values (2, NOW(), NOW(), '컴퓨터공학부', '201812753', '함현준', 1, 'Other_Qualifications', 0, null);
+values (2, NOW(), NOW(), '컴퓨터공학부', '201812753', '함현준', 1, 'Other_Qualifications');
 insert into submit_form
-values (3, NOW(), NOW(), '컴퓨터공학부', '202013149', '고은아', 1, 'THESIS', 0, null);
+values (3, NOW(), NOW(), '컴퓨터공학부', '202013149', '고은아', 1, 'THESIS');
 insert into submit_form
-values (4, NOW(), NOW(), '컴퓨터공학부', '202016034', '이도현', 1, 'THESIS', 0, null);
+values (4, NOW(), NOW(), '컴퓨터공학부', '202016034', '이도현', 1, 'THESIS');
 insert into submit_form
-values (6, NOW(), NOW(), '컴퓨터공학부', '201812301', '정경원', 1, 'THESIS', 0, null);
+values (6, NOW(), NOW(), '컴퓨터공학부', '201812301', '정경원', 1, 'THESIS');
 
 
 --  certification_board 데이터
