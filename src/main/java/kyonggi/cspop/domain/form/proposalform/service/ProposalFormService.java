@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.form.proposalform.service;
 
+import kyonggi.cspop.application.controller.form.FormRejectionDto;
 import kyonggi.cspop.application.controller.form.proposalform.ProposalFormDto;
 import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.proposalform.repository.ProposalFormRepository;
@@ -34,5 +35,11 @@ public class ProposalFormService {
     public void updateUserProposalState(Long id) {
         ProposalForm proposalForm = proposalFormRepository.findById(id).get();
         proposalForm.updateState();
+    }
+
+    @Transactional
+    public void rejectUserProposalForm(Long id, FormRejectionDto formRejectionDto){
+        ProposalForm proposalForm = proposalFormRepository.findById(id).get();
+        proposalForm.rejectProposalForm(formRejectionDto.getReject_reason());
     }
 }

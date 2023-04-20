@@ -2,6 +2,7 @@ package kyonggi.cspop.application.controller.board.excel.graduate;
 
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
+import kyonggi.cspop.application.controller.form.FormRejectionDto;
 import kyonggi.cspop.application.controller.form.finalForm.FinalViewDto;
 import kyonggi.cspop.application.controller.form.interimForm.InterimViewDto;
 import kyonggi.cspop.application.controller.form.otherform.OtherViewDto;
@@ -128,6 +129,14 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
+    //반려 처리 로직(신청접수 제외) 반려 값이 false일 때 ->true값으로 변경 + 사유를 dto로 전달
+    @PostMapping("api/userStatus/rejectionUser/{studentId}")
+    public ResponseEntity<Void> userRejectionProcess(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
+        Users user = usersService.findUserByStudentId(studentId);
+        rejectFormApproval(formRejectionDto, user);
+        return ResponseEntity.ok().build();
+    }
+
     @SneakyThrows
     @GetMapping("api/graduation/graduate_management.download")
     public ResponseEntity<InputStreamResource> downloadExcel(HttpServletResponse response) {
@@ -173,6 +182,33 @@ public class GraduateCheckController {
             if (!otherFormId.isApproval()) {
                 excelBoardService.updateApprovalState(user);
                 otherFormService.updateUserOtherState(otherFormId.getId());
+            }
+        }
+    }
+
+    private void rejectFormApproval(FormRejectionDto formRejectionDto, Users user) {
+        if (!Objects.isNull(user.getProposalForm())) {
+            ProposalForm proposalFormId = proposalFormService.findProposalForm(user.getProposalForm().getId());
+            if (!proposalFormId.isRejection()) {
+                proposalFormService.rejectUserProposalForm(proposalFormId.getId(), formRejectionDto);
+            }
+        }
+        else if (!Objects.isNull(user.getInterimForm())) {
+            InterimForm interimFormId = interimFormService.findInterimForm(user.getInterimForm().getId());
+            if (!interimFormId.isRejection()) {
+                interimFormService.rejectUserProposalForm(interimFormId.getId(), formRejectionDto);
+            }
+        }
+        else if (!Objects.isNull(user.getFinalForm())) {
+            FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
+            if (!finalFormId.isRejection()) {
+                finalFormService.rejectUserFinalForm(finalFormId.getId(), formRejectionDto);
+            }
+        }
+        else if (!Objects.isNull(user.getOtherForm())) {
+            OtherForm otherFormId = otherFormService.findOtherForm(user.getOtherForm().getId());
+            if (!otherFormId.isRejection()) {
+                otherFormService.rejectUserOtherForm(otherFormId.getId(), formRejectionDto);
             }
         }
     }

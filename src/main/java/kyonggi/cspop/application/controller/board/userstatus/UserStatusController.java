@@ -4,12 +4,16 @@ import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
 import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
+import kyonggi.cspop.application.controller.form.finalForm.FinalRejectionViewDto;
 import kyonggi.cspop.application.controller.form.finalForm.FinalViewDto;
 import kyonggi.cspop.application.controller.form.interimForm.InterimFormDto;
+import kyonggi.cspop.application.controller.form.interimForm.InterimRejectionViewDto;
 import kyonggi.cspop.application.controller.form.interimForm.InterimViewDto;
 import kyonggi.cspop.application.controller.form.otherform.OtherFormDto;
+import kyonggi.cspop.application.controller.form.otherform.OtherRejectionViewDto;
 import kyonggi.cspop.application.controller.form.otherform.OtherViewDto;
 import kyonggi.cspop.application.controller.form.proposalform.ProposalFormDto;
+import kyonggi.cspop.application.controller.form.proposalform.ProposalRejectionViewDto;
 import kyonggi.cspop.application.controller.form.proposalform.ProposalViewDto;
 import kyonggi.cspop.application.controller.form.submitform.SubmitFormDto;
 import kyonggi.cspop.application.controller.form.submitform.SubmitViewDto;
@@ -99,19 +103,35 @@ public class UserStatusController {
         }
         if (!Objects.isNull(user.getProposalForm())) {
             ProposalForm proposalForm = proposalFormService.findProposalForm(user.getProposalForm().getId());
+
+            if (proposalForm.isRejection()){
+                model.addAttribute("userProposalFormRejectReason",new ProposalRejectionViewDto(proposalForm));
+            }
             model.addAttribute("userProposalFormInfo", new ProposalViewDto(proposalForm));
         }
         if (!Objects.isNull(user.getInterimForm())) {
             InterimForm interimForm = interimFormService.findInterimForm(user.getInterimForm().getId());
+
+            if (interimForm.isRejection()){
+                model.addAttribute("userInterimFormRejectReason",new InterimRejectionViewDto(interimForm));
+            }
             model.addAttribute("userInterimFormInfo", new InterimViewDto(interimForm));
         }
         if (!Objects.isNull(user.getOtherForm())) {
             OtherForm otherForm = otherFormService.findOtherForm(user.getOtherForm().getId());
+
+            if (otherForm.isRejection()){
+                model.addAttribute("userOtherFormRejectionReason",new OtherRejectionViewDto(otherForm));
+            }
             model.addAttribute("userOtherFormInfo", new OtherViewDto(otherForm));
         }
         if (!Objects.isNull(user.getFinalForm())) {
-            FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
-            model.addAttribute("userFinalFormInfo", new FinalViewDto(finalFormId));
+            FinalForm finalForm = finalFormService.findFinalForm(user.getFinalForm().getId());
+
+            if (finalForm.isRejection()){
+                model.addAttribute("userFinalFormRejectionReason",new FinalRejectionViewDto(finalForm));
+            }
+            model.addAttribute("userFinalFormInfo", new FinalViewDto(finalForm));
         }
         return "graduation/userstatus/userGraduationStatus";
     }

@@ -54,10 +54,10 @@ public class OtherFormController {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
 
-        //중간 보고서 파일 저장
+        //기타 자격 파일 저장
         OtherFormUploadFile otherFormUploadFile = fileStore.storeOtherFile(otherFormDto.getOtherFormUploadFile());
 
-        //중간 보고서 폼 등록
+        //기타 자격 폼 등록
         OtherForm otherForm = OtherForm.createOtherForm(otherFormDto.getTitle(), otherFormDto.getDivision(), otherFormDto.getText(), otherFormUploadFile);
         Long otherFormId = otherFormService.saveOtherForm(otherForm);
 

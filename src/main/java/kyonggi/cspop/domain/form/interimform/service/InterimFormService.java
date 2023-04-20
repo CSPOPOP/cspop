@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.form.interimform.service;
 
+import kyonggi.cspop.application.controller.form.FormRejectionDto;
 import kyonggi.cspop.application.controller.form.interimForm.InterimFormDto;
 import kyonggi.cspop.domain.form.interimform.InterimForm;
 import kyonggi.cspop.domain.form.interimform.repository.InterimFormRepository;
@@ -39,5 +40,11 @@ public class InterimFormService {
     public void updateUserInterimState(Long id) {
         InterimForm interimForm = interimFormRepository.findById(id).get();
         interimForm.updateState();
+    }
+
+    @Transactional
+    public void rejectUserProposalForm(Long id, FormRejectionDto formRejectionDto){
+        InterimForm interimForm = interimFormRepository.findById(id).get();
+        interimForm.rejectInterimForm(formRejectionDto.getReject_reason());
     }
 }
