@@ -302,7 +302,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickSubmitFormModify(event, ${userSubmitFormInfo.id})">수정</button>
-                                                                <button type="button" class="btn btn-primary" onclick="ApproveButton(${userSubmitFormInfo.id}, ${userDetail.studentId}, userId)">승인</button>
+<%--                                                                <button type="button" class="btn btn-primary" onclick="ApproveButton(${userSubmitFormInfo.id}, ${userDetail.studentId}, userId)">승인</button>--%>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -321,11 +321,12 @@
                                                                 <h3>신청접수 승인</h3>
                                                             </div>
                                                             <div class="modal-body">
+                                                                <h4>신청 요건 <span class="badge bg-info">${userSubmitFormInfo.qualification}</span></h4>
                                                                 <label for="professorName">담당교수 :</label>
                                                                 <select id="professorName" name="professorName">
+                                                                    <option value="한상범">한상범</option>
                                                                     <option value="김도훈">김도훈</option>
                                                                     <option value="이은정">이은정</option>
-                                                                    <option value="한상범">한상범</option>
                                                                     <option value="권기현">권기현</option>
                                                                     <option value="누구있더라">누구있더라</option>
                                                                 </select><br>
