@@ -43,6 +43,11 @@
 </head>
 <%@include file="../../common/sessionController.jsp" %>
 <body>
+<c:if test="${errorMessage eq true}">
+    <script>
+        alert("비어있는 항목이 있어 제출할 수 없습니다.")
+    </script>
+</c:if>
 <%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
