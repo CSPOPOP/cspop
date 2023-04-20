@@ -41,6 +41,12 @@ public class ProposalForm extends BaseEntity {
     @Column
     private String text;
 
+    @Column
+    private boolean rejection;
+
+    @Column
+    private String reject_reason;
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "proposalForm")
     private Users users;
 
@@ -68,6 +74,7 @@ public class ProposalForm extends BaseEntity {
         }
         proposalForm.keyword = keyword;
         proposalForm.text = text;
+        proposalForm.rejection=false;
 
         return proposalForm;
     }
@@ -84,9 +91,15 @@ public class ProposalForm extends BaseEntity {
 
         this.keyword = keyword;
         this.text = text;
+        this.rejection=false;
     }
 
     public void updateState() {
         this.approval = true;
+    }
+
+    public void rejectProposalForm(String reject_reason){
+        this.rejection=true;
+        this.reject_reason=reject_reason;
     }
 }

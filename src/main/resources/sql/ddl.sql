@@ -106,6 +106,8 @@ CREATE TABLE final_form
     `division`                  VARCHAR(255) NOT NULL COMMENT '구분',
     `qualification`             VARCHAR(255) NOT NULL COMMENT '자격요건',
     `page_number`               INT          NOT NULL COMMENT '쪽수',
+    `rejection`                     BIT(1)       NOT NULL COMMENT '반려여부',
+    `reject_reason`             VARCHAR(5000) NULL DEFAULT NULL COMMENT '반려사유',
     `final_form_upload_file_id` BIGINT       NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_final_form_to_final_form_upload_file`
@@ -142,6 +144,8 @@ CREATE TABLE interim_form
     `division`                    VARCHAR(255) NOT NULL COMMENT '구분',
     `text`                        VARCHAR(5000) NOT NULL COMMENT '진행내용',
     `plan`                        VARCHAR(5000) NOT NULL COMMENT '향후계획',
+    `rejection`                      BIT(1)       NOT NULL COMMENT '반려여부',
+    `reject_reason`               VARCHAR(5000) NULL DEFAULT NULL COMMENT '반려사유',
     `interim_form_upload_file_id` BIGINT       NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_interim_form_to_interim_form_upload_file`
@@ -177,6 +181,8 @@ CREATE TABLE other_form
     `division`                  VARCHAR(255) NOT NULL COMMENT '구분',
     `title`                     VARCHAR(255) NOT NULL COMMENT '제목',
     `text`                      VARCHAR(5000) NOT NULL COMMENT '본문',
+    `rejection`                    BIT(1)       NOT NULL COMMENT '반려여부',
+    `reject_reason`             VARCHAR(5000) NULL DEFAULT NULL COMMENT '반려사유',
     `other_form_upload_file_id` BIGINT       NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_other_form_to_other_form_upload_file`
@@ -218,6 +224,8 @@ CREATE TABLE proposal_form
     `division`           VARCHAR(255) NOT NULL COMMENT '구분',
     `keyword`            VARCHAR(255) NOT NULL COMMENT '키워드',
     `text`               VARCHAR(5000) NOT NULL COMMENT '본문',
+    `rejection`             BIT(1)       NOT NULL COMMENT '반려여부',
+    `reject_reason`      VARCHAR(5000) NULL DEFAULT NULL COMMENT '반려사유',
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB

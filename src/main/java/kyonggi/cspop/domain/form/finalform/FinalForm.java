@@ -40,6 +40,12 @@ public class FinalForm extends BaseEntity {
     @Column
     private Integer pageNumber;
 
+    @Column
+    private boolean rejection;
+
+    @Column
+    private String reject_reason;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "finalFormUploadFile_id", foreignKey = @ForeignKey(name = "fk_final_form_upload_file_to_final_form"))
     private FinalFormUploadFile finalFormUploadFile;
@@ -72,6 +78,7 @@ public class FinalForm extends BaseEntity {
         }
 
         finalForm.pageNumber = pageNumber;
+        finalForm.rejection=false;
         finalForm.finalFormUploadFile = uploadFile;
 
         return finalForm;
@@ -99,9 +106,15 @@ public class FinalForm extends BaseEntity {
             throw new CsPopException(CsPopErrorCode.FINAL_INVALID_PAGE);
         }
         this.pageNumber = pageNumber;
+        this.rejection=false;
     }
 
     public void updateState() {
         this.approval = true;
+    }
+
+    public void rejectFinalForm(String reject_reason){
+        this.rejection=true;
+        this.reject_reason=reject_reason;
     }
 }
