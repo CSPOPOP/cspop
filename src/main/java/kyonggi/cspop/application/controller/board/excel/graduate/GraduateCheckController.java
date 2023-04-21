@@ -352,32 +352,4 @@ public class GraduateCheckController {
         UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), user.getStudentName(), user.getDepartment(), advisor != null ? advisor : "없음", excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false, user.getSubmitForm(), excelByStudentId.get().getGraduationDate());
         return userDetailDto;
     }
-
-    /**
-     * 작업 후 삭제될 테스트 컨트롤러
-     */
-
-    @GetMapping("api/userStatus/approvalUser/{studentId}/update")
-    public String testView(@PathVariable String studentId) {
-        Users user = usersService.findUserByStudentId(studentId);
-        return "graduation/form/submitApprovalForm";
-    }
-
-    @PostMapping("api/userStatus/approvalUser/{studentId}/update")
-    public String test(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
-
-        Users user = usersService.findUserByStudentId(studentId);
-
-        if (!Objects.isNull(user.getSubmitForm())) {
-            SubmitForm submitFormId = submitFormService.findSubmitForm(user.getSubmitForm().getId());
-
-            if (!submitFormId.isApproval()) {
-                excelBoardService.updateExcelBySubmitForm(user, excelBoardSubmitFormDto);
-                submitFormService.updateUserSubmitState(submitFormId.getId());
-            }
-        }
-
-        return "redirect:/api/userStatus/approvalUser/{studentId}";
-    }
-
 }
