@@ -105,7 +105,7 @@
                                             <div class="tab-pane fade active show" id="thesis-id" role="tabpanel"
                                                  aria-labelledby="thesis-tab-id"> <!-- 졸업논문 tab 코드 -->
                                                 <div id="thesis">
-                                                    <div class="progress" style="height: 20px;" id="thesisPercent"></div>
+                                                    <div class="progress" style="height: 45px;" id="thesisPercent"></div>
                                                     <table class="table mb-0" border-color="black">
                                                         <thead class="table-success">
                                                         <tr style="text-align: center">
@@ -198,7 +198,7 @@
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
                                                 <div id="otherQualifications">
-                                                    <div class="progress" style="height: 20px;" id="otherPercent"></div>
+                                                    <div class="progress" style="height: 45px;" id="otherPercent"></div>
                                                     <table class="table mb-0" border-color="black">
                                                         <thead class="table-success">
                                                         <tr style="text-align: center">
