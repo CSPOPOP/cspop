@@ -198,7 +198,6 @@
                                                         <div><a href="/api/interimForm">테스트 중간 보고서 신청 폼 이동</a></div>
                                                         <div><a href="/api/finalForm">테스트 최종 보고서 신청 폼 이동</a></div>
                                                         <div><a href="/api/otherForm">테스트 기타 자격 신청 폼 이동</a></div>
-                                                        <div><a href="/api/userStatus/approvalUser/${userDetail.studentId}/update">신청서 승인 테스트</a></div>
                                                     </table>
                                                 </div>
                                             </div>
@@ -278,7 +277,6 @@
                                                         <div><a href="/api/interimForm">테스트 중간 보고서 신청 폼 이동</a></div>
                                                         <div><a href="/api/finalForm">테스트 최종 보고서 신청 폼 이동</a></div>
                                                         <div><a href="/api/otherForm">테스트 기타 자격 신청 폼 이동</a></div>
-                                                        <div><a href="/api/userStatus/approvalUser/${userDetail.studentId}/update">신청서 승인 테스트</a></div>
                                                     </table>
                                                 </div>
                                             </div>
@@ -365,7 +363,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickProposalFormModify(event, ${userProposalFormInfo.id})">수정</button>
-                                                                <button type="button" class="btn btn-primary" onclick="ApproveButton(${userProposalFormInfo.id},${userDetail.studentId}, userId)">승인</button>
+                                                                <button type="button" class="btn btn-primary" onclick="ApproveProposalButton(${userProposalFormInfo.id},${userDetail.studentId}, userId)">승인</button>
 
                                                             </div>
                                                         </div>
@@ -390,7 +388,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickInterimFormModify(event, ${userInterimFormInfo.id})">수정</button>
-                                                                <button type="button" class="btn btn-primary" onclick="ApproveButton(${userInterimFormInfo.id},${userDetail.studentId}, userId)">승인</button>
+                                                                <button type="button" class="btn btn-primary" onclick="ApproveInterimButton(${userInterimFormInfo.id},${userDetail.studentId}, userId)">승인</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -414,7 +412,7 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                             <button type="button" class="btn btn-primary" onclick="clickOtherFormModify(event, ${userOtherFormInfo.id})">수정</button>
-                                                            <button type="button" class="btn btn-primary" onclick="ApproveButton(${userOtherFormInfo.id},${userDetail.studentId},userId)">승인</button>
+                                                            <button type="button" class="btn btn-primary" onclick="ApproveOtherButton(${userOtherFormInfo.id},${userDetail.studentId},userId)">승인</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -438,7 +436,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event, ${userFinalFormInfo.id})">수정</button>
-                                                                <button type="button" class="btn btn-primary" onclick="ApproveButton(${userFinalFormInfo.id},${userDetail.studentId}, userId)">승인</button>
+                                                                <button type="button" class="btn btn-primary" onclick="ApproveFinalButton(${userFinalFormInfo.id},${userDetail.studentId}, userId)">승인</button>
                                                             </div>
                                                         </div>
                                                     </form>

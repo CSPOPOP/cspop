@@ -1,10 +1,58 @@
-// 신청접수 외의 승인버튼
-function ApproveButton(id, studentId,loginId) {
+// 신청접수 외의 승인버튼 --버튼 쪼개기
+function ApproveProposalButton(id, studentId,loginId) {
     console.log(id);
     console.log(studentId)
     console.log(loginId)
     $.ajax({
-        url: "/api/userStatus/approvalUser/"+studentId,
+        url: "/api/userStatus/approvalUserProposalForm/"+studentId,
+        type: "post",
+        success: (data)=>{
+            alert("approve success")
+        },
+        error:(error)=>{
+            console.log(error)
+        }
+    })
+}
+
+function ApproveInterimButton(id, studentId,loginId) {
+    console.log(id);
+    console.log(studentId)
+    console.log(loginId)
+    $.ajax({
+        url: "/api/userStatus/approvalUserInterimForm/"+studentId,
+        type: "post",
+        success: (data)=>{
+            alert("approve success")
+        },
+        error:(error)=>{
+            console.log(error)
+        }
+    })
+}
+
+function ApproveFinalButton(id, studentId,loginId) {
+    console.log(id);
+    console.log(studentId)
+    console.log(loginId)
+    $.ajax({
+        url: "/api/userStatus/approvalUserFinalForm/"+studentId,
+        type: "post",
+        success: (data)=>{
+            alert("approve success")
+        },
+        error:(error)=>{
+            console.log(error)
+        }
+    })
+}
+
+function ApproveOtherButton(id, studentId,loginId) {
+    console.log(id);
+    console.log(studentId)
+    console.log(loginId)
+    $.ajax({
+        url: "/api/userStatus/approvalUserOtherForm/"+studentId,
         type: "post",
         success: (data)=>{
             alert("approve success")
@@ -22,7 +70,7 @@ function ApplicationReceived(studentId){
     console.log(formData)
     console.log(data)
     $.ajax({
-        url:'/api/userStatus/approvalUser/'+studentId,
+        url:'/api/userStatus/approvalUserSubmitForm/'+studentId,
         data: data,
         type: 'post',
         contentType: false,

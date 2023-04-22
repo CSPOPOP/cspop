@@ -122,10 +122,44 @@ public class GraduateCheckController {
         return "graduation/userstatus/userGraduationStatus";
     }
 
-    @PostMapping("api/userStatus/approvalUser/{studentId}")
-    public ResponseEntity<Void> userApprovalProcess(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
+
+    //신청접수 승인
+    @PostMapping("api/userStatus/approvalUserSubmitForm/{studentId}")
+    public ResponseEntity<Void> userApprovalSubmitForm(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
         Users user = usersService.findUserByStudentId(studentId);
-        updateExcelAndForms(excelBoardSubmitFormDto, user);
+        updateExcelAndSubmitForm(excelBoardSubmitFormDto, user);
+        return ResponseEntity.ok().build();
+    }
+
+    //제안서 승인
+    @PostMapping("api/userStatus/approvalUserProposalForm/{studentId}")
+    public ResponseEntity<Void> userApprovalProposalForm(@PathVariable String studentId){
+        Users user = usersService.findUserByStudentId(studentId);
+        updateExcelAndProposalForm(user);
+        return ResponseEntity.ok().build();
+    }
+
+    //중간보고서 승인
+    @PostMapping("api/userStatus/approvalUserInterimForm/{studentId}")
+    public ResponseEntity<Void> userApprovalInterimForm(@PathVariable String studentId){
+        Users user = usersService.findUserByStudentId(studentId);
+        updateExcelAndInterimForm(user);
+        return ResponseEntity.ok().build();
+    }
+
+    //최종보고서 승인
+    @PostMapping("api/userStatus/approvalUserFinalForm/{studentId}")
+    public ResponseEntity<Void> userApprovalFinalForm(@PathVariable String studentId){
+        Users user = usersService.findUserByStudentId(studentId);
+        updateExcelAndFinalForm(user);
+        return ResponseEntity.ok().build();
+    }
+
+    //기타보고서 승인
+    @PostMapping("api/userStatus/approvalUserOtherForm/{studentId}")
+    public ResponseEntity<Void> userApprovalOtherForm(@PathVariable String studentId){
+        Users user = usersService.findUserByStudentId(studentId);
+        updateExcelAndOtherForm(user);
         return ResponseEntity.ok().build();
     }
 
@@ -150,7 +184,7 @@ public class GraduateCheckController {
      * 위의 public 접근 제어자 메서드만 확인해 주세요.
      */
 
-    private void updateExcelAndForms(ExcelBoardSubmitFormDto excelBoardSubmitFormDto, Users user) {
+    private void updateExcelAndSubmitForm(ExcelBoardSubmitFormDto excelBoardSubmitFormDto, Users user) {
         if (!Objects.isNull(user.getSubmitForm())) {
             SubmitForm submitFormId = submitFormService.findSubmitForm(user.getSubmitForm().getId());
 
@@ -158,26 +192,40 @@ public class GraduateCheckController {
                 excelBoardService.updateExcelBySubmitForm(user, excelBoardSubmitFormDto);
                 submitFormService.updateUserSubmitState(submitFormId.getId());
             }
-        } else if (!Objects.isNull(user.getProposalForm())) {
+        }
+    }
+
+    private void updateExcelAndProposalForm(Users user) {
+        if (!Objects.isNull(user.getProposalForm())) {
             ProposalForm proposalFormId = proposalFormService.findProposalForm(user.getProposalForm().getId());
 
             if (!proposalFormId.isApproval()) {
                 excelBoardService.updateApprovalState(user);
                 proposalFormService.updateUserProposalState(proposalFormId.getId());
             }
-        } else if (!Objects.isNull(user.getInterimForm())) {
+        }
+    }
+
+    private void updateExcelAndInterimForm(Users user) {
+        if (!Objects.isNull(user.getInterimForm())) {
             InterimForm interimFormId = interimFormService.findInterimForm(user.getInterimForm().getId());
             if (!interimFormId.isApproval()) {
                 excelBoardService.updateApprovalState(user);
                 interimFormService.updateUserInterimState(interimFormId.getId());
             }
-        } else if (!Objects.isNull(user.getFinalForm())) {
+        }
+    }
+    private void updateExcelAndFinalForm(Users user) {
+        if (!Objects.isNull(user.getFinalForm())) {
             FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
             if (!finalFormId.isApproval()) {
                 excelBoardService.updateApprovalState(user);
                 finalFormService.updateUserFinalState(finalFormId.getId());
             }
-        } else if (!Objects.isNull(user.getOtherForm())) {
+        }
+    }
+    private void updateExcelAndOtherForm(Users user) {
+        if (!Objects.isNull(user.getOtherForm())) {
             OtherForm otherFormId = otherFormService.findOtherForm(user.getOtherForm().getId());
             if (!otherFormId.isApproval()) {
                 excelBoardService.updateApprovalState(user);
