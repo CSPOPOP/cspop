@@ -86,7 +86,7 @@ public class UserStatusController {
             return "graduation/userstatus/applyGraduation";
         }
 
-        UserDetailDto userDetailDto = createUserDeatilDto(user, excelByStudentId);
+        UserDetailDto userDetailDto = createUserDetailDto(user, excelByStudentId);
         model.addAttribute("userDetail", userDetailDto);
 
         List<UserScheduleDto> userSchedules = createScheduleDto(user);
@@ -101,6 +101,8 @@ public class UserStatusController {
             SubmitForm submitForm = submitFormService.findSubmitForm(user.getSubmitForm().getId());
             model.addAttribute("userSubmitFormInfo", new SubmitViewDto(submitForm));
         }
+
+
         if (!Objects.isNull(user.getProposalForm())) {
             ProposalForm proposalForm = proposalFormService.findProposalForm(user.getProposalForm().getId());
 
@@ -109,6 +111,8 @@ public class UserStatusController {
             }
             model.addAttribute("userProposalFormInfo", new ProposalViewDto(proposalForm));
         }
+
+
         if (!Objects.isNull(user.getInterimForm())) {
             InterimForm interimForm = interimFormService.findInterimForm(user.getInterimForm().getId());
 
@@ -117,6 +121,8 @@ public class UserStatusController {
             }
             model.addAttribute("userInterimFormInfo", new InterimViewDto(interimForm));
         }
+
+
         if (!Objects.isNull(user.getOtherForm())) {
             OtherForm otherForm = otherFormService.findOtherForm(user.getOtherForm().getId());
 
@@ -125,6 +131,8 @@ public class UserStatusController {
             }
             model.addAttribute("userOtherFormInfo", new OtherViewDto(otherForm));
         }
+
+
         if (!Objects.isNull(user.getFinalForm())) {
             FinalForm finalForm = finalFormService.findFinalForm(user.getFinalForm().getId());
 
@@ -177,12 +185,15 @@ public class UserStatusController {
     }
 
     @PostMapping("/modifySubmitForm")
-    public ResponseEntity<Void> modifySubmitForm(@RequestParam("submitFormId") Long submitFormId, @Validated @ModelAttribute SubmitFormDto submitFormDto, BindingResult result) {
+    public ResponseEntity<Void> modifySubmitForm(@RequestParam("submitFormId") Long submitFormId, @Validated @ModelAttribute SubmitFormDto submitFormDto, BindingResult result, @SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto) {
+
+        Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
 
         if (result.hasFieldErrors()) {
             throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
         }
         submitFormService.updateUserSubmitForm(submitFormId, submitFormDto);
+        excelBoardService.updateQualification(user);
         return ResponseEntity.noContent().build();
     }
 
@@ -282,7 +293,7 @@ public class UserStatusController {
         return userSchedules;
     }
 
-    private static UserDetailDto createUserDeatilDto(Users user, Optional<ExcelBoard> excelByStudentId) {
+    private static UserDetailDto createUserDetailDto(Users user, Optional<ExcelBoard> excelByStudentId) {
         String advisor = excelByStudentId.get().getProfessorName();
         UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), user.getStudentName(), user.getDepartment(), advisor != null ? advisor : "없음", excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false, user.getSubmitForm(), excelByStudentId.get().getGraduationDate());
         return userDetailDto;

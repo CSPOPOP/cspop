@@ -100,4 +100,14 @@ public class ExcelBoard extends BaseEntity {
     public void approvalUserForm() {
         this.state = "승인";
     }
+
+    public void updateQualification() {
+
+        if (qualifications.equals("기타자격")) {
+            this.qualifications = "논문";
+        }
+        else{
+            this.qualifications = "기타자격";
+        }
+    }
 }

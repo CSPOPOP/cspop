@@ -88,5 +88,11 @@ public class ExcelBoardService {
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.approvalUserForm();
     }
+
+    @Transactional
+    public void updateQualification(Users users){
+        ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
+        excelBoard.updateQualification();
+    }
 }
 
