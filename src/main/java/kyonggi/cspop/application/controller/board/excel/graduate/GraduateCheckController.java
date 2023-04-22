@@ -127,7 +127,7 @@ public class GraduateCheckController {
     @PostMapping("api/userStatus/approvalUserSubmitForm/{studentId}")
     public ResponseEntity<Void> userApprovalSubmitForm(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
         Users user = usersService.findUserByStudentId(studentId);
-        updateExcelAndSubmitForm(excelBoardSubmitFormDto, user);
+        approveExcelAndSubmitForm(excelBoardSubmitFormDto, user);
         return ResponseEntity.ok().build();
     }
 
@@ -135,7 +135,7 @@ public class GraduateCheckController {
     @PostMapping("api/userStatus/approvalUserProposalForm/{studentId}")
     public ResponseEntity<Void> userApprovalProposalForm(@PathVariable String studentId){
         Users user = usersService.findUserByStudentId(studentId);
-        updateExcelAndProposalForm(user);
+        approveExcelAndProposalForm(user);
         return ResponseEntity.ok().build();
     }
 
@@ -143,7 +143,7 @@ public class GraduateCheckController {
     @PostMapping("api/userStatus/approvalUserInterimForm/{studentId}")
     public ResponseEntity<Void> userApprovalInterimForm(@PathVariable String studentId){
         Users user = usersService.findUserByStudentId(studentId);
-        updateExcelAndInterimForm(user);
+        approveExcelAndInterimForm(user);
         return ResponseEntity.ok().build();
     }
 
@@ -151,7 +151,7 @@ public class GraduateCheckController {
     @PostMapping("api/userStatus/approvalUserFinalForm/{studentId}")
     public ResponseEntity<Void> userApprovalFinalForm(@PathVariable String studentId){
         Users user = usersService.findUserByStudentId(studentId);
-        updateExcelAndFinalForm(user);
+        approveExcelAndFinalForm(user);
         return ResponseEntity.ok().build();
     }
 
@@ -159,15 +159,40 @@ public class GraduateCheckController {
     @PostMapping("api/userStatus/approvalUserOtherForm/{studentId}")
     public ResponseEntity<Void> userApprovalOtherForm(@PathVariable String studentId){
         Users user = usersService.findUserByStudentId(studentId);
-        updateExcelAndOtherForm(user);
+        approveExcelAndOtherForm(user);
         return ResponseEntity.ok().build();
     }
 
     //반려 처리 로직(신청접수 제외) 반려 값이 false일 때 ->true값으로 변경 + 사유를 dto로 전달
-    @PostMapping("api/userStatus/rejectionUser/{studentId}")
-    public ResponseEntity<Void> userRejectionProcess(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
+    //제안서 반려
+    @PostMapping("api/userStatus/rejectionUserProposalForm/{studentId}")
+    public ResponseEntity<Void> userRejectionProposalForm(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
         Users user = usersService.findUserByStudentId(studentId);
-        rejectFormApproval(formRejectionDto, user);
+        rejectApprovalAndProposalForm(formRejectionDto, user);
+        return ResponseEntity.ok().build();
+    }
+
+    //중간보고서 반려
+    @PostMapping("api/userStatus/rejectionUserInterimForm/{studentId}")
+    public ResponseEntity<Void> userRejectionInterimForm(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
+        Users user = usersService.findUserByStudentId(studentId);
+        rejectApprovalAndInterimForm(formRejectionDto, user);
+        return ResponseEntity.ok().build();
+    }
+
+    //최종보고서 반려
+    @PostMapping("api/userStatus/rejectionUserFinalForm/{studentId}")
+    public ResponseEntity<Void> userRejectionFinalForm(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
+        Users user = usersService.findUserByStudentId(studentId);
+        rejectApprovalAndFinalForm(formRejectionDto, user);
+        return ResponseEntity.ok().build();
+    }
+
+    //기타자격 반려
+    @PostMapping("api/userStatus/rejectionUserOtherForm/{studentId}")
+    public ResponseEntity<Void> userRejectionOtherForm(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
+        Users user = usersService.findUserByStudentId(studentId);
+        rejectApprovalAndOtherForm(formRejectionDto, user);
         return ResponseEntity.ok().build();
     }
 
@@ -184,7 +209,7 @@ public class GraduateCheckController {
      * 위의 public 접근 제어자 메서드만 확인해 주세요.
      */
 
-    private void updateExcelAndSubmitForm(ExcelBoardSubmitFormDto excelBoardSubmitFormDto, Users user) {
+    private void approveExcelAndSubmitForm(ExcelBoardSubmitFormDto excelBoardSubmitFormDto, Users user) {
         if (!Objects.isNull(user.getSubmitForm())) {
             SubmitForm submitFormId = submitFormService.findSubmitForm(user.getSubmitForm().getId());
 
@@ -195,7 +220,7 @@ public class GraduateCheckController {
         }
     }
 
-    private void updateExcelAndProposalForm(Users user) {
+    private void approveExcelAndProposalForm(Users user) {
         if (!Objects.isNull(user.getProposalForm())) {
             ProposalForm proposalFormId = proposalFormService.findProposalForm(user.getProposalForm().getId());
 
@@ -206,7 +231,7 @@ public class GraduateCheckController {
         }
     }
 
-    private void updateExcelAndInterimForm(Users user) {
+    private void approveExcelAndInterimForm(Users user) {
         if (!Objects.isNull(user.getInterimForm())) {
             InterimForm interimFormId = interimFormService.findInterimForm(user.getInterimForm().getId());
             if (!interimFormId.isApproval()) {
@@ -215,7 +240,7 @@ public class GraduateCheckController {
             }
         }
     }
-    private void updateExcelAndFinalForm(Users user) {
+    private void approveExcelAndFinalForm(Users user) {
         if (!Objects.isNull(user.getFinalForm())) {
             FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
             if (!finalFormId.isApproval()) {
@@ -224,7 +249,7 @@ public class GraduateCheckController {
             }
         }
     }
-    private void updateExcelAndOtherForm(Users user) {
+    private void approveExcelAndOtherForm(Users user) {
         if (!Objects.isNull(user.getOtherForm())) {
             OtherForm otherFormId = otherFormService.findOtherForm(user.getOtherForm().getId());
             if (!otherFormId.isApproval()) {
@@ -234,33 +259,41 @@ public class GraduateCheckController {
         }
     }
 
-    private void rejectFormApproval(FormRejectionDto formRejectionDto, Users user) {
+    private void rejectApprovalAndProposalForm(FormRejectionDto formRejectionDto, Users user) {
         if (!Objects.isNull(user.getProposalForm())) {
             ProposalForm proposalFormId = proposalFormService.findProposalForm(user.getProposalForm().getId());
             if (!proposalFormId.isRejection()) {
                 proposalFormService.rejectUserProposalForm(proposalFormId.getId(), formRejectionDto);
             }
         }
-        else if (!Objects.isNull(user.getInterimForm())) {
+    }
+
+    private void rejectApprovalAndInterimForm(FormRejectionDto formRejectionDto, Users user) {
+        if (!Objects.isNull(user.getInterimForm())) {
             InterimForm interimFormId = interimFormService.findInterimForm(user.getInterimForm().getId());
             if (!interimFormId.isRejection()) {
                 interimFormService.rejectUserProposalForm(interimFormId.getId(), formRejectionDto);
             }
         }
-        else if (!Objects.isNull(user.getFinalForm())) {
+    }
+
+    private void rejectApprovalAndFinalForm(FormRejectionDto formRejectionDto, Users user) {
+        if (!Objects.isNull(user.getFinalForm())) {
             FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
             if (!finalFormId.isRejection()) {
                 finalFormService.rejectUserFinalForm(finalFormId.getId(), formRejectionDto);
             }
         }
-        else if (!Objects.isNull(user.getOtherForm())) {
+    }
+
+    private void rejectApprovalAndOtherForm(FormRejectionDto formRejectionDto, Users user) {
+        if (!Objects.isNull(user.getOtherForm())) {
             OtherForm otherFormId = otherFormService.findOtherForm(user.getOtherForm().getId());
             if (!otherFormId.isRejection()) {
                 otherFormService.rejectUserOtherForm(otherFormId.getId(), formRejectionDto);
             }
         }
     }
-
 
     private File getTmpFile() throws IOException {
         Workbook workbook = new XSSFWorkbook();
