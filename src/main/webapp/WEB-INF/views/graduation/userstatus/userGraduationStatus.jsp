@@ -194,10 +194,6 @@
                                                             </tr>
                                                             </tbody>
                                                         </c:forEach>
-                                                        <div><a href="/api/proposalForm">테스트 제안서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/interimForm">테스트 중간 보고서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/finalForm">테스트 최종 보고서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/otherForm">테스트 기타 자격 신청 폼 이동</a></div>
                                                     </table>
                                                 </div>
                                             </div>
@@ -281,11 +277,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
-                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
+<%--                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>--%>
+<%--                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>--%>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#submitFormModify" onclick="getSubmitForm(${userSubmitFormInfo.id})">신청접수 모달</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="submitFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -308,8 +302,6 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#submitFormApprove" onclick="getSubmitForm(${userSubmitFormInfo.id})">신청접수 승인 모달</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="submitFormApprove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -347,8 +339,6 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#proposalFormModify" onclick="getProposalForm(${userProposalFormInfo.id})">제안서 모달</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="proposalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -372,8 +362,6 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#interimFormModify" onclick="getInterimForm(${userInterimFormInfo.id})">중간 보고서 모달</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="interimFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -396,8 +384,6 @@
                                             </div>
                                         </div>
                                         <div>
-                                        <button class="btn btn-primary btn-sm float-right"
-                                        data-bs-toggle="modal" data-bs-target="#otherFormModify" onclick="getOtherForm(${userOtherFormInfo.id})">기타 자격 모달</button>
                                         <!-- Modal -->
                                         <div class="modal fade" id="otherFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -420,8 +406,6 @@
                                         </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#finalFormModify" onclick="getFinalForm(${userFinalFormInfo.id})">최종 보고서 모달</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="finalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
