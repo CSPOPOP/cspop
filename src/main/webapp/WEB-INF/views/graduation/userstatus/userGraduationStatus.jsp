@@ -136,8 +136,7 @@
                                                                 <td>
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
                                                                         <c:choose>
-                                                                            <%--admin 관련해서 모든 관리자 권한에 따른 버튼 view 수정 필요--%>
-                                                                            <c:when test="${userId == 'admin1'}">
+                                                                            <c:when test="${userId.contains('admin')}">
                                                                                 <button class="btn btn-success-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
                                                                                     확인
                                                                                 </button>
@@ -232,10 +231,19 @@
                                                                 <td>${userSchedule.endDate}</td>
                                                                 <td>
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
-                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
-                                                                            onclick="getSubmitForm(${userSubmitFormInfo.id})">
-                                                                            ${userSchedule.submitStatus}
-                                                                        </button>
+                                                                        <c:choose>
+                                                                            <c:when test="${userId.contains('admin')}">
+                                                                                <button class="btn btn-success-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
+                                                                                    확인
+                                                                                </button>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
+                                                                                        onclick="getSubmitForm(${userSubmitFormInfo.id})">
+                                                                                        ${userSchedule.submitStatus}
+                                                                                </button>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '제안서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
