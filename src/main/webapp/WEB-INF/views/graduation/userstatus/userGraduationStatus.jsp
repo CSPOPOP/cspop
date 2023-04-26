@@ -137,7 +137,7 @@
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
                                                                         <c:choose>
                                                                             <c:when test="${userId.contains('admin')}">
-                                                                                <button class="btn btn-success-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
+                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
                                                                                     확인
                                                                                 </button>
                                                                             </c:when>
@@ -151,39 +151,39 @@
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '제안서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
                                                                                 onclick="getProposalForm(${userProposalFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/proposalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '중간보고서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#interimFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#interimFormModify"
                                                                                 onclick="getInterimForm(${userInterimFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/interimForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/interimForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '최종보고서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#finalFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#finalFormModify"
                                                                                 onclick="getFinalForm(${userFinalFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/finalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/finalForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
@@ -233,7 +233,7 @@
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
                                                                         <c:choose>
                                                                             <c:when test="${userId.contains('admin')}">
-                                                                                <button class="btn btn-success-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
+                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
                                                                                     확인
                                                                                 </button>
                                                                             </c:when>
@@ -247,26 +247,26 @@
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '제안서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
                                                                                 onclick="getProposalForm(${userProposalFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/proposalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '기타자격'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#otherFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#otherFormModify"
                                                                                 onclick="getOtherForm(${userOtherFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/otherForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/otherForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
