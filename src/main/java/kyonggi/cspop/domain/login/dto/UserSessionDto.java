@@ -28,4 +28,10 @@ public class UserSessionDto {
         this.studentName = "null";
         this.classification = "null";
     }
+
+    public UserSessionDto(String id, String adminName, String classification) {
+        this.studentId=id;
+        this.studentName=adminName;
+        this.classification = classification;
+    }
 }
