@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <h1 class="h2 text-white mb-2">졸업자 조회</h1>
+                                <h1 class="h2 text-white mb-2">중간보고서</h1>
                                 <p class="text-white-50 lead">
                                     졸업자 현황
                                 </p>
