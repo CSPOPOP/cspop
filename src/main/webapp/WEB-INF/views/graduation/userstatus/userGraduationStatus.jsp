@@ -34,8 +34,11 @@
         img {
             margin-top: 5%;
         }
-        .nav-pills .nav-link{
+        .nav-pills .nav-link {
             background: white;
+        }
+        .badge {
+            font-size: 120%;
         }
     </style>
     <script src="../../../../assets/js/modal/submitFormModal.js"></script>
@@ -196,6 +199,12 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                            <div style="text-align: center">
+                                                <br>
+                                                <!--<c:if test="${finalPass}">
+                                                    <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
+                                                </c:if>-->
+                                            </div>
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
                                                 <div id="otherQualifications">
@@ -280,9 +289,17 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                            <div style="text-align: center">
+                                            <br>
+                                            <!--<c:if test="${finalPass}">
+                                                <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
+                                            </c:if>-->
+                                            </div>
                                         </div>
 <%--                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>--%>
 <%--                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>--%>
+                                        <div>
+                                        </div>
                                         <div>
                                             <!-- Modal -->
                                             <div class="modal fade" id="submitFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -564,4 +581,3 @@
 </script>
 </body>
 </html>
-
