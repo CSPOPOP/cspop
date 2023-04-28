@@ -109,7 +109,7 @@
                                             <div class="tab-pane fade active show" id="thesis-id" role="tabpanel"
                                                  aria-labelledby="thesis-tab-id"> <!-- 졸업논문 tab 코드 -->
                                                 <div id="thesis">
-                                                    <div class="progress" style="height: 20px;" id="thesisPercent"></div>
+                                                    <div class="progress" style="height: 45px;" id="thesisPercent"></div>
                                                     <table class="table mb-0" border-color="black">
                                                         <thead class="table-success">
                                                         <tr style="text-align: center">
@@ -208,7 +208,7 @@
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
                                                 <div id="otherQualifications">
-                                                    <div class="progress" style="height: 20px;" id="otherPercent"></div>
+                                                    <div class="progress" style="height: 45px;" id="otherPercent"></div>
                                                     <table class="table mb-0" border-color="black">
                                                         <thead class="table-success">
                                                         <tr style="text-align: center">
@@ -568,12 +568,16 @@
         }
     });
     $(() => { // 기타 자격 progress bar 추가 함수
-        let percentage = 100; // percent가 동적으로 변경되어야 함
+        let count = <c:out value="${fn:length(notApprovalList)}" />
+        console.log(count);
+        let percentage = 100 - 30 * count; // percent가 동적으로 변경되어야 함
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#otherPercent').html(appendText)
     });
     $(() => { // 논문 progress bar 추가 함수
-        let percentage = 100; // percent가 동적으로 변경되어야 함
+        let count = <c:out value="${fn:length(notApprovalList)}" />
+        console.log(count);
+        let percentage = 100 - 25 * count; // percent가 동적으로 변경되어야 함
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#thesisPercent').html(appendText)
     });
