@@ -34,8 +34,11 @@
         img {
             margin-top: 5%;
         }
-        .nav-pills .nav-link{
+        .nav-pills .nav-link {
             background: white;
+        }
+        .badge {
+            font-size: 120%;
         }
     </style>
     <script src="../../../../assets/js/modal/submitFormModal.js"></script>
@@ -43,6 +46,7 @@
     <script src="../../../../assets/js/modal/interimFormModal.js"></script>
     <script src="../../../../assets/js/modal/otherFormModal.js"></script>
     <script src="../../../../assets/js/modal/finalFormModal.js"></script>
+    <script src="../../../../assets/js/modal/ApprovalOrRejection.js"></script>
 </head>
 <%@include file="../../common/sessionController.jsp" %>
 <body>
@@ -122,9 +126,6 @@
                                                                 <div class="th-inner sortable both">제출</div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner sortable both">이동</div>
-                                                            </th>
-                                                            <th>
                                                                 <div class="th-inner sortable both">비고</div>
                                                             </th>
                                                         </tr>
@@ -137,63 +138,72 @@
                                                                 <td>${userSchedule.endDate}</td>
                                                                 <td>
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
-                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
-                                                                            onclick="getSubmitForm(${userSubmitFormInfo.id})">
-                                                                            ${userSchedule.submitStatus}
-                                                                        </button>
+                                                                        <c:choose>
+                                                                            <c:when test="${userId.contains('admin')}">
+                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
+                                                                                    확인
+                                                                                </button>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
+                                                                                        onclick="getSubmitForm(${userSubmitFormInfo.id})">
+                                                                                        ${userSchedule.submitStatus}
+                                                                                </button>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '제안서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
                                                                                 onclick="getProposalForm(${userProposalFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/proposalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '중간보고서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#interimFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#interimFormModify"
                                                                                 onclick="getInterimForm(${userInterimFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/interimForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/interimForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '최종보고서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#finalFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#finalFormModify"
                                                                                 onclick="getFinalForm(${userFinalFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/finalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/finalForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
                                                                     </c:if>
                                                                 </td>
-                                                                <td><a href="#">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
                                                             </tbody>
                                                         </c:forEach>
-                                                        <div><a href="/api/proposalForm">테스트 제안서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/interimForm">테스트 중간 보고서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/finalForm">테스트 최종 보고서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/otherForm">테스트 기타 자격 신청 폼 이동</a></div>
-                                                        <div><a href="/api/userStatus/approvalUser/${userDetail.studentId}/update">신청서 승인 테스트</a></div>
                                                     </table>
                                                 </div>
+                                            </div>
+                                            <div style="text-align: center">
+                                                <br>
+                                                <!--<c:if test="${finalPass}">
+                                                    <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
+                                                </c:if>-->
                                             </div>
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
@@ -230,33 +240,42 @@
                                                                 <td>${userSchedule.endDate}</td>
                                                                 <td>
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
-                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
-                                                                            onclick="getSubmitForm(${userSubmitFormInfo.id})">
-                                                                            ${userSchedule.submitStatus}
-                                                                        </button>
+                                                                        <c:choose>
+                                                                            <c:when test="${userId.contains('admin')}">
+                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
+                                                                                    확인
+                                                                                </button>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
+                                                                                        onclick="getSubmitForm(${userSubmitFormInfo.id})">
+                                                                                        ${userSchedule.submitStatus}
+                                                                                </button>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '제안서'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
                                                                                 onclick="getProposalForm(${userProposalFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/proposalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
                                                                     </c:if>
                                                                     <c:if test="${userSchedule.step eq '기타자격'}">
                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#otherFormModify"
+                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#otherFormModify"
                                                                                 onclick="getOtherForm(${userOtherFormInfo.id})">
                                                                                 ${userSchedule.submitStatus}
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary btn-sm float-right" href="/api/otherForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/otherForm">
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
@@ -267,20 +286,21 @@
                                                             </tr>
                                                             </tbody>
                                                         </c:forEach>
-                                                        <div><a href="/api/proposalForm">테스트 제안서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/interimForm">테스트 중간 보고서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/finalForm">테스트 최종 보고서 신청 폼 이동</a></div>
-                                                        <div><a href="/api/otherForm">테스트 기타 자격 신청 폼 이동</a></div>
-                                                        <div><a href="/api/userStatus/approvalUser/${userDetail.studentId}/update">신청서 승인 테스트</a></div>
                                                     </table>
                                                 </div>
                                             </div>
+                                            <div style="text-align: center">
+                                            <br>
+                                            <!--<c:if test="${finalPass}">
+                                                <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
+                                            </c:if>-->
+                                            </div>
                                         </div>
-                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
-                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
+<%--                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>--%>
+<%--                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>--%>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#submitFormModify" onclick="getSubmitForm(${userSubmitFormInfo.id})">신청접수 모달</button>
+                                        </div>
+                                        <div>
                                             <!-- Modal -->
                                             <div class="modal fade" id="submitFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -295,6 +315,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickSubmitFormModify(event, ${userSubmitFormInfo.id})">수정</button>
+<%--                                                                <button type="button" class="btn btn-primary" onclick="ApproveButton(${userSubmitFormInfo.id}, ${userDetail.studentId}, userId)">승인</button>--%>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -302,8 +323,43 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#proposalFormModify" onclick="getProposalForm(${userProposalFormInfo.id})">제안서 모달</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="submitFormApprove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form id="submitFormApproveModal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3>신청접수 승인</h3>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>신청 요건 <span class="badge bg-info">${userSubmitFormInfo.qualification}</span></h4>
+                                                                <label for="professorName">담당교수 :</label>
+                                                                <select id="professorName" name="professorName">
+                                                                    <option value="한상범">한상범</option>
+                                                                    <option value="김도훈">김도훈</option>
+                                                                    <option value="이은정">이은정</option>
+                                                                    <option value="권기현">권기현</option>
+                                                                    <option value="누구있더라">누구있더라</option>
+                                                                </select><br>
+                                                                <label for="graduationDate">졸업날짜 :</label>
+                                                                <input type="date" id="graduationDate" name="graduationDate"><br>
+                                                                <label>캡스톤 이수 여부:</label><br>
+                                                                <label for="capstoneCompletion-yes">이수</label>
+                                                                <input type="radio" id="capstoneCompletion-yes" name="capstoneCompletion" value=option1>
+                                                                <label for="capstoneCompletion-no">미이수</label>
+                                                                <input type="radio" id="capstoneCompletion-no" name="capstoneCompletion" value=option2>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                                <button type="button" class="btn btn-primary">반려</button>
+                                                                <button type="button" class="btn btn-primary" onclick="ApplicationReceived(${userDetail.studentId})">승인</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
                                             <!-- Modal -->
                                             <div class="modal fade" id="proposalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -318,6 +374,8 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickProposalFormModify(event, ${userProposalFormInfo.id})">수정</button>
+                                                                <button type="button" class="btn btn-primary" onclick="ApproveProposalButton(${userProposalFormInfo.id},${userDetail.studentId}, userId)">승인</button>
+
                                                             </div>
                                                         </div>
                                                     </form>
@@ -325,8 +383,6 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#interimFormModify" onclick="getInterimForm(${userInterimFormInfo.id})">중간 보고서 모달</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="interimFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -341,6 +397,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickInterimFormModify(event, ${userInterimFormInfo.id})">수정</button>
+                                                                <button type="button" class="btn btn-primary" onclick="ApproveInterimButton(${userInterimFormInfo.id},${userDetail.studentId}, userId)">승인</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -348,8 +405,6 @@
                                             </div>
                                         </div>
                                         <div>
-                                        <button class="btn btn-primary btn-sm float-right"
-                                        data-bs-toggle="modal" data-bs-target="#otherFormModify" onclick="getOtherForm(${userOtherFormInfo.id})">기타 자격 모달</button>
                                         <!-- Modal -->
                                         <div class="modal fade" id="otherFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -359,11 +414,12 @@
                                                             <h3>기타 자격</h3>
                                                         </div>
                                                         <div class="modal-body">
-                                                
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                             <button type="button" class="btn btn-primary" onclick="clickOtherFormModify(event, ${userOtherFormInfo.id})">수정</button>
+                                                            <button type="button" class="btn btn-primary" onclick="ApproveOtherButton(${userOtherFormInfo.id},${userDetail.studentId},userId)">승인</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -371,8 +427,6 @@
                                         </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-primary btn-sm float-right"
-                                                    data-bs-toggle="modal" data-bs-target="#finalFormModify" onclick="getFinalForm(${userFinalFormInfo.id})">최종 보고서 모달</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="finalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -387,6 +441,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event, ${userFinalFormInfo.id})">수정</button>
+                                                                <button type="button" class="btn btn-primary" onclick="ApproveFinalButton(${userFinalFormInfo.id},${userDetail.studentId}, userId)">승인</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -526,4 +581,3 @@
 </script>
 </body>
 </html>
-

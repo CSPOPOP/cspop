@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.form.finalform.service;
 
+import kyonggi.cspop.application.controller.form.FormRejectionDto;
 import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
 import kyonggi.cspop.domain.form.finalform.FinalForm;
 import kyonggi.cspop.domain.form.finalform.repository.FinalFormRepository;
@@ -38,5 +39,10 @@ public class FinalFormService {
     public void updateUserFinalState(Long id) {
         FinalForm finalForm = finalFormRepository.findById(id).get();
         finalForm.updateState();
+    }
+    @Transactional
+    public void rejectUserFinalForm(Long id, FormRejectionDto formRejectionDto){
+        FinalForm finalForm = finalFormRepository.findById(id).get();
+        finalForm.rejectFinalForm(formRejectionDto.getReject_reason());
     }
 }

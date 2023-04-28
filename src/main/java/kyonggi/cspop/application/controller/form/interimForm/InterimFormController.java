@@ -19,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
@@ -43,16 +44,24 @@ public class InterimFormController {
     public String saveInterimForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
-        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), excelByStudentId.get().getGraduationDate(), user.getStudentName(), user.getDepartment(), excelByStudentId.get().getProfessorName(), user.getSubmitForm(), excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
+        UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
 
         model.addAttribute("userDetail", userDetailDto);
         return "graduation/form/interimForm";
     }
 
     @PostMapping("api/interimForm")
-    public String saveInterimFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute InterimFormDto interimFormDto) throws IOException {
-
+    public String saveInterimFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute InterimFormDto interimFormDto, BindingResult bindingResult, Model model) throws IOException {
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
+        Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
+
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("errorMessage", true);
+
+            UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
+            model.addAttribute("userDetail", userDetailDto);
+            return "graduation/form/interimForm";
+        }
 
         //중간 보고서 파일 저장
         InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
@@ -84,5 +93,16 @@ public class InterimFormController {
         String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
 
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);
+    }
+
+    private static UserDetailDto getUserDetailDto(Users user, Optional<ExcelBoard> excelByStudentId) {
+        return new UserDetailDto(
+                user.getStudentId(),
+                excelByStudentId.get().getGraduationDate(),
+                user.getStudentName(),
+                user.getDepartment(),
+                excelByStudentId.get().getProfessorName(),
+                user.getSubmitForm(),
+                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
     }
 }

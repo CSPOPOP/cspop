@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,26 +36,27 @@ public class ProposalFormController {
     public String saveProposalForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
-        System.out.println("excelByStudentId.get().getCapstoneCompletion() = " + excelByStudentId.get().getCapstoneCompletion());
         String advisor = excelByStudentId.get().getProfessorName();
-        UserDetailDto userDetailDto = new UserDetailDto(
-                user.getStudentId(),
-                excelByStudentId.get().getGraduationDate(),
-                user.getStudentName(),
-                user.getDepartment(),
-                excelByStudentId.get().getProfessorName(),
-                user.getSubmitForm(),
-                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
+        UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
+
         model.addAttribute("userDetail", userDetailDto);
         return "graduation/form/proposalForm";
     }
 
     @PostMapping("api/proposalForm")
-    public String saveProposalFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated  @ModelAttribute ProposalFormDto proposalFormDto) {
+    public String saveProposalFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute ProposalFormDto proposalFormDto, BindingResult bindingResult, Model model) {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
         String advisor = excelByStudentId.get().getProfessorName();
+
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("errorMessage", true);
+
+            UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
+            model.addAttribute("userDetail", userDetailDto);
+            return "graduation/form/proposalForm";
+        }
 
         //제안서 폼 등록
         ProposalForm proposalForm = ProposalForm.createProposalForm(user.getStudentId(), user.getStudentName(), user.getDepartment(), excelByStudentId.get().getGraduationDate(), excelByStudentId.get().getProfessorName(), excelByStudentId.get().getQualifications(), proposalFormDto.getTitle(), proposalFormDto.getDivision(), proposalFormDto.getKeyword(), proposalFormDto.getText());
@@ -69,5 +71,16 @@ public class ProposalFormController {
         log.info("폼 = {}", proposalFormDto);
         //신청 폼 저장 -> 액셀 업데이트 -> 졸업 진행 상황 테이블 업데이트 -> 신청자 리스트 업데이트
         return "redirect:/api/userStatus";
+    }
+
+    private static UserDetailDto getUserDetailDto(Users user, Optional<ExcelBoard> excelByStudentId) {
+        return new UserDetailDto(
+                user.getStudentId(),
+                excelByStudentId.get().getGraduationDate(),
+                user.getStudentName(),
+                user.getDepartment(),
+                excelByStudentId.get().getProfessorName(),
+                user.getSubmitForm(),
+                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
     }
 }

@@ -22,23 +22,29 @@ public class OtherForm extends BaseEntity {
     private Long id;
 
     @Column
+    private boolean approval;
+
+    @Column
     private String title;
 
     @Column
     private String division;
 
+    @Column
+    private String text;
+
+    @Column
+    private boolean rejection;
+
+    @Column
+    private String reject_reason;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "otherFormUploadFile_id", foreignKey = @ForeignKey(name = "fk_other_form_upload_file_to_other_form"))
     private OtherFormUploadFile otherFormUploadFile;
 
-    @Column
-    private String text;
-
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "otherForm")
     private Users users;
-
-    @Column
-    private boolean approval;
 
     public void designateUsers(Users users) {
         this.users = users;
@@ -60,6 +66,7 @@ public class OtherForm extends BaseEntity {
         }
 
         otherForm.text = text;
+        otherForm.rejection=false;
         otherForm.otherFormUploadFile = uploadFile;
 
         return otherForm;
@@ -76,9 +83,15 @@ public class OtherForm extends BaseEntity {
         }
 
         this.text = text;
+        this.rejection=false;
     }
 
     public void updateState() {
         this.approval = true;
+    }
+
+    public void rejectOtherForm(String reject_reason) {
+        this.rejection=true;
+        this.reject_reason=reject_reason;
     }
 }

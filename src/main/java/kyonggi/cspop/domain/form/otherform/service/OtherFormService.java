@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.form.otherform.service;
 
+import kyonggi.cspop.application.controller.form.FormRejectionDto;
 import kyonggi.cspop.application.controller.form.otherform.OtherFormDto;
 import kyonggi.cspop.domain.form.otherform.OtherForm;
 import kyonggi.cspop.domain.form.otherform.repository.OtherFormRepository;
@@ -37,5 +38,11 @@ public class OtherFormService {
     public void updateUserOtherState(Long id) {
         OtherForm otherForm = otherFormRepository.findById(id).get();
         otherForm.updateState();
+    }
+
+    @Transactional
+    public void rejectUserOtherForm(Long id, FormRejectionDto formRejectionDto){
+        OtherForm otherForm = otherFormRepository.findById(id).get();
+        otherForm.rejectOtherForm(formRejectionDto.getReject_reason());
     }
 }

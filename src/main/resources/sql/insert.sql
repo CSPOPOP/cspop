@@ -95,6 +95,7 @@ values (4, NOW(), NOW(), '컴퓨터공학부', '202016034', '이도현', 1, 'THE
 insert into submit_form
 values (6, NOW(), NOW(), '컴퓨터공학부', '201812301', '정경원', 1, 'THESIS');
 
+
 --  certification_board 데이터
 INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
                                           `student_name`, `current_semester`, `professional_education`, `msc_bsm`,

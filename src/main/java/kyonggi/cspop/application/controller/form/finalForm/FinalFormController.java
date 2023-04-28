@@ -19,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
@@ -43,16 +44,25 @@ public class FinalFormController {
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
         String advisor = excelByStudentId.get().getProfessorName();
-        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), excelByStudentId.get().getGraduationDate(), user.getStudentName(), user.getDepartment(), excelByStudentId.get().getProfessorName(), user.getSubmitForm(),excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
+        UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
 
         model.addAttribute("userDetail", userDetailDto);
         return "graduation/form/finalForm";
     }
 
     @PostMapping("api/finalForm")
-    public String saveFinalFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute FinalFormDto finalFormDto) throws IOException {
+    public String saveFinalFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute FinalFormDto finalFormDto, BindingResult bindingResult, Model model) throws IOException {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
+        Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
+
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("errorMessage", true);
+
+            UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
+            model.addAttribute("userDetail", userDetailDto);
+            return "graduation/form/finalForm";
+        }
 
         //최종 보고서 파일 저장
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
@@ -82,5 +92,16 @@ public class FinalFormController {
         String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
 
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);
+    }
+
+    private static UserDetailDto getUserDetailDto(Users user, Optional<ExcelBoard> excelByStudentId) {
+        return new UserDetailDto(
+                user.getStudentId(),
+                excelByStudentId.get().getGraduationDate(),
+                user.getStudentName(),
+                user.getDepartment(),
+                excelByStudentId.get().getProfessorName(),
+                user.getSubmitForm(),
+                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
     }
 }

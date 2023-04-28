@@ -29,6 +29,13 @@ public class InterimForm extends BaseEntity {
     private String text;
     @Column
     private String plan;
+
+    @Column
+    private boolean rejection;
+
+    @Column
+    private String reject_reason;
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "interimForm")
     private Users users;
 
@@ -55,6 +62,7 @@ public class InterimForm extends BaseEntity {
 
         interimForm.text = text;
         interimForm.plan = plan;
+        interimForm.rejection=false;
         interimForm.interimFormUploadFile = uploadFile;
 
         return interimForm;
@@ -71,9 +79,15 @@ public class InterimForm extends BaseEntity {
         }
         this.text = text;
         this.plan = plan;
+        this.rejection=false;
     }
 
     public void updateState() {
         this.approval = true;
+    }
+
+    public void rejectInterimForm(String reject_reason) {
+        this.rejection=true;
+        this.reject_reason=reject_reason;
     }
 }
