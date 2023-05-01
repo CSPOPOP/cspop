@@ -28,9 +28,9 @@
         <div class="row g-0">
             <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0">
             <br>
-                <a href="../index.html" class="mb-4 d-flex justify-content-center">
+                <p class="mb-4 d-flex justify-content-center">
                     <img src="../../../../assets/images/fitness/cspop_logo.png" alt="" width="130em">
-                </a>
+                </p>
                 <!-- Form -->
                 <div class="bg-white p-4 p-xl-6 p-xxl-8 p-lg-4 rounded-3 border">
 <%--                    <form id="form" action="/api/home" method="get">--%>
