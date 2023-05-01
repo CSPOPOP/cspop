@@ -201,9 +201,9 @@
                                             </div>
                                             <div style="text-align: center">
                                                 <br>
-                                                <!--<c:if test="${finalPass}">
+                                                <c:if test="${finalPass}">
                                                     <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
-                                                </c:if>-->
+                                                </c:if>
                                             </div>
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
@@ -291,9 +291,9 @@
                                             </div>
                                             <div style="text-align: center">
                                             <br>
-                                            <!--<c:if test="${finalPass}">
+                                            <c:if test="${finalPass}">
                                                 <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
-                                            </c:if>-->
+                                            </c:if>
                                             </div>
                                         </div>
 <%--                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>--%>
