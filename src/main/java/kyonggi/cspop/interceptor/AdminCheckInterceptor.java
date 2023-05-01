@@ -1,8 +1,6 @@
 package kyonggi.cspop.interceptor;
 
 import kyonggi.cspop.application.SessionFactory;
-import kyonggi.cspop.domain.admins.Admins;
-import kyonggi.cspop.domain.admins.repository.AdminsRepository;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

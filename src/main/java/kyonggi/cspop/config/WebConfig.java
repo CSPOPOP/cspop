@@ -1,6 +1,5 @@
 package kyonggi.cspop.config;
 
-import kyonggi.cspop.domain.admins.repository.AdminsRepository;
 import kyonggi.cspop.interceptor.AdminCheckInterceptor;
 import kyonggi.cspop.interceptor.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;
