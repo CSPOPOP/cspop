@@ -30,6 +30,13 @@ function validateId() {
     return true;
 }
 
+// 비밀번호 찾기 질문 유효성 검사 함수
+function validateAnswerPw(){
+    if ($(`#answerPw`).val() === '') {
+        alert('비밀번호 찾기 질문을 입력해주세요.');
+        return false;
+    }
+}
 //  비밀번호 유효성 검사 함수
 function validatePassword() {
     const pwRegExp = /^(?=.*?[a-zA-Z])(?=.*?[#?!@$ %^&*-]).{8,40}$/; //비밀번호 8자리 이상. 대문자. 특수문자 포함 정규식
@@ -125,10 +132,15 @@ function resetPassword() {
         return;
     }
 
+    if (validateAnswerPw()===false){
+        return;
+    }
+
     // 비밀번호 유효성 검사
     if (validatePassword() === false) {
         return;
     }
+
 
     const studentId = $(`#id`).val();
     let editData = {
