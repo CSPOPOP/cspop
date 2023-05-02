@@ -1,8 +1,6 @@
 package kyonggi.cspop.interceptor;
 
 import kyonggi.cspop.application.SessionFactory;
-import kyonggi.cspop.domain.admins.Admins;
-import kyonggi.cspop.domain.admins.repository.AdminsRepository;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -34,7 +32,7 @@ public class AdminCheckInterceptor implements HandlerInterceptor {
 
         if (!isAdmin1 && !isAdmin2 && !isAdmin3 && !isAdmin4 && !isAdmin5) {
             log.info("일반 사용자 요청");
-            response.sendRedirect("/api/home");
+            response.sendRedirect("/api/home?param=user");
             return false;
         }
 

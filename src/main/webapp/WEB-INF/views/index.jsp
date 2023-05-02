@@ -31,6 +31,11 @@
 </head>
 <%@include file="common/sessionController.jsp"%>
 <body>
+<c:if test="${not empty message}">
+    <script>
+        alert("${message}");
+    </script>
+</c:if>
 <div class="header fixed-top border-3 border-top border-primary">
     <!-- navigation start -->
     <div class="container">
