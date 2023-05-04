@@ -157,7 +157,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>최종보고서 파일</label>
+                                    <label><b>파일 제출</b>(파일 크기는 128MB 이하여야 합니다.)</label>
                                     <div class="card" style="padding: 5px;">
                                         <input id="inputFile" type="file" name="finalFormUploadFile"required>
                                     </div>
