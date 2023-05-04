@@ -22,11 +22,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.util.UriUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -51,7 +55,7 @@ public class FinalFormController {
     }
 
     @PostMapping("api/finalForm")
-    public String saveFinalFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute FinalFormDto finalFormDto, BindingResult bindingResult, Model model) throws IOException {
+    public String saveFinalFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute FinalFormDto finalFormDto, BindingResult bindingResult, HttpServletRequest request, Model model) throws IOException {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
@@ -62,6 +66,19 @@ public class FinalFormController {
             UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
             model.addAttribute("userDetail", userDetailDto);
             return "graduation/form/finalForm";
+        }
+
+        //파일 크기 제한 예외처리
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+        for (MultipartFile multipartFile : fileMap.values()) {
+            if (multipartFile.getSize() > 10485760L) {
+                model.addAttribute("errorMessage2", true);
+                UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
+                model.addAttribute("userDetail", userDetailDto);
+                return "graduation/form/interimForm";
+            }
         }
 
         //최종 보고서 파일 저장

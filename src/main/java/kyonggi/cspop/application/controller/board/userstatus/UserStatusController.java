@@ -50,12 +50,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -213,6 +209,10 @@ public class UserStatusController {
         if (result.hasFieldErrors() || interimFormDto.getInterimFormUploadFile().isEmpty()) {
             throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
         }
+        //파일 크기 제한 예외처리
+        if (interimFormDto.getInterimFormUploadFile().getSize() > 10485760L) {
+            throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
+        }
         InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
         interimFormService.updateUserInterimForm(interimFormId, interimFormDto, interimFormUploadFile);
         return ResponseEntity.noContent().build();
@@ -224,6 +224,10 @@ public class UserStatusController {
         if (result.hasFieldErrors() || finalFormDto.getFinalFormUploadFile().isEmpty()) {
             throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
         }
+        //파일 크기 제한 예외처리
+        if (finalFormDto.getFinalFormUploadFile().getSize() > 10485760L) {
+            throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
+        }
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
         finalFormService.updateUserFinalForm(finalFormId, finalFormDto, finalFormUploadFile);
         return ResponseEntity.noContent().build();
@@ -234,6 +238,10 @@ public class UserStatusController {
 
         if (result.hasFieldErrors() || otherFormDto.getOtherFormUploadFile().isEmpty()) {
             throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
+        }
+        //파일 크기 제한 예외처리
+        if (otherFormDto.getOtherFormUploadFile().getSize() > 10485760L) {
+            throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
         }
         OtherFormUploadFile otherFormUploadFile = fileStore.storeOtherFile(otherFormDto.getOtherFormUploadFile());
         otherFormService.updateUserOtherForm(otherFormId, otherFormDto, otherFormUploadFile);
