@@ -54,9 +54,8 @@ public class UsersController {
     @ResponseBody
     @PostMapping("/answerPassword")
     public ResponseEntity<Void> checkAnswerPw(@NotBlank @RequestBody Map<String, String> answerPw) {
-        //answer 체크
-        usersService.checkExistPasswordAnswer(answerPw.get("answerPw"));
 
+        usersService.checkExistPasswordAnswer(answerPw.get("answerPw"));
         return ResponseEntity.noContent().build();
     }
 
@@ -64,7 +63,6 @@ public class UsersController {
     @PostMapping("/editPassword/{studentId}")
     public String updatePassword(@PathVariable String studentId, @NotBlank @RequestBody UserPasswordRequestDto userPasswordRequestDto) {
 
-        //비밀번호 변경
         usersService.updatePassword(studentId, userPasswordRequestDto);
         return "/api/home";
     }

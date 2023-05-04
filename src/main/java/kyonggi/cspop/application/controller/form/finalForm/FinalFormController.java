@@ -1,8 +1,8 @@
 package kyonggi.cspop.application.controller.form.finalForm;
 
-
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
+import kyonggi.cspop.application.controller.form.finalForm.dto.FinalFormDto;
 import kyonggi.cspop.application.util.FileStore;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
@@ -47,7 +47,6 @@ public class FinalFormController {
     public String saveFinalForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
-        String advisor = excelByStudentId.get().getProfessorName();
         UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
 
         model.addAttribute("userDetail", userDetailDto);
@@ -69,17 +68,9 @@ public class FinalFormController {
         }
 
         //파일 크기 제한 예외처리
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-
-        for (MultipartFile multipartFile : fileMap.values()) {
-            if (multipartFile.getSize() > 10485760L) {
-                model.addAttribute("errorMessage2", true);
-                UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
-                model.addAttribute("userDetail", userDetailDto);
-                return "graduation/form/interimForm";
-            }
-        }
+        String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
+        if (x != null)
+            return x;
 
         //최종 보고서 파일 저장
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
@@ -119,6 +110,20 @@ public class FinalFormController {
                 user.getDepartment(),
                 excelByStudentId.get().getProfessorName(),
                 user.getSubmitForm(),
-                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
+                excelByStudentId.get().getCapstoneCompletion().equals("이수"));
+    }
+
+    private static String exceptionOfFile(MultipartHttpServletRequest request, Model model, Users user, Optional<ExcelBoard> excelByStudentId) {
+        Map<String, MultipartFile> fileMap = request.getFileMap();
+
+        for (MultipartFile multipartFile : fileMap.values()) {
+            if (multipartFile.getSize() > 10485760L) {
+                model.addAttribute("errorMessage2", true);
+                UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
+                model.addAttribute("userDetail", userDetailDto);
+                return "graduation/form/interimForm";
+            }
+        }
+        return null;
     }
 }

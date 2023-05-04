@@ -1,7 +1,7 @@
 package kyonggi.cspop.domain.form.proposalform.service;
 
 import kyonggi.cspop.application.controller.form.FormRejectionDto;
-import kyonggi.cspop.application.controller.form.proposalform.ProposalFormDto;
+import kyonggi.cspop.application.controller.form.proposalform.dto.ProposalFormDto;
 import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.proposalform.repository.ProposalFormRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,13 +1,12 @@
-package kyonggi.cspop.application.controller.form.interimForm;
+package kyonggi.cspop.application.controller.form.proposalform.dto;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class InterimFormDto {
+public class ProposalFormDto {
 
     @NotBlank @NotNull
     private String title;
@@ -16,11 +15,8 @@ public class InterimFormDto {
     private String division;
 
     @NotBlank @NotNull
-    private String text;
+    private String keyword;
 
     @NotBlank @NotNull
-    private String plan;
-
-    @NotNull
-    private MultipartFile interimFormUploadFile;
+    private String text;
 }

@@ -58,13 +58,8 @@ public class CertificationExcelBoardController {
 
     @PostMapping("/certification_management.read")
     public String uploadCertification(@RequestParam("file") MultipartFile file, Model model) throws IOException {
-        //액셀 파일인지 검사
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        checkUploadCertificationFileExtension(extension);
 
-        Sheet worksheet = getWorksheet(file, extension);
-        List<CertificationBoard> certificationBoardList = getCertificationList(worksheet);
-
+        List<CertificationBoard> certificationBoardList = checkExcelFile(file);
         certificationBoardService.deleteExcelListAndUploadCertificationList(certificationBoardList);
 
         model.addAttribute("certification", certificationBoardList);
@@ -89,6 +84,14 @@ public class CertificationExcelBoardController {
      * 호출 함수 정의, 프론트 작업자 x
      *
      */
+
+    private static List<CertificationBoard> checkExcelFile(MultipartFile file) throws IOException {
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        checkUploadCertificationFileExtension(extension);
+
+        Sheet worksheet = getWorksheet(file, extension);
+        return getCertificationList(worksheet);
+    }
 
     private File getTmpFile() throws IOException {
         Workbook workbook = new XSSFWorkbook();

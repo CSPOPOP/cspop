@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.controller.form.finalForm;
+package kyonggi.cspop.application.controller.form.finalForm.dto;
 
 import kyonggi.cspop.domain.form.finalform.FinalForm;
 import lombok.Data;

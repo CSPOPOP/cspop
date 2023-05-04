@@ -2,6 +2,7 @@ package kyonggi.cspop.application.controller.form.interimForm;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
+import kyonggi.cspop.application.controller.form.interimForm.dto.InterimFormDto;
 import kyonggi.cspop.application.util.FileStore;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
@@ -12,7 +13,6 @@ import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -35,7 +35,6 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class InterimFormController {
 
     private final UsersService usersService;
@@ -67,17 +66,8 @@ public class InterimFormController {
         }
 
         //파일 크기 제한 예외처리
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-
-        for (MultipartFile multipartFile : fileMap.values()) {
-            if (multipartFile.getSize() > 10485760L) {
-                model.addAttribute("errorMessage2", true);
-                UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
-                model.addAttribute("userDetail", userDetailDto);
-                return "graduation/form/interimForm";
-            }
-        }
+        String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
+        if (x != null) return x;
         //중간 보고서 파일 저장
         InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
 
@@ -91,8 +81,6 @@ public class InterimFormController {
         //엑셀보드 업데이트
         excelBoardService.updateExcelByInterimForm(user);
 
-        log.info("폼 = {}", interimFormDto);
-        //신청 폼 저장 -> 액셀 업데이트 -> 졸업 진행 상황 테이블 업데이트 -> 신청자 리스트 업데이트
         return "redirect:/api/userStatus";
     }
 
@@ -118,6 +106,20 @@ public class InterimFormController {
                 user.getDepartment(),
                 excelByStudentId.get().getProfessorName(),
                 user.getSubmitForm(),
-                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
+                excelByStudentId.get().getCapstoneCompletion().equals("이수"));
+    }
+
+    private static String exceptionOfFile(MultipartHttpServletRequest request, Model model, Users user, Optional<ExcelBoard> excelByStudentId) {
+        Map<String, MultipartFile> fileMap = request.getFileMap();
+
+        for (MultipartFile multipartFile : fileMap.values()) {
+            if (multipartFile.getSize() > 10485760L) {
+                model.addAttribute("errorMessage2", true);
+                UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
+                model.addAttribute("userDetail", userDetailDto);
+                return "graduation/form/interimForm";
+            }
+        }
+        return null;
     }
 }

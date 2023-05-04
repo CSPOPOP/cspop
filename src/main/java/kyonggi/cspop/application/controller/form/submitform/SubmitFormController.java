@@ -1,6 +1,7 @@
 package kyonggi.cspop.application.controller.form.submitform;
 
 import kyonggi.cspop.application.SessionFactory;
+import kyonggi.cspop.application.controller.form.submitform.dto.SubmitFormDto;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.form.submitform.service.SubmitFormService;
@@ -8,7 +9,6 @@ import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class SubmitFormController {
 
     private final UsersService usersService;
     private final SubmitFormService submitFormService;
-
     private final ExcelBoardService excelBoardService;
 
     @PostMapping("api/submitForm")
@@ -39,8 +37,6 @@ public class SubmitFormController {
         //엑셀보드에 유저 로우 저장
         excelBoardService.addExcelBySubmitForm(user, submitForm);
 
-        log.info("폼 = {}", submitFormDto);
-        //신청 폼 저장 -> 액셀 업데이트 -> 졸업 진행 상황 테이블 업데이트 -> 신청자 리스트 업데이트
         return "redirect:/api/userStatus";
     }
 }

@@ -55,7 +55,7 @@ public class NoticeBoardController {
         int pageBlock = 10;
         int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1; //현재 페이지가 7이라면 0*10+1=1
         int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = totalPages < endBlockPage ? totalPages : endBlockPage;
+        endBlockPage = Math.min(totalPages, endBlockPage);
 
         model.addAttribute("startBlockPage", startBlockPage);
         model.addAttribute("endBlockPage", endBlockPage);
@@ -78,7 +78,7 @@ public class NoticeBoardController {
         int pageBlock = 10;
         int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1; //현재 페이지가 7이라면 0*10+1=1
         int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = totalPages < endBlockPage ? totalPages : endBlockPage;
+        endBlockPage = Math.min(totalPages, endBlockPage);
 
         model.addAttribute("startBlockPage", startBlockPage);
         model.addAttribute("endBlockPage", endBlockPage);
@@ -109,19 +109,11 @@ public class NoticeBoardController {
     @GetMapping("/attach/{noticeBoardId}/{uploadFileName}")
     public ResponseEntity<Resource> downloadAttach(@PathVariable Long noticeBoardId, @PathVariable String uploadFileName) throws MalformedURLException {
         NoticeBoard noticeBoard = noticeBoardService.findNoticeBoard(noticeBoardId);
-        List<NoticeBoardUploadFile> uploadFiles = noticeBoard.getUploadFiles();
-        for (NoticeBoardUploadFile uploadFile : uploadFiles) {
-            if (uploadFile.getUploadFileName().equals(uploadFileName)) {
-                String storeFileName = uploadFile.getStoreFileName();
-                String dbUploadFileName = uploadFile.getUploadFileName();
 
-                UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
-                String encodedUploadFileName = UriUtils.encode(dbUploadFileName, StandardCharsets.UTF_8);
-                String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
+        ResponseEntity<Resource> CONTENT_DISPOSITION = noticeBoardFileDownload(uploadFileName, noticeBoard);
+        if (CONTENT_DISPOSITION != null)
+            return CONTENT_DISPOSITION;
 
-                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);
-            }
-        }
         return ResponseEntity.noContent().build();
     }
 
@@ -160,5 +152,23 @@ public class NoticeBoardController {
     public ResponseEntity<Void> deleteNotice(@RequestBody NoticeNumberJsonRequest noticeNumberJsonRequest) {
         noticeBoardService.deleteNoticeBoard(noticeNumberJsonRequest.getNoticeBoardId());
         return ResponseEntity.noContent().build();
+    }
+
+
+    private ResponseEntity<Resource> noticeBoardFileDownload(String uploadFileName, NoticeBoard noticeBoard) throws MalformedURLException {
+        List<NoticeBoardUploadFile> uploadFiles = noticeBoard.getUploadFiles();
+        for (NoticeBoardUploadFile uploadFile : uploadFiles) {
+            if (uploadFile.getUploadFileName().equals(uploadFileName)) {
+                String storeFileName = uploadFile.getStoreFileName();
+                String dbUploadFileName = uploadFile.getUploadFileName();
+
+                UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
+                String encodedUploadFileName = UriUtils.encode(dbUploadFileName, StandardCharsets.UTF_8);
+                String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
+
+                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);
+            }
+        }
+        return null;
     }
 }

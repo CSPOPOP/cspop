@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.form.submitform.service;
 
-import kyonggi.cspop.application.controller.form.submitform.SubmitFormDto;
+import kyonggi.cspop.application.controller.form.submitform.dto.SubmitFormDto;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.form.submitform.repository.SubmitFormRepository;
 import lombok.RequiredArgsConstructor;

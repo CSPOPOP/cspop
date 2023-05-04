@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.controller.form.proposalform;
+package kyonggi.cspop.application.controller.form.proposalform.dto;
 
 import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.controller.form.finalForm;
+package kyonggi.cspop.application.controller.form.finalForm.dto;
 
 import lombok.Data;
 import org.springframework.format.annotation.NumberFormat;

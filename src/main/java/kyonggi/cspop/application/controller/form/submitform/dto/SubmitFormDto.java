@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.controller.form.submitform;
+package kyonggi.cspop.application.controller.form.submitform.dto;
 
 import lombok.Data;
 
