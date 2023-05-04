@@ -33,7 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/editPassword/**", "/notice/find", "/api/notice/search", "/notice/view/detail/**",
                         "/api/graduation/guide", "/api/graduation/schedule", "/api/userStatus",
                         "/api/submitForm", "/api/proposalForm", "/api/interimForm", "/api/finalForm",
-                        "/api/otherForm", "/api/userStatus/modifySubmitForm",
+                        "/api/otherForm", "/api/userStatus/modifySubmitForm", "/api/attach/**",
                         "/api/userStatus/modifyProposalForm", "/api/userStatus/modifyInterimForm",
                         "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm");
 
