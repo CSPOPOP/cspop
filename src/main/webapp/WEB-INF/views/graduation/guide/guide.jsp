@@ -89,7 +89,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="modifyGuide/${data.id}" class="btn btn-primary text-white">수정</a>
+                                <a href="modifyGuide/${data.id}" class="btn btn-primary text-white float-right">수정</a>
                             </div>
                         </div>
                     </div>
