@@ -32,7 +32,7 @@ public class AdminCheckInterceptor implements HandlerInterceptor {
 
         if (!isAdmin1 && !isAdmin2 && !isAdmin3 && !isAdmin4 && !isAdmin5) {
             log.info("일반 사용자 요청");
-            response.sendRedirect("/api/home");
+            response.sendRedirect("/api/home?param=user");
             return false;
         }
 

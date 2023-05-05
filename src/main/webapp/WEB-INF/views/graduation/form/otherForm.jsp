@@ -48,6 +48,11 @@
         alert("비어있는 항목이 있어 제출할 수 없습니다.")
     </script>
 </c:if>
+<c:if test="${errorMessage2 eq true}">
+    <script>
+        alert("파일 용량 제한을 초과하였습니다.");
+    </script>
+</c:if>
 <%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
@@ -114,7 +119,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>파일 제출</label>
+                                    <label><b>파일 제출</b>(파일 크기는 128MB 이하여야 합니다.)</label>
                                     <input id="inputFile" type="file" name="otherFormUploadFile" required>
                                 </div>
                                 <div class="form-group">

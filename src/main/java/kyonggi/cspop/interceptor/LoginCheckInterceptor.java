@@ -22,7 +22,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         if (session == null || session.getAttribute(SessionFactory.CSPOP_SESSION_KEY) == null) {
             log.info("미인증 사용자 요청");
-            response.sendRedirect("/api/home");
+            response.sendRedirect("/api/home?param=login");
             return false;
         }
 

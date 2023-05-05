@@ -1,7 +1,7 @@
 package kyonggi.cspop.domain.form.finalform.service;
 
 import kyonggi.cspop.application.controller.form.FormRejectionDto;
-import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
+import kyonggi.cspop.application.controller.form.finalForm.dto.FinalFormDto;
 import kyonggi.cspop.domain.form.finalform.FinalForm;
 import kyonggi.cspop.domain.form.finalform.repository.FinalFormRepository;
 import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;

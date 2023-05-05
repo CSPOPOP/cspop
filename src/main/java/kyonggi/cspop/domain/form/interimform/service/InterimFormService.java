@@ -1,7 +1,7 @@
 package kyonggi.cspop.domain.form.interimform.service;
 
 import kyonggi.cspop.application.controller.form.FormRejectionDto;
-import kyonggi.cspop.application.controller.form.interimForm.InterimFormDto;
+import kyonggi.cspop.application.controller.form.interimForm.dto.InterimFormDto;
 import kyonggi.cspop.domain.form.interimform.InterimForm;
 import kyonggi.cspop.domain.form.interimform.repository.InterimFormRepository;
 import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;

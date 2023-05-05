@@ -2,6 +2,7 @@ package kyonggi.cspop.application.controller.form.otherform;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
+import kyonggi.cspop.application.controller.form.otherform.dto.OtherFormDto;
 import kyonggi.cspop.application.util.FileStore;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
@@ -12,7 +13,6 @@ import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -22,16 +22,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.util.UriUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class OtherFormController {
 
     private final UsersService usersService;
@@ -51,7 +54,7 @@ public class OtherFormController {
     }
 
     @PostMapping("api/otherForm")
-    public String saveOtherFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute OtherFormDto otherFormDto, BindingResult bindingResult, Model model) throws IOException {
+    public String saveOtherFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute OtherFormDto otherFormDto, BindingResult bindingResult, HttpServletRequest request, Model model) throws IOException {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
@@ -64,6 +67,10 @@ public class OtherFormController {
             model.addAttribute("userDetail", userDetailDto);
             return "graduation/form/otherForm";
         }
+
+        //파일 크기 제한 예외처리
+        String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
+        if (x != null) return x;
 
         //기타 자격 파일 저장
         OtherFormUploadFile otherFormUploadFile = fileStore.storeOtherFile(otherFormDto.getOtherFormUploadFile());
@@ -102,7 +109,20 @@ public class OtherFormController {
                 user.getDepartment(),
                 excelByStudentId.get().getProfessorName(),
                 user.getSubmitForm(),
-                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
+                excelByStudentId.get().getCapstoneCompletion().equals("이수"));
+    }
+    private static String exceptionOfFile(MultipartHttpServletRequest request, Model model, Users user, Optional<ExcelBoard> excelByStudentId) {
+        Map<String, MultipartFile> fileMap = request.getFileMap();
+
+        for (MultipartFile multipartFile : fileMap.values()) {
+            if (multipartFile.getSize() > 10485760L) {
+                model.addAttribute("errorMessage2", true);
+                UserDetailDto userDetailDto = getUserDetailDto(user, excelByStudentId);
+                model.addAttribute("userDetail", userDetailDto);
+                return "graduation/form/interimForm";
+            }
+        }
+        return null;
     }
 }
 

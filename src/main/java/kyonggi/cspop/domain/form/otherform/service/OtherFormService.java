@@ -1,7 +1,7 @@
 package kyonggi.cspop.domain.form.otherform.service;
 
 import kyonggi.cspop.application.controller.form.FormRejectionDto;
-import kyonggi.cspop.application.controller.form.otherform.OtherFormDto;
+import kyonggi.cspop.application.controller.form.otherform.dto.OtherFormDto;
 import kyonggi.cspop.domain.form.otherform.OtherForm;
 import kyonggi.cspop.domain.form.otherform.repository.OtherFormRepository;
 import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;

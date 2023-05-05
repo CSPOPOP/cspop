@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.controller.form.otherform;
+package kyonggi.cspop.application.controller.form.otherform.dto;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;

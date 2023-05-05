@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.controller.form.interimForm;
+package kyonggi.cspop.application.controller.form.interimForm.dto;
 
 import kyonggi.cspop.domain.form.interimform.InterimForm;
 import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
