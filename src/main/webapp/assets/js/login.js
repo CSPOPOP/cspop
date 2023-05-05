@@ -21,18 +21,17 @@ function login() {
 }
 
 // id나 password input에 포커스가 있을 때 enter 누르면 로그인 버튼 클릭 되게 (유효성 검사는 추후에 추가해야합니다)
-$(document).ready(() => {
+$(() => {
     $('#id').on("keyup", function(event) {
         event.preventDefault();
         if (event.keyCode === 13) {
-          document.getElementById("submit-button").click();
+          $('#submit-button').click();
         }
       });
       $('#password').on("keyup", function(event) {
         event.preventDefault();
         if (event.keyCode === 13) {
-          document.getElementById("submit-button").click();
+          $('#submit-button').click();
         }
       });
 })
-
