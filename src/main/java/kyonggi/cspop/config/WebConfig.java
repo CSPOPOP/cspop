@@ -35,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/submitForm", "/api/proposalForm", "/api/interimForm", "/api/finalForm",
                         "/api/otherForm", "/api/userStatus/modifySubmitForm", "/api/attach/**",
                         "/api/userStatus/modifyProposalForm", "/api/userStatus/modifyInterimForm",
-                        "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm", "/api/chatBot/professionalEducation");
+                        "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm", "/api/chatBot", "/api/chatBotPage");
 
     }
 }
