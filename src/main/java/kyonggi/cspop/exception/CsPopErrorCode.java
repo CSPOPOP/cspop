@@ -25,7 +25,7 @@ public enum CsPopErrorCode {
     FINAL_INVALID_PAGE(HttpStatus.BAD_REQUEST, "페이지는 항상 양수입니다."),
     
     //File
-    FILE_INVALID_SIZE(HttpStatus.BAD_REQUEST,"파일 용량 제한을 초과하였습니다.");
+    FILE_INVALID_SIZE(HttpStatus.BAD_REQUEST,"파일 용량 제한을 초과하였습니다."),
     
     //ChatBot
     CERTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 학생의 공학인증 정보가 존재하지 않습니다.");
