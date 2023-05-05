@@ -75,7 +75,13 @@
           <div class="card">
             <div class="card-body p-4 p-lg-7">
               <div>
-
+                <button onclick="testFunction(`전문교양`)">전문교양</button>
+                <button onclick="testFunction(`msc/bsm`)">msc/bsm</button>
+                <button onclick="testFunction(`설계학점`)">설계학점</button>
+                <button onclick="testFunction(`전공학점`)">전공학점</button>
+                <button onclick="testFunction(`총학점`)">총학점</button>
+                <button onclick="testFunction(`특이사항`)">특이사항</button>
+                <button onclick="testFunction(`전체공학인증`)">전체공학인증</button>
               </div>
             </div>
           </div>
@@ -87,6 +93,24 @@
 <%@include file="../common/commonJS.jsp" %>
 <script src="../../../../assets/js/detailPage.js">
 
+</script>
+
+<script>
+  function testFunction(mode){
+    let jsonData = {
+      "sentence" : mode
+    }
+    $.ajax({
+      type: 'post',
+      url: "/api/chatBot",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(jsonData) ,
+      success: (data) => {
+        console.log(data.answer)
+      },
+      error:(error)=>alert("Fail")
+    })
+  }
 </script>
 </body>
 </html>
