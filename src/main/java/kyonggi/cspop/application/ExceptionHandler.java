@@ -4,6 +4,7 @@ import kyonggi.cspop.application.controller.board.excel.certification.Certificat
 import kyonggi.cspop.application.controller.board.excel.graduate.GraduateCheckController;
 import kyonggi.cspop.application.controller.board.notice.NoticeBoardController;
 import kyonggi.cspop.application.controller.board.userstatus.UserStatusController;
+import kyonggi.cspop.application.controller.chatbot.ChatBotController;
 import kyonggi.cspop.application.controller.users.UsersController;
 import kyonggi.cspop.exception.CsPopException;
 import kyonggi.cspop.exception.ErrorResponse;
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
         GraduateCheckController.class,
         CertificationExcelBoardController.class,
         NoticeBoardController.class,
-        UserStatusController.class
+        UserStatusController.class,
+        ChatBotController.class
 })
 public class ExceptionHandler {
 

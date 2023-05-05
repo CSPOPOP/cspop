@@ -1,6 +1,5 @@
 package kyonggi.cspop.config;
 
-import kyonggi.cspop.domain.admins.repository.AdminsRepository;
 import kyonggi.cspop.interceptor.AdminCheckInterceptor;
 import kyonggi.cspop.interceptor.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/submitForm", "/api/proposalForm", "/api/interimForm", "/api/finalForm",
                         "/api/otherForm", "/api/userStatus/modifySubmitForm",
                         "/api/userStatus/modifyProposalForm", "/api/userStatus/modifyInterimForm",
-                        "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm");
+                        "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm", "/api/chatBot/professionalEducation");
 
     }
 }

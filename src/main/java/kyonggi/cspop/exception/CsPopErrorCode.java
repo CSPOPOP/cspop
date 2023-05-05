@@ -22,7 +22,10 @@ public enum CsPopErrorCode {
     //Form
     FORM_HAS_NULL_CONTENT(HttpStatus.NOT_FOUND,"비어있는 항목이 있어 제출할 수 없습니다."),
     SUBMIT_NOT_QUALIFICATION(HttpStatus.BAD_REQUEST,"존재하지 않는 졸업 요건입니다."),
-    FINAL_INVALID_PAGE(HttpStatus.BAD_REQUEST, "페이지는 항상 양수입니다.");
+    FINAL_INVALID_PAGE(HttpStatus.BAD_REQUEST, "페이지는 항상 양수입니다."),
+
+    //ChatBot
+    CERTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 학생의 공학인증 정보가 존재하지 않습니다.");
 
     private HttpStatus httpStatus;
     private String errorMessage;
