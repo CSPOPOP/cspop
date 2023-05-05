@@ -121,6 +121,9 @@
                                         </thead>
                                     </table>
                                 </div>
+                                <a href="/api/graduation/form">
+                                    <button class="btn btn-primary btn-sm float-right">글쓰기</button>
+                                </a>
                             </div>
                         </div>
                         <!-- 페이징 영역 시작 -->
@@ -169,9 +172,6 @@
                         </div>
                         <!-- 페이징 영역 끝 -->
                     </div>
-                    <a href="/api/graduation/form">
-                        <button class="btn btn-primary btn-sm float-right">글쓰기</button>
-                    </a>
                 </div>
             </div>
         </div>

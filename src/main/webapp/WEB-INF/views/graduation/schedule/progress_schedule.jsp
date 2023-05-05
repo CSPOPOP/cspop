@@ -191,7 +191,8 @@
                                     </select>
                                 </div>
                                 <div class="modal-body">
-                                    <textarea id="editor" name="editor" cols="30" rows="10"></textarea>
+                                    <!-- <textarea id="editor" name="editor" cols="30" rows="10"></textarea> -->
+                                    <textarea name="editor" id="editor" cols="50" rows="10"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
@@ -208,9 +209,9 @@
 <%@include file="../../common/commonJS.jsp" %>
 <script>
 
-    CKEDITOR.replace('editor',{
-        height: 200,
-    })
+    // CKEDITOR.replace('editor',{
+    //     height: 200,
+    // })
 
 
     // let legacyText = ${dataL2[0].receivedText};
@@ -238,7 +239,10 @@
 
     function textSubmit(){
         let selectValue = $('#selectValue').val()
-        let modifyText = CKEDITOR.instances.editor.getData();
+        // let modifyText = CKEDITOR.instances.editor.getData();
+        let modifyText = $('#editor').val()
+        modifyText = modifyText.replace(/\n/g,'<br>') // 줄 바꿈을 html에 적용되도록 변경
+
         if (modifyText.length !== 0){ // 변경된 텍스트의 길이가 0일경우에는 ajax가 일어나지 않음.
             const data = {
                 receivedText: modifyText,
