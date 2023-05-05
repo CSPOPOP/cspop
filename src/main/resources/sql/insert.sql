@@ -101,6 +101,26 @@ INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_d
                                           `student_name`, `current_semester`, `professional_education`, `msc_bsm`,
                                           `design`, `major`, `essential`, `first_and_last`, `total`, `special_note`)
 VALUES (1, NOW(), NOW(), 'AI컴퓨터공학부', '201812345', '홍길동', '7', '6', '15', '7.5', '100', '부', '가', '126', '해당사항 없음');
+INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
+                                          `student_name`, `current_semester`, `professional_education`, `msc_bsm`,
+                                          `design`, `major`, `essential`, `first_and_last`, `total`, `special_note`)
+VALUES (2, NOW(), NOW(), 'AI컴퓨터공학부', '201812753', '함현준', '7', '6', '15', '7.5', '100', '부', '가', '126', '해당사항 없음');
+INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
+                                          `student_name`, `current_semester`, `professional_education`, `msc_bsm`,
+                                          `design`, `major`, `essential`, `first_and_last`, `total`, `special_note`)
+VALUES (3, NOW(), NOW(), 'AI컴퓨터공학부', '201812301', '정경원', '7', '6', '15', '7.5', '100', '부', '가', '126', '해당사항 없음');
+INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
+                                          `student_name`, `current_semester`, `professional_education`, `msc_bsm`,
+                                          `design`, `major`, `essential`, `first_and_last`, `total`, `special_note`)
+VALUES (4, NOW(), NOW(), 'AI컴퓨터공학부', '201811612', '유명한', '7', '6', '15', '7.5', '100', '부', '가', '126', '해당사항 없음');
+INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
+                                          `student_name`, `current_semester`, `professional_education`, `msc_bsm`,
+                                          `design`, `major`, `essential`, `first_and_last`, `total`, `special_note`)
+VALUES (5, NOW(), NOW(), 'AI컴퓨터공학부', '202013149', '고은아', '7', '6', '15', '7.5', '100', '부', '가', '126', '해당사항 없음');
+INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
+                                          `student_name`, `current_semester`, `professional_education`, `msc_bsm`,
+                                          `design`, `major`, `essential`, `first_and_last`, `total`, `special_note`)
+VALUES (6, NOW(), NOW(), 'AI컴퓨터공학부', '202016034', '이도현', '7', '6', '15', '7.5', '100', '부', '가', '126', '해당사항 없음');
 
 -- excel_board 데이터
 INSERT INTO `CSPOP`.`excel_board`
