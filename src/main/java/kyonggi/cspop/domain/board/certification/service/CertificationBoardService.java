@@ -39,7 +39,7 @@ public class CertificationBoardService {
         CertificationBoard findCertification = certificationBoardRepository.findByStudentId(userSessionDto.getStudentId()).orElseThrow(() -> new CsPopException(CsPopErrorCode.CERTIFICATION_NOT_FOUND));
         String answer = "";
 
-        // 내 졸업 요건이 얼마 남았고 어떤것이 필요한지 에 대한 작업은
+        // 내 졸업 요건이 얼마 남았고 어떤 것이 필요한지 에 대한 작업은
         // 학년별로 공학인증 조건이 다르므로 학년별 공학인증 조건 등록하는 페이지 및 DB 구축 후, 로직 작성해야함
         // 또는 이미 공학인증 파일의 특이사항에 기재돼있으므로, 굳이 작성 안해도 됨
         switch (sentence) {
