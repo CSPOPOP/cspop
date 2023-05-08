@@ -178,7 +178,7 @@
                                 </c:forEach>
                                 <!-- 다음 -->
                                 <c:choose>
-                                    <c:when test="${ulist.last}"></c:when>
+                                    <c:when test="${graduator.last}"></c:when>
                                     <c:otherwise>
                                         <li class="page-item "><a class="page-link"
                                                                   href="/api/graduation/graduate_submitForm?page=${graduator.number+1}&size=10">다음</a>
