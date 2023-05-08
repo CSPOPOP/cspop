@@ -1,5 +1,6 @@
 package kyonggi.cspop.application.controller.board.excel.certification;
 
+import kyonggi.cspop.application.util.PageStore;
 import kyonggi.cspop.domain.board.certification.CertificationBoard;
 import kyonggi.cspop.domain.board.certification.dto.CertificationBoardResponseDto;
 import kyonggi.cspop.domain.board.certification.service.CertificationBoardService;
@@ -38,20 +39,16 @@ import java.util.Objects;
 public class CertificationExcelBoardController {
 
     private final CertificationBoardService certificationBoardService;
+    private final PageStore pageStore;
 
     @GetMapping("/certification_management")
     public String certificationForm(Pageable pageable, Model model) {
         Page<CertificationBoardResponseDto> allCertificationBoard = certificationBoardService.findAllCertificationBoard(pageable);
 
-        int pageNumber = allCertificationBoard.getPageable().getPageNumber();
-        int totalPages = allCertificationBoard.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        //private로 나중에 빼기
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allCertificationBoard.getPageable().getPageNumber(), allCertificationBoard.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("certification", allCertificationBoard);
         return "graduation/certification/certification_list";
     }
