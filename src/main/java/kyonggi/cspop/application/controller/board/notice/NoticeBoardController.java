@@ -5,6 +5,7 @@ import kyonggi.cspop.application.controller.board.notice.dto.NoticeBoardRequestD
 import kyonggi.cspop.application.controller.board.notice.dto.NoticeNumberJsonRequest;
 import kyonggi.cspop.application.controller.board.notice.dto.NoticeViewDto;
 import kyonggi.cspop.application.util.FileStore;
+import kyonggi.cspop.application.util.PageStore;
 import kyonggi.cspop.domain.admins.Admins;
 import kyonggi.cspop.domain.admins.repository.AdminsRepository;
 import kyonggi.cspop.domain.board.notice.NoticeBoard;
@@ -39,6 +40,7 @@ public class NoticeBoardController {
     private final NoticeBoardService noticeBoardService;
     private final AdminsRepository adminsRepository;
     private final FileStore fileStore;
+    private final PageStore pageStore;
 
     @GetMapping("api/graduation/form")
     public String noticeForm() {return "graduation/notice/noticeForm";}
@@ -50,17 +52,10 @@ public class NoticeBoardController {
     public String findAllNoticeBoard(Pageable pageable, Model model) {
         Page<NoticeBoardResponseDto> allNoticeBoard = noticeBoardService.findAllNoticeBoard(pageable);
 
-        int pageNumber = allNoticeBoard.getPageable().getPageNumber(); //현재페이지
-        int totalPages = allNoticeBoard.getTotalPages(); //총 페이지 수
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1; //현재 페이지가 7이라면 0*10+1=1
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allNoticeBoard.getPageable().getPageNumber(), allNoticeBoard.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("allNoticeBoard", allNoticeBoard);
-
         return "graduation/notice/notice";
     }
 
@@ -72,16 +67,9 @@ public class NoticeBoardController {
             return "graduation/notice/notice";
         }
 
-
-        int pageNumber = searchNotice.getPageable().getPageNumber(); //현재페이지
-        int totalPages = searchNotice.getTotalPages(); //총 페이지 수
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1; //현재 페이지가 7이라면 0*10+1=1
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchNotice.getPageable().getPageNumber(), searchNotice.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("allNoticeBoard", searchNotice);
 
         return "graduation/notice/notice";
