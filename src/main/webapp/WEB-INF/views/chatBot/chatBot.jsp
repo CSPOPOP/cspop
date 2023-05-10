@@ -35,6 +35,26 @@
       margin-top: 5%;
     }
   </style>
+  <style>
+    /* CSS 스타일을 여기에 작성하세요 */
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .user-message {
+      color: #333;
+    }
+    .input-container {
+      margin-top: 20px;
+    }
+    .input-container input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+    }
+  </style>
 </head>
 <%@include file="../common/sessionController.jsp" %>
 <body>
@@ -74,15 +94,22 @@
         <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
           <div class="card">
             <div class="card-body p-4 p-lg-7">
-              <div>
-                <button onclick="testFunction(`전문교양`)">전문교양</button>
-                <button onclick="testFunction(`msc/bsm`)">msc/bsm</button>
-                <button onclick="testFunction(`설계학점`)">설계학점</button>
-                <button onclick="testFunction(`전공학점`)">전공학점</button>
-                <button onclick="testFunction(`총학점`)">총학점</button>
-                <button onclick="testFunction(`특이사항`)">특이사항</button>
-                <button onclick="testFunction(`전체공학인증`)">전체공학인증</button>
-              </div>
+                <div class="message user-message">안녕하세요! 챗봇입니다.</div>
+                <!-- 메시지를 표시할 영역 -->
+                <div id="message-area"></div>
+                <!-- 사용자 입력을 받을 입력 필드 -->
+                <div class="input-container">
+                  <input type="text" id="user-input" placeholder="메시지를 입력하세요">
+                </div>
+<%--              <div>--%>
+<%--                <button onclick="testFunction(`전문교양`)">전문교양</button>--%>
+<%--                <button onclick="testFunction(`msc/bsm`)">msc/bsm</button>--%>
+<%--                <button onclick="testFunction(`설계학점`)">설계학점</button>--%>
+<%--                <button onclick="testFunction(`전공학점`)">전공학점</button>--%>
+<%--                <button onclick="testFunction(`총학점`)">총학점</button>--%>
+<%--                <button onclick="testFunction(`특이사항`)">특이사항</button>--%>
+<%--                <button onclick="testFunction(`전체공학인증`)">전체공학인증</button>--%>
+<%--              </div>--%>
             </div>
           </div>
         </div>
@@ -91,26 +118,7 @@
   </div>
 </section>
 <%@include file="../common/commonJS.jsp" %>
-<script src="../../../../assets/js/detailPage.js">
-
-</script>
-
-<script>
-  function testFunction(mode){
-    let jsonData = {
-      "sentence" : mode
-    }
-    $.ajax({
-      type: 'post',
-      url: "/api/chatBot",
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(jsonData) ,
-      success: (data) => {
-        console.log(data.answer)
-      },
-      error:(error)=>alert("Fail")
-    })
-  }
-</script>
+<script src="../../../../assets/js/detailPage.js"></script>
+<script src="../../../assets/js/chatBot.js"></script>
 </body>
 </html>
