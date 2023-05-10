@@ -374,6 +374,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickProposalFormModify(event, ${userProposalFormInfo.id})">수정</button>
+                                                                <button type="button" class="btn btn-primary">반려</button>
                                                                 <button type="button" class="btn btn-primary" onclick="ApproveProposalButton(${userProposalFormInfo.id},${userDetail.studentId}, userId)">승인</button>
 
                                                             </div>
@@ -397,6 +398,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickInterimFormModify(event, ${userInterimFormInfo.id})">수정</button>
+                                                                <button type="button" class="btn btn-primary">반려</button>
                                                                 <button type="button" class="btn btn-primary" onclick="ApproveInterimButton(${userInterimFormInfo.id},${userDetail.studentId}, userId)">승인</button>
                                                             </div>
                                                         </div>
@@ -419,6 +421,7 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                             <button type="button" class="btn btn-primary" onclick="clickOtherFormModify(event, ${userOtherFormInfo.id})">수정</button>
+                                                            <button type="button" class="btn btn-primary">반려</button>
                                                             <button type="button" class="btn btn-primary" onclick="ApproveOtherButton(${userOtherFormInfo.id},${userDetail.studentId},userId)">승인</button>
                                                         </div>
                                                     </div>
@@ -441,6 +444,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event, ${userFinalFormInfo.id})">수정</button>
+                                                                <button type="button" class="btn btn-primary">반려</button>
                                                                 <button type="button" class="btn btn-primary" onclick="ApproveFinalButton(${userFinalFormInfo.id},${userDetail.studentId}, userId)">승인</button>
                                                             </div>
                                                         </div>
