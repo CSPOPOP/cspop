@@ -8,6 +8,7 @@ import kyonggi.cspop.application.controller.form.interimForm.dto.InterimViewDto;
 import kyonggi.cspop.application.controller.form.otherform.dto.OtherViewDto;
 import kyonggi.cspop.application.controller.form.proposalform.dto.ProposalViewDto;
 import kyonggi.cspop.application.controller.form.submitform.dto.SubmitViewDto;
+import kyonggi.cspop.application.util.PageStore;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardSubmitFormDto;
@@ -64,21 +65,16 @@ public class GraduateCheckController {
     private final InterimFormService interimFormService;
     private final OtherFormService otherFormService;
     private final FinalFormService finalFormService;
+    private final PageStore pageStore;
 
 
     @GetMapping("api/graduation/graduate_management")
     public String graduateForm(Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> allExcelBoard = excelBoardService.findAllExcelBoard(pageable);
 
-        int pageNumber = allExcelBoard.getPageable().getPageNumber();
-        int totalPages = allExcelBoard.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allExcelBoard.getPageable().getPageNumber(), allExcelBoard.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", allExcelBoard);
         return "graduation/graduator/graduation_list";
     }
