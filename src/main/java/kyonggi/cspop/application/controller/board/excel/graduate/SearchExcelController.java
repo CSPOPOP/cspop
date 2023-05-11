@@ -1,5 +1,6 @@
 package kyonggi.cspop.application.controller.board.excel.graduate;
 
+import kyonggi.cspop.application.util.PageStore;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SearchExcelController {
 
     private final ExcelBoardService excelBoardService;
+    private final PageStore pageStore;
 
     @GetMapping("/allStep/search")
     public String searchAll(@RequestParam String word, Pageable pageable, Model model) {
@@ -27,15 +29,10 @@ public class SearchExcelController {
             model.addAttribute("errorMessage", true);
             return "graduation/graduator/graduation_list";
         }
-        int pageNumber = searchName.getPageable().getPageNumber();
-        int totalPages = searchName.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
 
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", searchName);
         return "graduation/graduator/graduation_list";
     }
@@ -48,15 +45,9 @@ public class SearchExcelController {
             return "graduation/graduator/step/submitFormStep_list";
         }
 
-        int pageNumber = searchName.getPageable().getPageNumber();
-        int totalPages = searchName.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", searchName);
         return "graduation/graduator/step/submitFormStep_list";
     }
@@ -69,15 +60,9 @@ public class SearchExcelController {
             return "graduation/graduator/step/proposalFormStep_list";
         }
 
-        int pageNumber = searchName.getPageable().getPageNumber();
-        int totalPages = searchName.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", searchName);
         return "graduation/graduator/step/proposalFormStep_list";
     }
@@ -90,15 +75,9 @@ public class SearchExcelController {
             return "graduation/graduator/step/interimFormStep_list";
         }
 
-        int pageNumber = searchName.getPageable().getPageNumber();
-        int totalPages = searchName.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", searchName);
         return "graduation/graduator/step/interimFormStep_list";
     }
@@ -111,15 +90,9 @@ public class SearchExcelController {
             return "graduation/graduator/step/finalFormStep_list";
         }
 
-        int pageNumber = searchName.getPageable().getPageNumber();
-        int totalPages = searchName.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", searchName);
         return "graduation/graduator/step/finalFormStep_list";
     }
@@ -132,15 +105,9 @@ public class SearchExcelController {
             return "graduation/graduator/step/otherFormStep_list";
         }
 
-        int pageNumber = searchName.getPageable().getPageNumber();
-        int totalPages = searchName.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", searchName);
         return "graduation/graduator/step/otherFormStep_list";
     }
@@ -153,15 +120,9 @@ public class SearchExcelController {
             return "graduation/graduator/step/finalPassStep_list";
         }
 
-        int pageNumber = searchName.getPageable().getPageNumber();
-        int totalPages = searchName.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", searchName);
         return "graduation/graduator/step/finalPassStep_list";
     }
