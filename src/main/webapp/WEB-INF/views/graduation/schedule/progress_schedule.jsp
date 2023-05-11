@@ -114,9 +114,11 @@
                                     </table>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifyTable">
-                                수정
-                            </button>
+                            <c:if test="${fn:contains(userId, 'admin')}">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifyTable">
+                                    수정
+                                </button>
+                            </c:if>
                             <div class="modal fade" id="modifyTable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -173,9 +175,11 @@
                         </c:forEach>
                     </div>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        수정
-                    </button>
+                    <c:if test="${fn:contains(userId, 'admin')}">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            수정
+                        </button>
+                    </c:if>
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">

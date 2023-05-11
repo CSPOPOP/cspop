@@ -121,9 +121,11 @@
                                         </thead>
                                     </table>
                                 </div>
-                                <a href="/api/graduation/form">
-                                    <button class="btn btn-primary btn-sm float-right">글쓰기</button>
-                                </a>
+                                <c:if test="${fn:contains(userId, 'admin')}">
+                                    <a href="/api/graduation/form">
+                                        <button class="btn btn-primary btn-sm float-right">글쓰기</button>
+                                    </a>
+                                </c:if>
                             </div>
                         </div>
                         <!-- 페이징 영역 시작 -->
@@ -151,7 +153,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <li class="page-item"><a class="page-link"
-                                                                     href="/notice/find?page=${i-1}&size=10">${i}</a>
+                                                href="/notice/find?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:otherwise>
                                     </c:choose>
