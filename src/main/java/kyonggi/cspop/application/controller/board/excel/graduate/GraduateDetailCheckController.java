@@ -1,5 +1,6 @@
 package kyonggi.cspop.application.controller.board.excel.graduate;
 
+import kyonggi.cspop.application.util.PageStore;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import lombok.RequiredArgsConstructor;
@@ -17,21 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GraduateDetailCheckController {
 
     private final ExcelBoardService excelBoardService;
+    private final PageStore pageStore;
 
 
     @GetMapping("/graduate_submitForm")
     public String graduateSubmitForm(Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> applyGraduation = excelBoardService.findAllStep(pageable, "신청접수");
 
-        int pageNumber = applyGraduation.getPageable().getPageNumber();
-        int totalPages = applyGraduation.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(applyGraduation.getPageable().getPageNumber(), applyGraduation.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", applyGraduation);
         return "graduation/graduator/step/submitFormStep_list";
     }
@@ -40,15 +36,9 @@ public class GraduateDetailCheckController {
     public String graduateProposalForm(Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> proposalFormStep = excelBoardService.findAllStep(pageable,"제안서");
 
-        int pageNumber = proposalFormStep.getPageable().getPageNumber();
-        int totalPages = proposalFormStep.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(proposalFormStep.getPageable().getPageNumber(), proposalFormStep.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", proposalFormStep);
         return "graduation/graduator/step/proposalFormStep_list";
     }
@@ -57,15 +47,9 @@ public class GraduateDetailCheckController {
     public String graduateInterimForm(Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> interimFormStep = excelBoardService.findAllStep(pageable,"중간보고서");
 
-        int pageNumber = interimFormStep.getPageable().getPageNumber();
-        int totalPages = interimFormStep.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(interimFormStep.getPageable().getPageNumber(), interimFormStep.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", interimFormStep);
         return "graduation/graduator/step/interimFormStep_list";
     }
@@ -74,15 +58,9 @@ public class GraduateDetailCheckController {
     public String graduateFinalForm(Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> finalFormStep = excelBoardService.findAllStep(pageable,"최종보고서");
 
-        int pageNumber = finalFormStep.getPageable().getPageNumber();
-        int totalPages = finalFormStep.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(finalFormStep.getPageable().getPageNumber(), finalFormStep.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", finalFormStep);
         return "graduation/graduator/step/finalFormStep_list";
     }
@@ -91,15 +69,9 @@ public class GraduateDetailCheckController {
     public String graduateOtherForm(Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> otherFormStep = excelBoardService.findAllStep(pageable,"기타자격");
 
-        int pageNumber = otherFormStep.getPageable().getPageNumber();
-        int totalPages = otherFormStep.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(otherFormStep.getPageable().getPageNumber(), otherFormStep.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", otherFormStep);
         return "graduation/graduator/step/otherFormStep_list";
     }
@@ -108,15 +80,9 @@ public class GraduateDetailCheckController {
     public String graduateFinalPass(Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> finalPassStep = excelBoardService.findAllStep(pageable,"최종통과");
 
-        int pageNumber = finalPassStep.getPageable().getPageNumber();
-        int totalPages = finalPassStep.getTotalPages();
-        int pageBlock = 10;
-        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = Math.min(totalPages, endBlockPage);
-
-        model.addAttribute("startBlockPage", startBlockPage);
-        model.addAttribute("endBlockPage", endBlockPage);
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(finalPassStep.getPageable().getPageNumber(), finalPassStep.getTotalPages());
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", finalPassStep);
         return "graduation/graduator/step/finalPassStep_list";
     }
