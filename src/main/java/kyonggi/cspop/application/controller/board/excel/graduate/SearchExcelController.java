@@ -24,16 +24,12 @@ public class SearchExcelController {
     @GetMapping("/allStep/search")
     public String searchAll(@RequestParam String word, Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> searchName = excelBoardService.findSearchName(pageable, word);
-
         if (searchName.isEmpty()) {
             model.addAttribute("errorMessage", true);
             return "graduation/graduator/graduation_list";
         }
-
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", searchName);
+        putPagingInf(model, searchName, startAndEndBlockPage);
         return "graduation/graduator/graduation_list";
     }
 
@@ -44,11 +40,8 @@ public class SearchExcelController {
             model.addAttribute("errorMessage", true);
             return "graduation/graduator/step/submitFormStep_list";
         }
-
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", searchName);
+        putPagingInf(model, searchName, startAndEndBlockPage);
         return "graduation/graduator/step/submitFormStep_list";
     }
 
@@ -59,11 +52,8 @@ public class SearchExcelController {
             model.addAttribute("errorMessage", true);
             return "graduation/graduator/step/proposalFormStep_list";
         }
-
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", searchName);
+        putPagingInf(model, searchName, startAndEndBlockPage);
         return "graduation/graduator/step/proposalFormStep_list";
     }
 
@@ -74,11 +64,8 @@ public class SearchExcelController {
             model.addAttribute("errorMessage", true);
             return "graduation/graduator/step/interimFormStep_list";
         }
-
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", searchName);
+        putPagingInf(model, searchName, startAndEndBlockPage);
         return "graduation/graduator/step/interimFormStep_list";
     }
 
@@ -89,11 +76,8 @@ public class SearchExcelController {
             model.addAttribute("errorMessage", true);
             return "graduation/graduator/step/finalFormStep_list";
         }
-
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", searchName);
+        putPagingInf(model, searchName, startAndEndBlockPage);
         return "graduation/graduator/step/finalFormStep_list";
     }
 
@@ -104,11 +88,8 @@ public class SearchExcelController {
             model.addAttribute("errorMessage", true);
             return "graduation/graduator/step/otherFormStep_list";
         }
-
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", searchName);
+        putPagingInf(model, searchName, startAndEndBlockPage);
         return "graduation/graduator/step/otherFormStep_list";
     }
 
@@ -119,11 +100,14 @@ public class SearchExcelController {
             model.addAttribute("errorMessage", true);
             return "graduation/graduator/step/finalPassStep_list";
         }
-
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchName.getPageable().getPageNumber(), searchName.getTotalPages());
+        putPagingInf(model, searchName, startAndEndBlockPage);
+        return "graduation/graduator/step/finalPassStep_list";
+    }
+
+    private static void putPagingInf(Model model, Page<ExcelBoardResponseDto> searchName, int[] startAndEndBlockPage) {
         model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
         model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("graduator", searchName);
-        return "graduation/graduator/step/finalPassStep_list";
     }
 }

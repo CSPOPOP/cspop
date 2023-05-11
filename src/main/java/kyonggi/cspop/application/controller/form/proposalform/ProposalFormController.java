@@ -54,17 +54,10 @@ public class ProposalFormController {
             model.addAttribute("userDetail", userDetailDto);
             return "graduation/form/proposalForm";
         }
-
-        //제안서 폼 등록
         ProposalForm proposalForm = ProposalForm.createProposalForm(user.getStudentId(), user.getStudentName(), user.getDepartment(), excelByStudentId.get().getGraduationDate(), excelByStudentId.get().getProfessorName(), excelByStudentId.get().getQualifications(), proposalFormDto.getTitle(), proposalFormDto.getDivision(), proposalFormDto.getKeyword(), proposalFormDto.getText());
         Long proposalFormId = proposalFormService.saveProposalForm(proposalForm);
-
-        //유저 테이블 수정
         usersService.updateUserByProposalForm(user.getId(), proposalFormId);
-
-        //엑셀보드 업데이트
         excelBoardService.updateExcelByProposalForm(user);
-
         return "redirect:/api/userStatus";
     }
 

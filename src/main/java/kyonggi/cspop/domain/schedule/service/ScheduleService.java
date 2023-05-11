@@ -30,7 +30,6 @@ public class ScheduleService {
         schedules.updateInfo(scheduleDto);
     }
 
-    //Schedules 자동 업데이트 로직
     @Transactional
     public void autoUpdateSchedulesState() {
         List<Schedules> findScheduleList = scheduleRepository.findAll();

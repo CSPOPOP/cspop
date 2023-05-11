@@ -26,7 +26,6 @@ public class Users extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //===========회원 가입============//
     @Comment("학번")
     @Column(nullable = false)
     private String studentId;
@@ -87,7 +86,6 @@ public class Users extends BaseEntity {
     @JoinColumn(name = "otherForm_id", foreignKey = @ForeignKey(name = "fk_users_to_other_form"))
     private OtherForm otherForm;
 
-    //==생성 메소드==//
     public static Users createUser(String studentId, String studentPassword, String studentName, Sex sex, LocalDate birth, String email,
                                    String phoneNumber, Classification classification, String department,String answerPw) {
 
@@ -105,19 +103,15 @@ public class Users extends BaseEntity {
 
         return user;
     }
-    //비밀번호 업데이트
+
     public void updatePassword(String studentPassword) {
         this.studentPassword = studentPassword;
     }
 
-    // 비밀번호 암호화
     public void encryptPassword(String encryptPassword) {
         this.studentPassword = encryptPassword;
     }
 
-    /**
-     *  양방향 연관관계 메서드
-     */
     public void addSubmitForms(SubmitForm submitForm) {
         this.submitForm = submitForm;
         submitForm.designateUsers(this);

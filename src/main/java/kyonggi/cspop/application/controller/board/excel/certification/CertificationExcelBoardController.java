@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//공학인증 액셀 게시판 컨트롤러
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("api/graduation")
@@ -44,21 +43,15 @@ public class CertificationExcelBoardController {
     @GetMapping("/certification_management")
     public String certificationForm(Pageable pageable, Model model) {
         Page<CertificationBoardResponseDto> allCertificationBoard = certificationBoardService.findAllCertificationBoard(pageable);
-
-        //private로 나중에 빼기
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allCertificationBoard.getPageable().getPageNumber(), allCertificationBoard.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("certification", allCertificationBoard);
+        putPagingInf(model, allCertificationBoard, startAndEndBlockPage);
         return "graduation/certification/certification_list";
     }
 
     @PostMapping("/certification_management.read")
     public String uploadCertification(@RequestParam("file") MultipartFile file, Model model) throws IOException {
-
         List<CertificationBoard> certificationBoardList = checkExcelFile(file);
         certificationBoardService.deleteExcelListAndUploadCertificationList(certificationBoardList);
-
         model.addAttribute("certification", certificationBoardList);
         return "redirect:./certification_management?page=0&size=10";
     }
@@ -66,26 +59,21 @@ public class CertificationExcelBoardController {
     @SneakyThrows
     @GetMapping("/certification_management.download")
     public ResponseEntity<InputStreamResource> downloadCertification(HttpServletResponse response) {
-
         File tmpFile = getTmpFile();
         InputStream excelFile = getExcelFile(tmpFile);
-
-        return ResponseEntity.ok() //
-                .contentLength(tmpFile.length()) //
-                .contentType(MediaType.APPLICATION_OCTET_STREAM) //
-                .header("Content-Disposition", "attachment;filename=certification.xlsx") //
+        return ResponseEntity.ok().contentLength(tmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=certification.xlsx")
                 .body(new InputStreamResource(excelFile));
     }
 
-    /**
-     * 호출 함수 정의, 프론트 작업자 x
-     *
-     */
+    private static void putPagingInf(Model model, Page<CertificationBoardResponseDto> allCertificationBoard, int[] startAndEndBlockPage) {
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
+        model.addAttribute("certification", allCertificationBoard);
+    }
 
     private static List<CertificationBoard> checkExcelFile(MultipartFile file) throws IOException {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         checkUploadCertificationFileExtension(extension);
-
         Sheet worksheet = getWorksheet(file, extension);
         return getCertificationList(worksheet);
     }
@@ -190,76 +178,55 @@ public class CertificationExcelBoardController {
         List<CertificationBoard> certificationBoardList = new ArrayList<>();
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             Row row = worksheet.getRow(i);
-
             for (int j = 0; j < row.getLastCellNum(); j++) {
                 Cell cell = row.getCell(j);
-
                 StringBuilder row1 = new StringBuilder();
-
-                //null 또는 빈 값일 경우 대체 값 대입
                 if (cell == null) {
                     String value = "N/A";
                     cell = row.createCell(j);
                     cell.setCellValue(value);
-                }
-                else if (cell.getCellType() == CellType.BLANK) {
+                } else if (cell.getCellType() == CellType.BLANK) {
                     String value = "N/A";
                     cell.setCellValue(value);
-                }
-                else if (cell.getCellType() == CellType.STRING) {
+                } else if (cell.getCellType() == CellType.STRING) {
                     String value = cell.getStringCellValue();
                     if (value == null || value.trim().isEmpty()) {
-                        // 빈 문자열인 경우 대체 값을 설정하고 셀에 입력
                         String replacementValue = "N/A";
                         cell.setCellValue(replacementValue);
                     }
-                }
-
-                else if (cell.getCellType() == CellType.NUMERIC) {
+                } else if (cell.getCellType() == CellType.NUMERIC) {
                     double value = cell.getNumericCellValue();
                     String stringValue = String.valueOf(value);
 
-                    //들어온 값이 빈 값
                     if (stringValue.trim().isEmpty()) {
                         String replacementValue = "N/A";
                         cell.setCellValue(replacementValue);
-                    }
-                    else{
-                        if (stringValue.length()>8){
-                            for (int k=0;k<stringValue.length();k++) {
+                    } else {
+                        if (stringValue.length() > 8) {
+                            for (int k = 0; k < stringValue.length(); k++) {
                                 char c = stringValue.charAt(k);
 
-                                if (c=='.')
-                                    continue;
+                                if (c == '.') continue;
 
-                                if (c>='A' && c<='Z')
-                                    break;
+                                if (c >= 'A' && c <= 'Z') break;
 
                                 row1.append(c);
                             }
-                            //학번 뒷자리에 0이 연속해서 올 경우 있는 만큼 0 추가
                             if (row1.length() == 8) {
                                 row1.append("0");
-                            }
-                            else if (row1.length() == 7) {
+                            } else if (row1.length() == 7) {
                                 row1.append("00");
-                            }
-                            else if (row1.length() == 6) {
+                            } else if (row1.length() == 6) {
                                 row1.append("000");
                             }
-                            //이외의 경우는 없다고 봄
-                        }
-                        else {
-                            //설계 학점은 따로 반환
+                        } else {
                             if (!stringValue.contains(".0")) {
                                 row1.append(stringValue);
-                            }
-                            else {
+                            } else {
                                 for (int k = 0; k < stringValue.length(); k++) {
                                     char c = stringValue.charAt(k);
 
-                                    if (c == '.')
-                                        break;
+                                    if (c == '.') break;
 
                                     row1.append(c);
                                 }
@@ -283,7 +250,6 @@ public class CertificationExcelBoardController {
 
     private static Workbook getWorkbook(MultipartFile file, String extension) throws IOException {
         Workbook workbook = null;
-
         if (extension.equals("xlsx")) {
             workbook = new XSSFWorkbook(file.getInputStream());
         } else if (extension.equals("xls")) {
@@ -293,7 +259,6 @@ public class CertificationExcelBoardController {
     }
 
     private static void checkUploadCertificationFileExtension(String extension) {
-
         if (extension.equals("")) {
             throw new CsPopException(CsPopErrorCode.NO_UPLOAD_FILE_EXTENSION);
         }

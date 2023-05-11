@@ -73,9 +73,7 @@ public class GraduateCheckController {
         Page<ExcelBoardResponseDto> allExcelBoard = excelBoardService.findAllExcelBoard(pageable);
 
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allExcelBoard.getPageable().getPageNumber(), allExcelBoard.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", allExcelBoard);
+        putPagingInf(model, allExcelBoard, startAndEndBlockPage);
         return "graduation/graduator/graduation_list";
     }
 
@@ -99,8 +97,6 @@ public class GraduateCheckController {
         return "graduation/userstatus/userGraduationStatus";
     }
 
-
-    //신청접수 승인
     @PostMapping("api/userStatus/approvalUserSubmitForm/{studentId}")
     public ResponseEntity<Void> userApprovalSubmitForm(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
         Users user = usersService.findUserByStudentId(studentId);
@@ -108,7 +104,6 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
-    //제안서 승인
     @PostMapping("api/userStatus/approvalUserProposalForm/{studentId}")
     public ResponseEntity<Void> userApprovalProposalForm(@PathVariable String studentId){
         Users user = usersService.findUserByStudentId(studentId);
@@ -116,7 +111,6 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
-    //중간보고서 승인
     @PostMapping("api/userStatus/approvalUserInterimForm/{studentId}")
     public ResponseEntity<Void> userApprovalInterimForm(@PathVariable String studentId){
         Users user = usersService.findUserByStudentId(studentId);
@@ -124,7 +118,6 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
-    //최종보고서 승인
     @PostMapping("api/userStatus/approvalUserFinalForm/{studentId}")
     public ResponseEntity<Void> userApprovalFinalForm(@PathVariable String studentId){
         Users user = usersService.findUserByStudentId(studentId);
@@ -132,7 +125,6 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
-    //기타보고서 승인
     @PostMapping("api/userStatus/approvalUserOtherForm/{studentId}")
     public ResponseEntity<Void> userApprovalOtherForm(@PathVariable String studentId){
         Users user = usersService.findUserByStudentId(studentId);
@@ -140,8 +132,6 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
-    //반려 처리 로직(신청접수 제외) 반려 값이 false일 때 ->true값으로 변경 + 사유를 dto로 전달
-    //제안서 반려
     @PostMapping("api/userStatus/rejectionUserProposalForm/{studentId}")
     public ResponseEntity<Void> userRejectionProposalForm(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
         Users user = usersService.findUserByStudentId(studentId);
@@ -149,7 +139,6 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
-    //중간보고서 반려
     @PostMapping("api/userStatus/rejectionUserInterimForm/{studentId}")
     public ResponseEntity<Void> userRejectionInterimForm(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
         Users user = usersService.findUserByStudentId(studentId);
@@ -157,7 +146,6 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
-    //최종보고서 반려
     @PostMapping("api/userStatus/rejectionUserFinalForm/{studentId}")
     public ResponseEntity<Void> userRejectionFinalForm(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
         Users user = usersService.findUserByStudentId(studentId);
@@ -165,7 +153,6 @@ public class GraduateCheckController {
         return ResponseEntity.ok().build();
     }
 
-    //기타자격 반려
     @PostMapping("api/userStatus/rejectionUserOtherForm/{studentId}")
     public ResponseEntity<Void> userRejectionOtherForm(@PathVariable String studentId, @Valid FormRejectionDto formRejectionDto){
         Users user = usersService.findUserByStudentId(studentId);
@@ -181,10 +168,11 @@ public class GraduateCheckController {
         return ResponseEntity.ok().contentLength(tmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=graduation.xlsx").body(new InputStreamResource(excelFile));
     }
 
-    /**
-     * 프론트 작업자는 이 밑으로 로직 안봐도 됩니다.
-     * 위의 public 접근 제어자 메서드만 확인해 주세요.
-     */
+    private static void putPagingInf(Model model, Page<ExcelBoardResponseDto> allExcelBoard, int[] startAndEndBlockPage) {
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
+        model.addAttribute("graduator", allExcelBoard);
+    }
 
     private File getTmpFile() throws IOException {
         Workbook workbook = new XSSFWorkbook();

@@ -51,27 +51,20 @@ public class NoticeBoardController {
     @GetMapping("/notice/find")
     public String findAllNoticeBoard(Pageable pageable, Model model) {
         Page<NoticeBoardResponseDto> allNoticeBoard = noticeBoardService.findAllNoticeBoard(pageable);
-
         int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allNoticeBoard.getPageable().getPageNumber(), allNoticeBoard.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("allNoticeBoard", allNoticeBoard);
+        putPagingInf(model, allNoticeBoard, startAndEndBlockPage);
         return "graduation/notice/notice";
     }
 
     @GetMapping("api/notice/search")
     public String searchNotice(@RequestParam String word, Pageable pageable, Model model) {
-        Page<NoticeBoardResponseDto> searchNotice = noticeBoardService.findSearchNotice(pageable, word);
-        if (searchNotice.isEmpty()) {
+        Page<NoticeBoardResponseDto> allNoticeBoard = noticeBoardService.findSearchNotice(pageable, word);
+        if (allNoticeBoard.isEmpty()) {
             model.addAttribute("errorMessage", true);
             return "graduation/notice/notice";
         }
-
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(searchNotice.getPageable().getPageNumber(), searchNotice.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("allNoticeBoard", searchNotice);
-
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allNoticeBoard.getPageable().getPageNumber(), allNoticeBoard.getTotalPages());
+        putPagingInf(model, allNoticeBoard, startAndEndBlockPage);
         return "graduation/notice/notice";
     }
 
@@ -81,33 +74,25 @@ public class NoticeBoardController {
             model.addAttribute("data", noticeBoardRequestDto.getText() != null ? noticeBoardRequestDto.getText() : "");
             return "graduation/notice/noticeForm";
         }
-
         UserSessionDto adminSession = (UserSessionDto) request.getSession().getAttribute(SessionFactory.CSPOP_SESSION_KEY);
         Admins findAdmin = adminsRepository.findByAdminId(adminSession.getStudentId()).get();
-
         List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
-
-        //데이터베이스에 저장
         NoticeBoard noticeBoard = NoticeBoard.createNoticeBoard(noticeBoardRequestDto.getTitle(), noticeBoardRequestDto.getText(), false, 0, findAdmin, storeFiles);
         noticeBoardService.saveNoticeBoard(noticeBoard, storeFiles);
-
         return "redirect:/notice/find?page=0&size=10";
     }
 
     @GetMapping("/attach/{noticeBoardId}/{uploadFileName}")
     public ResponseEntity<Resource> downloadAttach(@PathVariable Long noticeBoardId, @PathVariable String uploadFileName) throws MalformedURLException {
         NoticeBoard noticeBoard = noticeBoardService.findNoticeBoard(noticeBoardId);
-
         ResponseEntity<Resource> CONTENT_DISPOSITION = noticeBoardFileDownload(uploadFileName, noticeBoard);
         if (CONTENT_DISPOSITION != null)
             return CONTENT_DISPOSITION;
-
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/notice/view/detail/{noticeBoardId}")
     public String viewDetail(@PathVariable Long noticeBoardId, Model model) {
-        //자세히 보기 누르면 view + 1 돼야함.
         NoticeBoard detailNoticeBoard = noticeBoardService.findDetailNoticeBoard(noticeBoardId);
         model.addAttribute("detailView", new NoticeViewDto(detailNoticeBoard));
         return "graduation/notice/noticeDetail";
@@ -149,14 +134,18 @@ public class NoticeBoardController {
             if (uploadFile.getUploadFileName().equals(uploadFileName)) {
                 String storeFileName = uploadFile.getStoreFileName();
                 String dbUploadFileName = uploadFile.getUploadFileName();
-
                 UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
                 String encodedUploadFileName = UriUtils.encode(dbUploadFileName, StandardCharsets.UTF_8);
                 String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
-
                 return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);
             }
         }
         return null;
+    }
+
+    private static void putPagingInf(Model model, Page<NoticeBoardResponseDto> allNoticeBoard, int[] startAndEndBlockPage) {
+        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
+        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
+        model.addAttribute("allNoticeBoard", allNoticeBoard);
     }
 }

@@ -23,67 +23,55 @@ public class GraduateDetailCheckController {
 
     @GetMapping("/graduate_submitForm")
     public String graduateSubmitForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> applyGraduation = excelBoardService.findAllStep(pageable, "신청접수");
-
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(applyGraduation.getPageable().getPageNumber(), applyGraduation.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", applyGraduation);
+        Page<ExcelBoardResponseDto> graduator = excelBoardService.findAllStep(pageable, "신청접수");
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(graduator.getPageable().getPageNumber(), graduator.getTotalPages());
+        putPagingInf(model, graduator, startAndEndBlockPage);
         return "graduation/graduator/step/submitFormStep_list";
     }
 
     @GetMapping("/graduate_proposalForm")
     public String graduateProposalForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> proposalFormStep = excelBoardService.findAllStep(pageable,"제안서");
-
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(proposalFormStep.getPageable().getPageNumber(), proposalFormStep.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", proposalFormStep);
+        Page<ExcelBoardResponseDto> graduator = excelBoardService.findAllStep(pageable,"제안서");
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(graduator.getPageable().getPageNumber(), graduator.getTotalPages());
+        putPagingInf(model, graduator, startAndEndBlockPage);
         return "graduation/graduator/step/proposalFormStep_list";
     }
 
     @GetMapping("/graduate_interimForm")
     public String graduateInterimForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> interimFormStep = excelBoardService.findAllStep(pageable,"중간보고서");
-
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(interimFormStep.getPageable().getPageNumber(), interimFormStep.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", interimFormStep);
+        Page<ExcelBoardResponseDto> graduator = excelBoardService.findAllStep(pageable,"중간보고서");
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(graduator.getPageable().getPageNumber(), graduator.getTotalPages());
+        putPagingInf(model, graduator, startAndEndBlockPage);
         return "graduation/graduator/step/interimFormStep_list";
     }
 
     @GetMapping("/graduate_finalForm")
     public String graduateFinalForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> finalFormStep = excelBoardService.findAllStep(pageable,"최종보고서");
-
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(finalFormStep.getPageable().getPageNumber(), finalFormStep.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", finalFormStep);
+        Page<ExcelBoardResponseDto> graduator = excelBoardService.findAllStep(pageable,"최종보고서");
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(graduator.getPageable().getPageNumber(), graduator.getTotalPages());
+        putPagingInf(model, graduator, startAndEndBlockPage);
         return "graduation/graduator/step/finalFormStep_list";
     }
 
     @GetMapping("/graduate_otherForm")
     public String graduateOtherForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> otherFormStep = excelBoardService.findAllStep(pageable,"기타자격");
-
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(otherFormStep.getPageable().getPageNumber(), otherFormStep.getTotalPages());
-        model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
-        model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", otherFormStep);
+        Page<ExcelBoardResponseDto> graduator = excelBoardService.findAllStep(pageable,"기타자격");
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(graduator.getPageable().getPageNumber(), graduator.getTotalPages());
+        putPagingInf(model, graduator, startAndEndBlockPage);
         return "graduation/graduator/step/otherFormStep_list";
     }
 
     @GetMapping("/graduate_finalPass")
     public String graduateFinalPass(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> finalPassStep = excelBoardService.findAllStep(pageable,"최종통과");
+        Page<ExcelBoardResponseDto> graduator = excelBoardService.findAllStep(pageable,"최종통과");
+        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(graduator.getPageable().getPageNumber(), graduator.getTotalPages());
+        putPagingInf(model, graduator, startAndEndBlockPage);
+        return "graduation/graduator/step/finalPassStep_list";
+    }
 
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(finalPassStep.getPageable().getPageNumber(), finalPassStep.getTotalPages());
+    private static void putPagingInf(Model model, Page<ExcelBoardResponseDto> graduator, int[] startAndEndBlockPage) {
         model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
         model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
-        model.addAttribute("graduator", finalPassStep);
-        return "graduation/graduator/step/finalPassStep_list";
+        model.addAttribute("graduator", graduator);
     }
 }
