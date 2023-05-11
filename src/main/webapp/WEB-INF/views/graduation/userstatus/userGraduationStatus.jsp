@@ -93,7 +93,7 @@
                                         <ul class="nav-pills-border nav nav-pills nav-justified mb-5 " id="pills-tab"
                                             role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active fw-bold" id="thesis-tab-id"
+                                                <a class="nav-link fw-bold" id="thesis-tab-id"
                                                    data-bs-toggle="pill" href="#thesis-id" role="tab"
                                                    aria-controls="thesis" aria-selected="true">
                                                     졸업 논문</a>
@@ -106,7 +106,7 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade active show" id="thesis-id" role="tabpanel"
+                                            <div class="tab-pane fade show" id="thesis-id" role="tabpanel"
                                                  aria-labelledby="thesis-tab-id"> <!-- 졸업논문 tab 코드 -->
                                                 <div id="thesis">
                                                     <div class="progress" style="height: 45px;" id="thesisPercent"></div>
@@ -559,6 +559,18 @@
     const otherPercentage = {
 
     }
+    $(() => {
+        if (${userDetail.thesis}) {
+            $('#thesis-tab-id').addClass('active show');
+            $('#thesis-id').addClass('active');
+        }
+    });
+    $(() => {
+        if (${userDetail.otherQualifications}) {
+            $('#Qualifications-tab').addClass('active show');
+            $('#Qualifications-id').addClass('active');
+        }
+    });
     $(() => { // 졸업, 기타 요건중 유저가 신청한 졸업 전형 table만 띄워준다.
         let image;
         if (${userDetail.otherQualifications} || ${userDetail.thesis}) { //졸업, 기타 요건 중 하나가 true일때,
@@ -585,7 +597,6 @@
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#thesisPercent').html(appendText)
     });
-
 </script>
 </body>
 </html>
