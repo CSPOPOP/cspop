@@ -41,7 +41,7 @@ public class CertificationExcelBoardController {
     }
 
     @PostMapping("/certification_management.read")
-    public String uploadCertification(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+    public String uploadCertificationExcelFile(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         deleteExistentFileAndUploadCertificationExcelFile(file, model);
         return "redirect:./certification_management?page=0&size=10";
     }
