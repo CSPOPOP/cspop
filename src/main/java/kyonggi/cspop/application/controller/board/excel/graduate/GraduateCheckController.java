@@ -35,6 +35,7 @@ import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +44,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -61,7 +64,6 @@ public class GraduateCheckController {
     private final OtherFormService otherFormService;
     private final FinalFormService finalFormService;
     private final PageStore pageStore;
-
     private final ExcelStore excelStore;
 
 
@@ -160,7 +162,9 @@ public class GraduateCheckController {
     @SneakyThrows
     @GetMapping("api/graduation/graduate_management.download")
     public ResponseEntity<InputStreamResource> downloadGraduationExcelFile() {
-        return excelStore.downloadExcelFile();
+        File tmpFile = excelStore.getTmpFile();
+        InputStream excelFile = excelStore.getExcelFile(tmpFile);
+        return ResponseEntity.ok().contentLength(tmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=graduation.xlsx").body(new InputStreamResource(excelFile));
     }
 
     private static void putPagingInf(Model model, Page<ExcelBoardResponseDto> allExcelBoard, int[] startAndEndBlockPage) {

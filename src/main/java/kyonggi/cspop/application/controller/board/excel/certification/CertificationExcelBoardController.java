@@ -10,6 +10,7 @@ import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +49,9 @@ public class CertificationExcelBoardController {
     @SneakyThrows
     @GetMapping("/certification_management.download")
     public ResponseEntity<InputStreamResource> downloadCertificationExcelFile() {
-        return excelStore.downloadCertificationExcelFile();
+        File certificationTmpFile = excelStore.getCertificationTmpFile();
+        InputStream certificationExcelFile = excelStore.getCertificationExcelFile(certificationTmpFile);
+        return ResponseEntity.ok().contentLength(certificationTmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=certification.xlsx").body(new InputStreamResource(certificationExcelFile));
     }
 
     private static void putPagingInf(Model model, Page<CertificationBoardResponseDto> allCertificationBoard, int[] startAndEndBlockPage) {

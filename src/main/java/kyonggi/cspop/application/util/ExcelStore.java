@@ -12,9 +12,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,22 +25,9 @@ import java.util.Objects;
 public class ExcelStore {
 
     private final ExcelBoardService excelBoardService;
-
     private final CertificationBoardService certificationBoardService;
 
-    public ResponseEntity<InputStreamResource> downloadExcelFile() throws IOException {
-        File tmpFile = getTmpFile();
-        InputStream excelFile = getExcelFile(tmpFile);
-        return ResponseEntity.ok().contentLength(tmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=graduation.xlsx").body(new InputStreamResource(excelFile));
-    }
-
-    public ResponseEntity<InputStreamResource> downloadCertificationExcelFile() throws IOException {
-        File tmpFile = getCertificationTmpFile();
-        InputStream certificationExcelFile = getCertificationExcelFile(tmpFile);
-        return ResponseEntity.ok().contentLength(tmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=certification.xlsx").body(new InputStreamResource(certificationExcelFile));
-    }
-
-    private File getTmpFile() throws IOException {
+    public File getTmpFile() throws IOException {
         Workbook workbook = new XSSFWorkbook();
         File tmpFile = getFile(workbook);
         OutputStream fos = new FileOutputStream(tmpFile);
@@ -51,7 +35,24 @@ public class ExcelStore {
         return tmpFile;
     }
 
-    private static InputStream getExcelFile(File tmpFile) throws FileNotFoundException {
+    public InputStream getExcelFile(File tmpFile) throws FileNotFoundException {
+        return new FileInputStream(tmpFile) {
+            @Override
+            public void close() throws IOException {
+                super.close();
+            }
+        };
+    }
+
+    public File getCertificationTmpFile() throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        File tmpFile = getCertificationFile(workbook);
+        OutputStream fos = new FileOutputStream(tmpFile);
+        workbook.write(fos);
+        return tmpFile;
+    }
+
+    public InputStream getCertificationExcelFile(File tmpFile) throws FileNotFoundException {
         return new FileInputStream(tmpFile) {
             @Override
             public void close() throws IOException {
@@ -122,23 +123,6 @@ public class ExcelStore {
         font.setFontHeightInPoints((short) 13);
         headStyle.setFont(font);
         return headStyle;
-    }
-
-    private File getCertificationTmpFile() throws IOException {
-        Workbook workbook = new XSSFWorkbook();
-        File tmpFile = getCertificationFile(workbook);
-        OutputStream fos = new FileOutputStream(tmpFile);
-        workbook.write(fos);
-        return tmpFile;
-    }
-
-    private static InputStream getCertificationExcelFile(File tmpFile) throws FileNotFoundException {
-        return new FileInputStream(tmpFile) {
-            @Override
-            public void close() throws IOException {
-                super.close();
-            }
-        };
     }
 
     private File getCertificationFile(Workbook workbook) throws IOException {
@@ -272,11 +256,9 @@ public class ExcelStore {
                                 row1.append("000");
                             } else if (row1.length() == 5) {
                                 row1.append("0000");
-                            }
-                            else if(row1.length()==4) {
+                            } else if (row1.length() == 4) {
                                 row1.append("00000");
-                            }
-                            else if(row1.length()==3) {
+                            } else if (row1.length() == 3) {
                                 row1.append("000000");
                             }
                         } else {
