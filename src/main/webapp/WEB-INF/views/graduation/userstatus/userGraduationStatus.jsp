@@ -563,12 +563,9 @@
         if (${userDetail.thesis}) {
             $('#thesis-tab-id').addClass('active show');
             $('#thesis-id').addClass('active');
-        }
-    });
-    $(() => {
-        if (${userDetail.otherQualifications}) {
-            $('#Qualifications-tab').addClass('active show');
-            $('#Qualifications-id').addClass('active');
+        } else if (${userDetail.otherQualifications}) {
+              $('#Qualifications-tab').addClass('active show');
+              $('#Qualifications-id').addClass('active');
         }
     });
     $(() => { // 졸업, 기타 요건중 유저가 신청한 졸업 전형 table만 띄워준다.
