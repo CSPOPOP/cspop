@@ -89,7 +89,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="modifyGuide/${data.id}" class="btn btn-primary text-white float-right">수정</a>
+                                <c:if test="${fn:contains(userId, 'admin')}">
+                                    <a href="modifyGuide/${data.id}" class="btn btn-primary text-white float-right">수정</a>
+                                </c:if>
                             </div>
                         </div>
                     </div>

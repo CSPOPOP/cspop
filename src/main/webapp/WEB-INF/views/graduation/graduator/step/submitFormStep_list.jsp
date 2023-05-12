@@ -29,6 +29,13 @@
         img {
             margin-top: 5%;
         }
+        ul {
+            list-style: none;
+        }
+        li {
+            float: left;
+            margin-right: 15px;
+        }
     </style>
     <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
     <script src="../../../../assets/js/graduation.js"></script>
@@ -76,6 +83,8 @@
                                     <input name="word" type="search" class="form-control ps-6 mb-2 border-0"
                                            placeholder="search"/>
                                 </form>
+                                <br>
+                                <%@include file="../graduation_menu.jsp" %>
                             </div>
                         </div>
                     </div>

@@ -29,6 +29,13 @@
         img {
             margin-top: 5%;
         }
+        ul {
+            list-style: none;
+        }
+        li {
+            float: left;
+            margin-right: 15px;
+        }
     </style>
     <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
     <script src="../../../../assets/js/graduation.js"></script>
@@ -70,12 +77,23 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <form action="/api/graduation/allStep/search?page=0&size=10" method="get">
-                                        <span class="position-absolute ps-3 pt-1 mt-1">
-                                            <i class="fe fe-search"></i>
-                                        </span>
+                                    <span class="position-absolute ps-3 pt-1 mt-1">
+                                        <i class="fe fe-search"></i>
+                                    </span>
                                     <input name="word" type="search" class="form-control ps-6 mb-2 border-0"
                                            placeholder="search"/>
                                 </form>
+                                <br>
+                                <div align="right" style="width: 600px">
+                                    <ul>
+                                        <li><a class="text-white" href="/api/graduation/graduate_submitForm?page=0&size=10">신청접수</a></li>
+                                        <li><a class="text-white" href="/api/graduation/graduate_proposalForm?page=0&size=10">제안서</a></li>
+                                        <li><a class="text-white" href="/api/graduation/graduate_interimForm?page=0&size=10">중간보고서</a></li>
+                                        <li><a class="text-white" href="/api/graduation/graduate_finalForm?page=0&size=10">최종보고서</a></li>
+                                        <li><a class="text-white" href="/api/graduation/graduate_otherForm?page=0&size=10">기타자격</a></li>
+                                        <li><a class="text-white" href="/api/graduation/graduate_finalPass?page=0&size=10">최종통과</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
