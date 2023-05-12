@@ -15,12 +15,17 @@ public class HomeController {
 
         if (param != null){
             if (param.equals("login")) {
-                model.addAttribute("message", "로그인 하여주시기 바랍니다!");
+                model.addAttribute("message", "로그인 후 이용해주세요!");
             }
             else if (param.equals("user")) {
                 model.addAttribute("message", "권한이 없는 사용자입니다!");
             }
         }
         return "index";
+    }
+
+    @GetMapping("api/chatBotPage")
+    public String chatBot(){
+        return "chatBot/chatBot";
     }
 }
