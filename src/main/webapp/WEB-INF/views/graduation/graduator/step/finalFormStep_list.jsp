@@ -29,6 +29,13 @@
         img {
             margin-top: 5%;
         }
+        ul {
+            list-style: none;
+        }
+        li {
+            float: left;
+            margin-right: 15px;
+        }
     </style>
     <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
     <script src="../../../../assets/js/graduation.js"></script>
@@ -70,12 +77,14 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <form action="/api/graduation/finalFormStep/search?page=0&size=10" method="get">
-                                        <span class="position-absolute ps-3 pt-1 mt-1">
-                                            <i class="fe fe-search"></i>
-                                        </span>
+                                    <span class="position-absolute ps-3 pt-1 mt-1">
+                                        <i class="fe fe-search"></i>
+                                    </span>
                                     <input name="word" type="search" class="form-control ps-6 mb-2 border-0"
-                                           placeholder="search"/>
+                                        placeholder="search"/>
                                 </form>
+                                <br>
+                                <%@include file="../graduation_menu.jsp" %>
                             </div>
                         </div>
                     </div>
