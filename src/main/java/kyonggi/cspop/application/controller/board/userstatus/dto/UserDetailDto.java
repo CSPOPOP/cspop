@@ -7,9 +7,6 @@ import lombok.Data;
 @Data
 public class UserDetailDto {
 
-    /**
-     * 유저별 진행상황 뷰 공통 속성
-     */
     private String studentId;
     private String graduationDate;
     private String studentName;
@@ -18,9 +15,6 @@ public class UserDetailDto {
     private boolean capstoneCompletionStatus;
     private String qualification;
 
-    /**
-     * 유저별 진행상황 뷰 분리될 속성
-     */
     private boolean otherQualifications;
     private boolean thesis;
 

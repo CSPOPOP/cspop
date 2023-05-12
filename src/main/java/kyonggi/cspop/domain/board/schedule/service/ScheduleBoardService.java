@@ -19,7 +19,6 @@ public class ScheduleBoardService {
         return scheduleBoardRepository.findAll();
     }
 
-    //AJAX 통신용 API Service logic
     @Transactional
     public void updateReceivedText(String receivedText) {
         scheduleBoardRepository.findById(1l).get().updateReceivedText(receivedText);

@@ -29,7 +29,6 @@ public class Admins extends BaseEntity {
     @Column(nullable = false)
     private String adminPassword;
 
-    // 비밀번호 암호화
     public void encryptPassword(String adminPassword) {
         this.adminPassword = adminPassword;
     }

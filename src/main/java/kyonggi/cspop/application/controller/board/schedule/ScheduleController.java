@@ -24,19 +24,13 @@ public class ScheduleController {
 
     @GetMapping("/schedule")
     public String showSchedule(Model model) {
-
-        //테이블 데이터 출력
         List<Schedules> schedules = scheduleService.findScheduleList();
         model.addAttribute("schedules", schedules);
-
-        //각 테이블 컬럼에 해당하는 세부 내용 출력
         List<ScheduleBoard> schedulesTextList = scheduleBoardService.findScheduleBoardList();
         model.addAttribute("schedulesTextList", schedulesTextList);
-
         return "graduation/schedule/progress_schedule";
     }
 
-    //AJAX 통신용 API 진행일정 텍스트
     @PostMapping("/scheduleBoard/modify/receivedText")
     public ResponseEntity<Void> modifyReceivedText(@RequestBody ReceivedText receivedText) {
         scheduleBoardService.updateReceivedText(receivedText.getReceivedText());
@@ -73,7 +67,6 @@ public class ScheduleController {
         return ResponseEntity.noContent().build();
     }
 
-    //AJAX 통신용 API 진행일정 테이블
     @PostMapping("/schedule/modify/{id}")
     public ResponseEntity<Void> scheduleModify(@PathVariable Long id, @RequestBody ScheduleDto scheduleDto) {
         scheduleService.updateSchedules(id, scheduleDto);

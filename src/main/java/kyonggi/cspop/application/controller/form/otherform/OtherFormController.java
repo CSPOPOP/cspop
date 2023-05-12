@@ -67,22 +67,12 @@ public class OtherFormController {
             model.addAttribute("userDetail", userDetailDto);
             return "graduation/form/otherForm";
         }
-
-        //파일 크기 제한 예외처리
         String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
         if (x != null) return x;
-
-        //기타 자격 파일 저장
         OtherFormUploadFile otherFormUploadFile = fileStore.storeOtherFile(otherFormDto.getOtherFormUploadFile());
-
-        //기타 자격 폼 등록
         OtherForm otherForm = OtherForm.createOtherForm(otherFormDto.getTitle(), otherFormDto.getDivision(), otherFormDto.getText(), otherFormUploadFile);
         Long otherFormId = otherFormService.saveOtherForm(otherForm);
-
-        //유저 테이블 수정
         usersService.updateUserByOtherForm(user.getId(), otherFormId);
-
-        //엑셀보드 업데이트
         excelBoardService.updateExcelByOtherForm(user);
         return "redirect:/api/userStatus";
     }

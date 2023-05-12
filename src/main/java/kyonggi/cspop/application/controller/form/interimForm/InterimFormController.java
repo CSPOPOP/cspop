@@ -64,23 +64,13 @@ public class InterimFormController {
             model.addAttribute("userDetail", userDetailDto);
             return "graduation/form/interimForm";
         }
-
-        //파일 크기 제한 예외처리
         String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
         if (x != null) return x;
-        //중간 보고서 파일 저장
         InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
-
-        //중간 보고서 폼 등록
         InterimForm interimForm = InterimForm.createInterimForm(interimFormDto.getTitle(), interimFormDto.getDivision(), interimFormDto.getText(), interimFormDto.getPlan(), interimFormUploadFile);
         Long interimFormId = interimFormService.saveInterimForm(interimForm);
-
-        //유저 테이블 수정
         usersService.updateUserByInterimForm(user.getId(), interimFormId);
-
-        //엑셀보드 업데이트
         excelBoardService.updateExcelByInterimForm(user);
-
         return "redirect:/api/userStatus";
     }
 

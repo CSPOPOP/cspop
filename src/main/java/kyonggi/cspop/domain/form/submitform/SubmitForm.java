@@ -47,7 +47,6 @@ public class SubmitForm extends BaseEntity {
         this.users = users;
     }
 
-    //신청서 생성 메소드
     public static SubmitForm createSubmitForm(String studentId, String studentName, String department, String graduationRequirements) {
         SubmitForm submitForm = new SubmitForm();
         submitForm.studentId = studentId;

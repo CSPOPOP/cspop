@@ -44,7 +44,6 @@ public class FileStore {
         return new NoticeBoardUploadFile(originalFilename, storeFileName);
     }
 
-    //중간 보고서 파일 저장 메서드
     public InterimFormUploadFile storeInterimFile(MultipartFile multipartFile) throws IOException {
 
         if (multipartFile.isEmpty()) {
@@ -56,7 +55,6 @@ public class FileStore {
         return new InterimFormUploadFile(originalFilename, storeFileName);
     }
 
-    //최종 보고서 파일 저장 메서드
     public FinalFormUploadFile storeFinalFile(MultipartFile multipartFile) throws IOException {
 
         if (multipartFile.isEmpty()) {
@@ -79,7 +77,6 @@ public class FileStore {
         return new OtherFormUploadFile(originalFilename, storeFileName);
     }
 
-    //이거 정규식으로 한번에 처리해야 하지만 일단은 이렇게 함
     private static String urlEncodingFileName(MultipartFile multipartFile) {
         String originalFilename = multipartFile.getOriginalFilename()
                 .replace(" ", "_")
