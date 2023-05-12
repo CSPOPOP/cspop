@@ -181,7 +181,7 @@
                         </c:forEach>
                         <c:if test="${fn:contains(userId, 'admin')}">
                         <div>
-                            <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#modifyTable">
+                            <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 수정
                             </button>
                         </c:if>
