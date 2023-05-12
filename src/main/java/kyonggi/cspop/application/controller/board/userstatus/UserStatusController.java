@@ -170,7 +170,6 @@ public class UserStatusController {
         if (result.hasFieldErrors() || interimFormDto.getInterimFormUploadFile().isEmpty()) {
             throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
         }
-        //파일 크기 제한 예외처리
         if (interimFormDto.getInterimFormUploadFile().getSize() > 10485760L) {
             throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
         }
@@ -185,7 +184,6 @@ public class UserStatusController {
         if (result.hasFieldErrors() || finalFormDto.getFinalFormUploadFile().isEmpty()) {
             throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
         }
-        //파일 크기 제한 예외처리
         if (finalFormDto.getFinalFormUploadFile().getSize() > 10485760L) {
             throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
         }
@@ -200,7 +198,6 @@ public class UserStatusController {
         if (result.hasFieldErrors() || otherFormDto.getOtherFormUploadFile().isEmpty()) {
             throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
         }
-        //파일 크기 제한 예외처리
         if (otherFormDto.getOtherFormUploadFile().getSize() > 10485760L) {
             throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
         }
@@ -208,10 +205,6 @@ public class UserStatusController {
         otherFormService.updateUserOtherForm(otherFormId, otherFormDto, otherFormUploadFile);
         return ResponseEntity.noContent().build();
     }
-
-    /**
-     * 뷰 작업자, private 접근제어 함수는 안 봐도 됩니다.
-     */
 
     private static List<String> createUnApprovalList(List<UserScheduleDto> userSchedules) {
         List<String> notApprovalList = new ArrayList<>();

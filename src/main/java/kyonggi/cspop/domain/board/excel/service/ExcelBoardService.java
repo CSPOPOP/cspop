@@ -63,8 +63,6 @@ public class ExcelBoardService {
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByOtherForm();
     }
-
-    //상태 별 필터링
     public Page<ExcelBoardResponseDto> findAllStep(Pageable pageable, String word) {
         return excelBoardRepository.findAllByStepOrderById(word, pageable).map(ExcelBoardResponseDto::new);
     }

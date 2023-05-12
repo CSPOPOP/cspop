@@ -22,7 +22,6 @@ public class LoginService {
     private final UsersRepository usersRepository;
     private final AdminsRepository adminsRepository;
 
-    //사용자 로그인
     public UserSessionDto login(String loginId, String loginPassword) {
         Users findUser = usersRepository.findByStudentId(loginId)
                 .orElseThrow(() -> new CsPopException(CsPopErrorCode.USER_NOT_FOUND));
@@ -36,13 +35,12 @@ public class LoginService {
         }
     }
 
-    //관리자 로그인
     public UserSessionDto loginAsAdmin(String loginId, String loginPassword){
         Optional<Admins> findAdmin = adminsRepository.findByAdminId(loginId);
         if (findAdmin.isPresent()) {
             if (isCorrectAdminPassword(loginPassword, findAdmin)) return new UserSessionDto(findAdmin.get());
         }
-        return new UserSessionDto(); //필드 값이 모두 "null"인 기본 생성자
+        return new UserSessionDto();
     }
 
     private boolean isCorrectAdminPassword(String loginPassword, Optional<Admins> findAdmin) {

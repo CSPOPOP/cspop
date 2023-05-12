@@ -27,16 +27,10 @@ public class SubmitFormController {
     public String saveSubmitFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute SubmitFormDto submitFormDto) {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
-        //수정폼 등록
         SubmitForm submitForm = SubmitForm.createSubmitForm(submitFormDto.getStudentId(), submitFormDto.getStudentName(), submitFormDto.getDepartment(), submitFormDto.getQualification());
         Long submitFormId = submitFormService.saveSubmitForm(submitForm);
-
-        //유저 테이블 수정
         usersService.updateUserBySubmitForm(user.getId(),submitFormId);
-
-        //엑셀보드에 유저 로우 저장
         excelBoardService.addExcelBySubmitForm(user, submitForm);
-
         return "redirect:/api/userStatus";
     }
 }

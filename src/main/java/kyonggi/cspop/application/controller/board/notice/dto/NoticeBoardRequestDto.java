@@ -13,6 +13,5 @@ public class NoticeBoardRequestDto {
     private String title;
     @NotBlank(message = "글을 작성해 주세요.")
     private String text;
-    // private MultipartFile file;
     private List<MultipartFile> files;
 }

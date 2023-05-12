@@ -203,7 +203,7 @@
                                 </c:forEach>
                                 <!-- 다음 -->
                                 <c:choose>
-                                    <c:when test="${ulist.last}"></c:when>
+                                    <c:when test="${certification.last}"></c:when>
                                     <c:otherwise>
                                         <li class="page-item "><a class="page-link" href="/api/graduation/certification_management?page=${certification.number+1}&size=10">다음</a></li>
                                         <li class="page-item "><a class="page-link" href="/api/graduation/certification_management?page=${certification.totalPages-1}&size=10">마지막</a></li>

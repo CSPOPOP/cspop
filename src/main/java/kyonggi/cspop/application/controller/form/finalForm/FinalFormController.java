@@ -67,24 +67,14 @@ public class FinalFormController {
             return "graduation/form/finalForm";
         }
 
-        //파일 크기 제한 예외처리
         String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
         if (x != null)
             return x;
-
-        //최종 보고서 파일 저장
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
-
-        //최종 보고서 폼 등록
         FinalForm finalForm = FinalForm.createFinalForm(finalFormDto.getTitle(), finalFormDto.getDivision(), finalFormDto.getQualification(), finalFormDto.getPageNumber(), finalFormUploadFile);
         Long finalFormId = finalFormService.saveFinalForm(finalForm);
-
-        //유저 테이블 수정
         usersService.updateUserByFinalForm(user.getId(), finalFormId);
-
-        //엑셀보드 업데이트
         excelBoardService.updateExcelByFinalForm(user);
-
         return "redirect:/api/userStatus";
     }
 
@@ -93,12 +83,9 @@ public class FinalFormController {
         FinalForm finalForm = finalFormService.findFinalForm(finalFormId);
         String storeFileName = finalForm.getFinalFormUploadFile().getStoreFileName();
         String uploadFileName = finalForm.getFinalFormUploadFile().getUploadFileName();
-
         UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
-
         String encodedUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
         String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
-
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);
     }
 
@@ -115,7 +102,6 @@ public class FinalFormController {
 
     private static String exceptionOfFile(MultipartHttpServletRequest request, Model model, Users user, Optional<ExcelBoard> excelByStudentId) {
         Map<String, MultipartFile> fileMap = request.getFileMap();
-
         for (MultipartFile multipartFile : fileMap.values()) {
             if (multipartFile.getSize() > 10485760L) {
                 model.addAttribute("errorMessage2", true);

@@ -20,7 +20,6 @@ public class AdminInitializer {
     private final AdminsRepository adminsRepository;
     private final PasswordEncoder passwordEncoder;
 
-    //관리자 수에 따라 관리자 계정 생성
     @PostConstruct
     @Transactional
     public void init() {
