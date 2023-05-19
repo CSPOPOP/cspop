@@ -105,7 +105,7 @@ public class ExcelStore {
         headerRow.createCell(3).setCellValue("졸업 날짜");
         headerRow.createCell(4).setCellValue("단계");
         headerRow.createCell(5).setCellValue("상태");
-        headerRow.createCell(6).setCellValue("기타 자격");
+        headerRow.createCell(6).setCellValue("자격");
         headerRow.createCell(7).setCellValue("캡스톤 이수");
 
         for (int i = 0; i <= 7; i++) {

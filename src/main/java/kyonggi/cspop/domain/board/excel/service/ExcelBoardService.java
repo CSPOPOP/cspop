@@ -63,6 +63,16 @@ public class ExcelBoardService {
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByOtherForm();
     }
+
+    @Transactional
+    public void updateExcelByFinalPass(Users users){
+        ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
+        if ((excelBoard.getStep().equals("최종보고서") && excelBoard.getState().equals("승인"))
+        ||(excelBoard.getStep().equals("기타자격") && excelBoard.getState().equals("승인"))) {
+            excelBoard.updateExcelFinalPass();
+        }
+
+    }
     public Page<ExcelBoardResponseDto> findAllStep(Pageable pageable, String word) {
         return excelBoardRepository.findAllByStepOrderById(word, pageable).map(ExcelBoardResponseDto::new);
     }

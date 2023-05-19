@@ -119,7 +119,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label><b>파일 제출</b>(파일 크기는 128MB 이하여야 합니다.)</label>
+                                    <label><b>파일 제출</b>(파일 크기는 10MB 이하여야 합니다.)</label>
                                     <input id="inputFile" type="file" name="otherFormUploadFile" required>
                                 </div>
                                 <div class="form-group">

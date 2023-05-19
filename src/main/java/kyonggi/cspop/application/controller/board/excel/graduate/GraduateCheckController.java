@@ -212,6 +212,7 @@ public class GraduateCheckController {
                 excelBoardService.updateApprovalState(user);
                 finalFormService.updateUserFinalState(finalFormId.getId());
             }
+            excelBoardService.updateExcelByFinalPass(user);
         }
     }
     private void approveExcelAndOtherForm(Users user) {
@@ -221,6 +222,7 @@ public class GraduateCheckController {
                 excelBoardService.updateApprovalState(user);
                 otherFormService.updateUserOtherState(otherFormId.getId());
             }
+            excelBoardService.updateExcelByFinalPass(user);
         }
     }
 
