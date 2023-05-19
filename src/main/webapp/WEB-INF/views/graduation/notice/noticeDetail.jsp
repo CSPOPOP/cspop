@@ -114,14 +114,16 @@
                                     <a href="/notice/find?page=0&size=10" class="btn btn-primary text-white">목록</a>
                                 </div>
                                 <div style="text-align: right; float: right; margin-top: 5px">
-                                    <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
-                                    <c:if test="${detailView.fixed eq true}">
-                                        <button id="fixNotice" class="btn btn-success">해제</button>
+                                    <c:if test="${fn:contains(userId, 'admin')}">
+                                        <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
+                                        <c:if test="${detailView.fixed eq true}">
+                                            <button id="fixNotice" class="btn btn-success">해제</button>
+                                        </c:if>
+                                        <c:if test="${detailView.fixed ne true}">
+                                            <button id="fixNotice" class="btn btn-success">고정</button>
+                                        </c:if>
+                                        <button id="deleteNotice" class="btn btn-danger">삭제</button>
                                     </c:if>
-                                    <c:if test="${detailView.fixed ne true}">
-                                        <button id="fixNotice" class="btn btn-success">고정</button>
-                                    </c:if>
-                                    <button id="deleteNotice" class="btn btn-danger">삭제</button>
                                 </div>
                             <%--버튼 End--%>
                         </div>
