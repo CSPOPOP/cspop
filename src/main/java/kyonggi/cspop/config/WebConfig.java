@@ -29,7 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/graduation/guide", "/api/graduation/schedule", "/api/userStatus",
                         "/api/submitForm", "/api/proposalForm", "/api/interimForm", "/api/finalForm",
                         "/api/otherForm", "/api/userStatus/modifySubmitForm", "/api/attach/**",
-                        "/api/userStatus/modifyProposalForm", "/api/userStatus/modifyInterimForm",
+                        "/api/userStatus/modifyProposalForm", "/api/userStatus/modifyInterimForm", "/attach/**",
                         "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm", "/api/chatBot", "/api/chatBotPage");
 
     }
