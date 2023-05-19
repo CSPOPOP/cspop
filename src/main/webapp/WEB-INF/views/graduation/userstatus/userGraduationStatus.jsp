@@ -40,6 +40,11 @@
         .badge {
             font-size: 120%;
         }
+        a[disabled] {
+            pointer-events: none;
+            cursor: default;
+            background-color: gainsboro;
+        }
     </style>
     <script src="../../../../assets/js/modal/submitFormModal.js"></script>
     <script src="../../../../assets/js/modal/proposalFormModal.js"></script>
@@ -130,6 +135,7 @@
                                                             </th>
                                                         </tr>
                                                         </thead>
+                                                        <c:out value="${notApprovalList[0]}"/>
                                                         <c:forEach items="${userSchedules}" var="userSchedule">
                                                             <tbody>
                                                             <tr class="text-center">
@@ -160,7 +166,7 @@
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm" ${notApprovalList[0] eq '제안서' ? '' : 'disabled'}>
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
@@ -173,7 +179,7 @@
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/interimForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/interimForm" ${notApprovalList[0] eq '중간보고서' ? '' : 'disabled'}>
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
@@ -186,7 +192,7 @@
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/finalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/finalForm" ${notApprovalList[0] eq '최종보고서' ? '' : 'disabled'}>
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
@@ -262,7 +268,7 @@
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm" ${notApprovalList[0] eq '제안서' ? '' : 'disabled'}>
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
@@ -275,7 +281,7 @@
                                                                             </button>
                                                                         </c:if>
                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/otherForm">
+                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/otherForm" ${notApprovalList[0] eq '기타자격' ? '' : 'disabled'}>
                                                                                 ${userSchedule.submitStatus}
                                                                             </a>
                                                                         </c:if>
