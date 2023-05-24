@@ -135,7 +135,7 @@
                                                             </th>
                                                         </tr>
                                                         </thead>
-                                                        <c:out value="${notApprovalList[0]}"/>
+<%--                                                        <c:out value="${notApprovalList[0]}"/>--%>
                                                         <c:forEach items="${userSchedules}" var="userSchedule">
                                                             <tbody>
                                                             <tr class="text-center">
@@ -203,14 +203,15 @@
                                                             </tbody>
                                                         </c:forEach>
                                                     </table>
+                                                    <div style="text-align: center">
+                                                        <br>
+                                                        <c:if test="${finalPass}">
+                                                            <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
+                                                        </c:if>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div style="text-align: center">
-                                                <br>
-                                                <c:if test="${finalPass}">
-                                                    <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
-                                                </c:if>
-                                            </div>
+
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
                                                 <div id="otherQualifications">
@@ -293,14 +294,15 @@
                                                             </tbody>
                                                         </c:forEach>
                                                     </table>
+                                                    <div style="text-align: center">
+                                                        <br>
+                                                        <c:if test="${finalPass}">
+                                                            <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
+                                                        </c:if>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div style="text-align: center">
-                                            <br>
-                                            <c:if test="${finalPass}">
-                                                <p class="badge bg-secondary-soft text-uppercase fw-bold">&#127881;졸업요건을 모두 완료하였습니다&#127881;</p>
-                                            </c:if>
-                                            </div>
+
                                         </div>
 <%--                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>--%>
 <%--                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>--%>
@@ -596,14 +598,14 @@
         }
     });
     $(() => { // 기타 자격 progress bar 추가 함수
-        let count = <c:out value="${fn:length(notApprovalList)}" />
+        let count = <c:out value="${fn:length(notApprovalList)}" />;
         console.log(count);
         let percentage = 100 - 30 * count; // percent가 동적으로 변경되어야 함
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#otherPercent').html(appendText)
     });
     $(() => { // 논문 progress bar 추가 함수
-        let count = <c:out value="${fn:length(notApprovalList)}" />
+        let count = <c:out value="${fn:length(notApprovalList)}" />;
         console.log(count);
         let percentage = 100 - 25 * count; // percent가 동적으로 변경되어야 함
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
