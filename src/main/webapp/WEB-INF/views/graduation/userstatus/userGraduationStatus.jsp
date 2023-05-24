@@ -146,15 +146,35 @@
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
                                                                         <c:choose>
                                                                             <c:when test="${userId.contains('admin')}">
-                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
-                                                                                    확인
-                                                                                </button>
+                                                                                <%--제출 했어?--%>
+                                                                                <c:if test="${userSchedule.submitStatus eq '완료'}">
+                                                                                    <%--승인 했어?--%>
+                                                                                    <c:if test="${userSchedule.approvalStatus eq '미승인'}">
+                                                                                        <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
+                                                                                            확인
+                                                                                        </button>
+                                                                                    </c:if>
+                                                                                    <c:if test="${userSchedule.approvalStatus eq '승인'}">
+                                                                                        <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
+                                                                                            승인완료
+                                                                                        </button>
+                                                                                    </c:if>
+                                                                                </c:if>
+                                                                                    <%-- ++ 수정도 가능해야하고, 유저가 신청한 (졸업논문, 기타) 것도 수정 가능하도록--%>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
-                                                                                        onclick="getSubmitForm(${userSubmitFormInfo.id})">
-                                                                                        ${userSchedule.submitStatus}
-                                                                                </button>
+                                                                                <%--승인 했어?--%>
+                                                                                <c:if test="${userSchedule.approvalStatus eq '미승인'}">
+                                                                                    <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
+                                                                                            onclick="getSubmitForm(${userSubmitFormInfo.id})">
+                                                                                            ${userSchedule.submitStatus}
+                                                                                    </button>
+                                                                                </c:if>
+                                                                                <c:if test="${userSchedule.approvalStatus eq '승인'}">
+                                                                                    <button class="btn btn-primary-soft btn-sm float-right disabled">
+                                                                                            ${userSchedule.submitStatus}
+                                                                                    </button>
+                                                                                </c:if>
                                                                             </c:otherwise>
                                                                         </c:choose>
                                                                     </c:if>
@@ -305,7 +325,7 @@
 
                                         </div>
 <%--                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>--%>
-<%--                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>--%>
+                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                         <div>
                                         </div>
                                         <div>
@@ -570,12 +590,6 @@
 </section>
 <%@include file="../../common/commonJS.jsp" %>
 <script>
-    const thesisPercentage = {
-
-    }
-    const otherPercentage = {
-
-    }
     $(() => {
         if (${userDetail.thesis}) {
             $('#thesis-tab-id').addClass('active show');
