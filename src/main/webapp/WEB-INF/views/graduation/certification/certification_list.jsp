@@ -213,7 +213,7 @@
                         </div>
                         <!-- 페이징 영역 끝 -->
                     </div>
-                    <form action="certification_management.download" method="get">
+                    <form action="certification_management.download" method="get" onclick="return confirm('다운로드 하시겠습니까?')">
                         <button class="btn btn-primary btn-sm float-right">다운로드</button>
                     </form>
                     <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyTable">파일 올리기</button>

@@ -141,6 +141,9 @@ function resetPassword() {
         return;
     }
 
+    if (!confirm('변경하시겠습니까?')) {
+        return;
+    }
 
     const studentId = $(`#id`).val();
     let editData = {
