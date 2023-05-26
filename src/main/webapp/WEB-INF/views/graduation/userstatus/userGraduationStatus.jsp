@@ -507,11 +507,21 @@
                                                                 <h4>신청 요건 <span class="badge bg-info">${userSubmitFormInfo.qualification}</span></h4>
                                                                 <label for="professorName">담당교수 :</label>
                                                                 <select id="professorName" name="professorName">
-                                                                    <option value="한상범">한상범</option>
-                                                                    <option value="김도훈">김도훈</option>
-                                                                    <option value="이은정">이은정</option>
                                                                     <option value="권기현">권기현</option>
-                                                                    <option value="누구있더라">누구있더라</option>
+                                                                    <option value="권준희">권준희</option>
+                                                                    <option value="김남기">김남기</option>
+                                                                    <option value="김도훈">김도훈</option>
+                                                                    <option value="김인철">김인철</option>
+                                                                    <option value="김희열">김희열</option>
+                                                                    <option value="박재환">박재환</option>
+                                                                    <option value="배상원">배상원</option>
+                                                                    <option value="안진호">안진호</option>
+                                                                    <option value="윤익준">윤익준</option>
+                                                                    <option value="이병대">이병대</option>
+                                                                    <option value="이은정">이은정</option>
+                                                                    <option value="임현기">임현기</option>
+                                                                    <option value="전준철">전준철</option>
+                                                                    <option value="정경용">정경용</option>
                                                                 </select><br>
                                                                 <label for="graduationDate">졸업날짜 :</label>
                                                                 <input type="date" id="graduationDate" name="graduationDate"><br>
