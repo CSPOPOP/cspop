@@ -471,7 +471,6 @@
                                             </div>
 
                                         </div>
-                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                         <div>
                                         </div>
                                         <div>
