@@ -61,13 +61,6 @@
                             </a>
                         </li>
                     </c:if>
-                    <c:if test="${not fn:contains(userId, 'admin')}">
-                        <li class="nav-item">
-                            <a class="nav-link " href="/api/graduation/graduation_status" data-bs-display="static">
-                                졸업 조회
-                            </a>
-                        </li>
-                    </c:if>
                     <c:if test="${fn:contains(userId, 'admin')}">
                         <li class="nav-item">
                             <a class="nav-link " href="/api/graduation/application_management" data-bs-display="static">
