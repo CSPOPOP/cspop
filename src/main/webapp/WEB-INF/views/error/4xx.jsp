@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>400.html</title>
-    <link rel="stylesheet" href="../../../webapp/assets/css/theme.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.min.css">
 </head>
 <body>
 <br>
 <br>
 <br>
 <center>
-    <img alt="400에러이미지" src="img/error400_remove.png" width="380">
+    <img alt="400에러이미지" src="/assets/images/error/error400_remove.png" width="380">
     <br>
     <br>
     <h4>페이지가 존재하지 않거나, 사용할 수 없는 페이지입니다.</h4>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>500.html</title>
-    <link rel="stylesheet" href="../../../webapp/assets/css/theme.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.min.css">
 </head>
 <body>
 <br>
@@ -13,7 +13,7 @@
 <br>
 <br>
 <center>
-    <img alt="500에러이미지" src="img/error500_remove.png" width="380">
+    <img alt="500에러이미지" src="/assets/images/error/error500_remove.png" width="380">
     <br>
     <br>
     <h4>서비스 이용에 불편을 드려 죄송합니다.</h4>
