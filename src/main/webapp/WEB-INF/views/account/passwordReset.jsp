@@ -52,7 +52,6 @@
                         <input type="text" class="form-control" id="answerPw" placeholder="답을 입력해 주세요."
                             value="" required maxlength="9">
                         <button id="btnAnswerCheck" class="btn btn-primary" onclick="passwordAnswer(this)">확인</button>
-                        <!--//아이디명 pwAnswer로 변경하였습니다-->
                     </div>
                 </div>
                 <!--<br>-->
