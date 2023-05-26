@@ -135,7 +135,6 @@
                                                             </th>
                                                         </tr>
                                                         </thead>
-<%--                                                        <c:out value="${notApprovalList[0]}"/>--%>
                                                         <c:forEach items="${userSchedules}" var="userSchedule">
                                                             <tbody>
                                                             <tr class="text-center">
@@ -146,9 +145,7 @@
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
                                                                         <c:choose>
                                                                             <c:when test="${userId.contains('admin')}">
-                                                                                <%--제출 했어?--%>
                                                                                 <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                                    <%--승인 했어?--%>
                                                                                     <c:if test="${userSchedule.approvalStatus eq '미승인'}">
                                                                                         <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
                                                                                             확인
@@ -160,10 +157,8 @@
                                                                                         </button>
                                                                                     </c:if>
                                                                                 </c:if>
-                                                                                    <%-- ++ 수정도 가능해야하고, 유저가 신청한 (졸업논문, 기타) 것도 수정 가능하도록--%>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <%--승인 했어?--%>
                                                                                 <c:if test="${userSchedule.approvalStatus eq '미승인'}">
                                                                                     <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
                                                                                             onclick="getSubmitForm(${userSubmitFormInfo.id})">
@@ -349,9 +344,7 @@
                                                                     <c:if test="${userSchedule.step eq '신청접수'}">
                                                                         <c:choose>
                                                                             <c:when test="${userId.contains('admin')}">
-                                                                                <%--제출 했어?--%>
                                                                                 <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                                    <%--승인 했어?--%>
                                                                                     <c:if test="${userSchedule.approvalStatus eq '미승인'}">
                                                                                         <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormApprove">
                                                                                             확인
@@ -363,10 +356,8 @@
                                                                                         </button>
                                                                                     </c:if>
                                                                                 </c:if>
-                                                                                <%-- ++ 수정도 가능해야하고, 유저가 신청한 (졸업논문, 기타) 것도 수정 가능하도록--%>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <%--승인 했어?--%>
                                                                                 <c:if test="${userSchedule.approvalStatus eq '미승인'}">
                                                                                     <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
                                                                                             onclick="getSubmitForm(${userSubmitFormInfo.id})">
@@ -480,7 +471,6 @@
                                             </div>
 
                                         </div>
-<%--                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>--%>
                                         <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                         <div>
                                         </div>
@@ -756,11 +746,11 @@
     });
     $(() => { // 졸업, 기타 요건중 유저가 신청한 졸업 전형 table만 띄워준다.
         let image;
-        if (${userDetail.otherQualifications} || ${userDetail.thesis}) { //졸업, 기타 요건 중 하나가 true일때,
-            if (${userDetail.thesis}) { // 논문이 true일때 기타요건에 들어갈 이미지
+        if (${userDetail.otherQualifications} || ${userDetail.thesis}) {
+            if (${userDetail.thesis}) {
                 image = "논문으로 신청하셨습니다"
                 $('#otherQualifications').html(image)
-            } else if (${userDetail.otherQualifications}) { // 기타요건이 true일때 논문에 들어갈 이미지
+            } else if (${userDetail.otherQualifications}) {
                 image = "기타 자격으로 신청하셨습니다."
                 $('#thesis').html(image)
             }
@@ -769,14 +759,14 @@
     $(() => { // 기타 자격 progress bar 추가 함수
         let count = <c:out value="${fn:length(notApprovalList)}" />;
         console.log(count);
-        let percentage = 100 - 30 * count; // percent가 동적으로 변경되어야 함
+        let percentage = 100 - 30 * count;
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#otherPercent').html(appendText)
     });
     $(() => { // 논문 progress bar 추가 함수
         let count = <c:out value="${fn:length(notApprovalList)}" />;
         console.log(count);
-        let percentage = 100 - 25 * count; // percent가 동적으로 변경되어야 함
+        let percentage = 100 - 25 * count;
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#thesisPercent').html(appendText)
     });
