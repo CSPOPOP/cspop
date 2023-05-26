@@ -58,7 +58,7 @@
                 <!--<br>-->
                 <div class="mb-3 ">
                     <label for="password" class="form-label">새로운 비밀번호</label>
-                    <input type="password" id="password" class="form-control" placeholder="8~16자 영문 대소문자,특수문자를 사용하세요." required="">
+                    <input type="password" id="password" class="form-control" placeholder="8~16자 영문,특수문자를 사용하세요." required="">
                 </div>
                 <div class="mb-3 ">
                     <label for="password" class="form-label">비밀번호 확인</label>
