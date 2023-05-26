@@ -202,7 +202,7 @@
                                                                                     </c:when>
                                                                                     <c:otherwise>
                                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm">
+                                                                                            <a class="btn btn-primary-soft btn-sm float-right" ${notApprovalList[0] eq '제안서' ? 'href="/api/proposalForm"' : 'disabled'}>
                                                                                                     ${userSchedule.submitStatus}
                                                                                             </a>
                                                                                         </c:if>
@@ -242,7 +242,7 @@
                                                                                     </c:when>
                                                                                     <c:otherwise>
                                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/interimForm">
+                                                                                            <a class="btn btn-primary-soft btn-sm float-right" ${notApprovalList[0] eq '중간보고서' ? 'href="/api/interimForm"' : 'disabled'}>
                                                                                                     ${userSchedule.submitStatus}
                                                                                             </a>
                                                                                         </c:if>
@@ -282,7 +282,7 @@
                                                                                     </c:when>
                                                                                     <c:otherwise>
                                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/finalForm" ${notApprovalList[0] eq '최종보고서' ? '' : 'disabled'}>
+                                                                                            <a class="btn btn-primary-soft btn-sm float-right" ${notApprovalList[0] eq '최종보고서' ? 'href="/api/finalForm"' : 'disabled'}>
                                                                                                     ${userSchedule.submitStatus}
                                                                                             </a>
                                                                                         </c:if>
@@ -407,9 +407,10 @@
                                                                                     </c:when>
                                                                                     <c:otherwise>
                                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/proposalForm" ${notApprovalList[0] eq '제안서' ? '' : 'disabled'}>
+                                                                                            <a class="btn btn-primary-soft btn-sm float-right" ${notApprovalList[0] eq '제안서' ? 'href="/api/proposalForm"' : 'disabled'}>
                                                                                                     ${userSchedule.submitStatus}
                                                                                             </a>
+
                                                                                         </c:if>
                                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
                                                                                             <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#otherFormModify"
@@ -448,7 +449,7 @@
                                                                                     </c:when>
                                                                                     <c:otherwise>
                                                                                         <c:if test="${userSchedule.submitStatus eq '미제출'}">
-                                                                                            <a class="btn btn-primary-soft btn-sm float-right" href="/api/otherForm" ${notApprovalList[0] eq '기타자격' ? '' : 'disabled'}>
+                                                                                            <a class="btn btn-primary-soft btn-sm float-right" ${notApprovalList[0] eq '기타자격' ? 'href="/api/otherForm"' : 'disabled'}>
                                                                                                     ${userSchedule.submitStatus}
                                                                                             </a>
                                                                                         </c:if>
@@ -498,7 +499,6 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                 <button type="button" class="btn btn-primary" onclick="clickSubmitFormModify(event, ${userSubmitFormInfo.id})">수정</button>
-<%--                                                                <button type="button" class="btn btn-primary" onclick="ApproveButton(${userSubmitFormInfo.id}, ${userDetail.studentId}, userId)">승인</button>--%>
                                                             </div>
                                                         </div>
                                                     </form>
