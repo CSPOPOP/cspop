@@ -34,7 +34,6 @@
     }
     li {
       float: left;
-      margin-right: 15px;
     }
   </style>
   <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
