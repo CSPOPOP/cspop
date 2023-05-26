@@ -35,6 +35,10 @@ public class ExcelBoardService {
         return excelBoard;
     }
 
+    public List<ExcelBoard> findStepList(String step){
+        return excelBoardRepository.findExcelBoardByStep(step);
+    }
+
     @Transactional
     public void addExcelBySubmitForm(Users users, SubmitForm submitForm) {
         excelBoardRepository.save(ExcelBoard.addExcelBySubmitForm(users, submitForm));

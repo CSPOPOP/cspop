@@ -201,7 +201,7 @@
                         </div>
                         <!-- 페이징 영역 끝 -->
                     </div>
-                    <form action="graduate_management.download" method="get">
+                    <form action="graduate_finalPass.downloadFinalPassStep" method="get">
                         <button class="btn btn-primary btn-sm float-right">다운로드</button>
                     </form>
                 </div>
