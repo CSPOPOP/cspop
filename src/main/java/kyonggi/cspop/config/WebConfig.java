@@ -14,15 +14,15 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/sql/**", "/assets/**", "/*.ico", "/static/error/**", "/", "/api/home",
+                .excludePathPatterns("/sql/**", "/assets/**", "/*.ico", "/error/**", "/", "/api/home",
                         "/api/signup", "/api/login", "/api/passwordReset", "/api/user/**",
                         "/api/login/auth", "/api/passwordQuestion", "/api/answerPassword", "/api/logout",
-                        "/api/editPassword/**", "/notice/find", "/api/notice/search", "/notice/view/detail/**", "/error", "/api/img/error500_remove.png", "/webapp/assets/css/**");
+                        "/api/editPassword/**", "/notice/find", "/api/notice/search", "/notice/view/detail/**", "/api/img/**", "/webapp/assets/css/**");
 
         registry.addInterceptor(new AdminCheckInterceptor())
                 .order(2)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/sql/**", "/assets/**", "/*.ico", "/static/error/**", "/", "/api/home",
+                .excludePathPatterns("/sql/**", "/assets/**", "/*.ico", "/error/**", "/", "/api/home",
                         "/api/signup", "/api/login", "/api/passwordReset", "/api/user/**",
                         "/api/login/auth", "/api/passwordQuestion", "/api/answerPassword", "/api/logout",
                         "/api/editPassword/**", "/notice/find", "/api/notice/search", "/notice/view/detail/**",
@@ -30,7 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/submitForm", "/api/proposalForm", "/api/interimForm", "/api/finalForm",
                         "/api/otherForm", "/api/userStatus/modifySubmitForm", "/api/attach/**",
                         "/api/userStatus/modifyProposalForm", "/api/userStatus/modifyInterimForm", "/attach/**",
-                        "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm", "/api/chatBot", "/api/chatBotPage", "/error", "/api/img/error500_remove.png", "/webapp/assets/css/**");
+                        "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm", "/api/chatBot", "/api/chatBotPage", "/api/img/**", "/webapp/assets/css/**");
 
     }
 }
