@@ -84,7 +84,7 @@
                 <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
                     <div class="card">
                         <div class="card-body p-4 p-lg-7">
-                            <form id="myForm" method="post" enctype="multipart/form-data">
+                            <form id="myForm" method="post" enctype="multipart/form-data" onclick="return confirm('수정하시겠습니까?')">
                                 <div class="form-group">
                                     <spring:hasBindErrors name="noticeBoardRequestDto">
                                         <c:if test="${errors.hasFieldErrors('title')}">
@@ -101,7 +101,7 @@
                                     <textarea id="editor" name="text">${detailView.text}</textarea>
                                     <%--저기에 텍스트 들어가면 됨--%>
                                     <input id="inputFil정e" type="file" name="files" multiple>
-                                    <button type="submit" class="btn btn-default">수정</button>
+                                    <button type="submit" class="btn btn-primary">수정</button>
                                 </div>
                             </form>
                         </div>
