@@ -98,18 +98,19 @@
                 <!-- 메시지를 표시할 영역 -->
                 <div id="message-area"></div>
                 <!-- 사용자 입력을 받을 입력 필드 -->
+              <div>
+                <button onclick="chatBotAjax(`전문교양`)">전문교양</button>
+                <button onclick="chatBotAjax(`msc/bsm`)">msc/bsm</button>
+                <button onclick="chatBotAjax(`설계학점`)">설계학점</button>
+                <button onclick="chatBotAjax(`전공학점`)">전공학점</button>
+                <button onclick="chatBotAjax(`총학점`)">총학점</button>
+                <button onclick="chatBotAjax(`특이사항`)">특이사항</button>
+                <button onclick="chatBotAjax(`전체공학인증`)">전체공학인증</button>
+              </div>
                 <div class="input-container">
                   <input type="text" id="user-input" placeholder="메시지를 입력하세요">
                 </div>
-<%--              <div>--%>
-<%--                <button onclick="testFunction(`전문교양`)">전문교양</button>--%>
-<%--                <button onclick="testFunction(`msc/bsm`)">msc/bsm</button>--%>
-<%--                <button onclick="testFunction(`설계학점`)">설계학점</button>--%>
-<%--                <button onclick="testFunction(`전공학점`)">전공학점</button>--%>
-<%--                <button onclick="testFunction(`총학점`)">총학점</button>--%>
-<%--                <button onclick="testFunction(`특이사항`)">특이사항</button>--%>
-<%--                <button onclick="testFunction(`전체공학인증`)">전체공학인증</button>--%>
-<%--              </div>--%>
+
             </div>
           </div>
         </div>

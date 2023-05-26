@@ -1,18 +1,4 @@
-function testFunction(mode) {
-    let jsonData = {
-        "sentence": mode
-    }
-    $.ajax({
-        type: 'post',
-        url: "/api/chatBot",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(jsonData),
-        success: (data) => {
-            console.log(data.answer)
-        },
-        error: (error) => alert("Fail")
-    })
-}
+
 
 const userInput = $('#user-input');
 const messageArea = $('#message-area');
@@ -26,3 +12,18 @@ userInput.on('keyup', (event) => {
         }
     }
 });
+
+function chatBotAjax(mode) {
+    messageArea.append('<div class="message user-message">' + mode + ' 알려줘</div>');
+    let jsonData = {
+        "sentence": mode
+    }
+    $.ajax({
+        type: 'post',
+        url: "/api/chatBot",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(jsonData),
+        success: (data) => messageArea.append('<div class="message user-message">' + data.answer + '</div>'),
+        error: (error) => alert("유효하지 않은 접근 입니다")
+    })
+}
