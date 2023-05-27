@@ -69,8 +69,11 @@ public class ProposalForm extends BaseEntity {
         if (division.equals("option1")) {
             proposalForm.division = "구현논문";
         }
-        else{
+        else if (division.equals("option2")) {
             proposalForm.division = "조사(이론)논문";
+        }
+        else {
+            proposalForm.division = "기타자격";
         }
         proposalForm.keyword = keyword;
         proposalForm.text = text;
@@ -85,8 +88,11 @@ public class ProposalForm extends BaseEntity {
 
         if (division.equals("option1")) {
             this.division = "구현논문";
-        } else {
+        } else if (division.equals("option2")) {
             this.division = "조사(이론)논문";
+        }
+        else{
+            this.division = "기타자격";
         }
 
         this.keyword = keyword;

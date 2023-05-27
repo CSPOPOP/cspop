@@ -31,6 +31,11 @@
                             ${proposalForm.division == '조사(이론)논문' ? 'checked' : ''} ${proposalFormExists ? 'disabled' : ''}    value="option2">
                             <label class="form-check-label" for="category2">조사(이론)논문</label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="category3" name="division"
+                            ${proposalForm.division == '기타자격' ? 'checked' : ''} ${proposalFormExists ? 'disabled' : ''}    value="option3">
+                            <label class="form-check-label" for="category3">기타자격</label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
