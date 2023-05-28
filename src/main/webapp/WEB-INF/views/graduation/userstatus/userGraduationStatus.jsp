@@ -513,7 +513,6 @@
                                                                     <option value="김도훈">김도훈</option>
                                                                     <option value="김인철">김인철</option>
                                                                     <option value="김희열">김희열</option>
-                                                                    <option value="박재환">박재환</option>
                                                                     <option value="배상원">배상원</option>
                                                                     <option value="안진호">안진호</option>
                                                                     <option value="윤익준">윤익준</option>
