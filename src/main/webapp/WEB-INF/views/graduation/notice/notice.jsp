@@ -95,7 +95,7 @@
                             <div>
                                 <div class="card table-responsive">
                                     <table id="table" class="table mb-0" border-color="black">
-                                        <thead class="table-light">
+                                        <thead class="table-dark">
                                         <tr class="text-center">
                                             <th>번호</th>
                                             <th>제목</th>
@@ -103,6 +103,7 @@
                                             <th>작성일</th>
                                             <th>조회수</th>
                                         </tr>
+                                    </thead>
                                         <c:forEach items="${allNoticeBoard.content}" var="noticeBoard">
                                             <tr class="text-center" data-id=${noticeBoard.id}>
                                                 <c:if test="${noticeBoard.fixed eq true}">
@@ -118,7 +119,7 @@
                                                 <td>${noticeBoard.views}</td>
                                             </tr>
                                         </c:forEach>
-                                        </thead>
+                                        
                                     </table>
                                 </div>
                                 <c:if test="${fn:contains(userId, 'admin')}">
