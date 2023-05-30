@@ -63,13 +63,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- header -->
 <c:set var="userId" value="<%= userId %>" scope="page" />
-<div class="header fixed-top border-3 border-top border-primary border-sm">
+<div class="header fixed-top border-3 border-top border-primary">
   <!-- navigation start -->
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-default">
-      <a class="navbar-brand" href="/api/home">
-        <img src="../../../../assets/images/cspop_logo.png" alt="" width="100em">
+    <nav class="navbar navbar-default">
+      <a class="navbar-brand" href="/">
+        <img src="../../assets/images/cspop_logo.png" alt="" width="100em">
       </a>
+      <div id="userCheck"></div>
     </nav>
   </div>
 </div>
