@@ -41,7 +41,7 @@
     <div class="container">
         <nav class="navbar navbar-default">
             <a class="navbar-brand" href="/">
-                <img src="../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
+                <img src="../../assets/images/cspop_logo.png" alt="" width="100em">
             </a>
             <div id="userCheck"></div>
         </nav>
@@ -70,11 +70,11 @@
             <div class="offset-xxl-2 col-xxl-5 offset-lg-1 col-lg-5 col-md-6 col-12 mb-n2 d-none d-md-block">
                 <a href="/api/chatBotPage">
                     <div class="position-relative z-1">
-                        <img src="../../assets/images/fitness/aiBot.jpg" alt=""
+                        <img src="../../assets/images/chatBot.jpg" alt=""
                              class="img-fluid rounded w-100 border-bottom border-4 border-primary"/>
                         <div class="card-img-overlay d-flex flex-column justify-content-top p-4 ">
-                            <h4 class="mb-0 h2">공학인증</h4>
-                            <span class="font-12">당신의 공학 인증 요건을 확인하세요</span>
+                            <h4 class="mb-0 h2">FAQ</h4>
+                            <span class="font-12">궁금한것들 물어보기</span>
                         </div>
                     </div>
                 </a>
@@ -129,10 +129,6 @@
         </div>
     </div>
 </div>
-<!-- 출처관련한 부분은 추후 따로 분리합니다. -->
-<a
-        href="https://kr.freepik.com/free-vector/cloud-robotics-abstract-concept-illustration_12291072.htm#query=chatbot&position=4&from_view=keyword&track=sph">작가
-    vectorjuice</a> 출처 Freepik
 <!--  Jquery 가져오기 -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
