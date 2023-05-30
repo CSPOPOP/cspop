@@ -34,14 +34,9 @@
     img {
       margin-top: 5%;
     }
-  </style>
-  <style>
-    /* CSS 스타일을 여기에 작성하세요 */
-
     .message {
       margin-bottom: 10px;
     }
-
     .user-message {
       color: #333;
     }
@@ -54,11 +49,39 @@
       border: none;
       border-radius: 3px;
     }
+    .chat-container{
+      height: 500px;
+      overflow-y: scroll;
+    }
+
   </style>
 </head>
 <%@include file="../common/sessionController.jsp" %>
 <body>
-<%@include file="../common/header.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!-- header -->
+<c:set var="userId" value="<%= userId %>" scope="page" />
+<div class="header fixed-top border-3 border-top border-primary">
+  <!-- navigation start -->
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <a class="navbar-brand" href="/">
+        <img src="../../assets/images/cspop_logo.png" alt="" width="100em">
+      </a>
+      <div id="userCheck"></div>
+    </nav>
+  </div>
+</div>
+<!--  Jquery 가져오기 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<%--account js include--%>
+<script src="../../../../assets/js/signUp.js"></script>
+<!-- navigation close -->
+
 <section class="page-start">
   <!-- pageheader section -->
   <div class="bg-shape bg-secondary">
@@ -74,13 +97,13 @@
                       <a href="/api/home">Home</a>
                     </li>
                     <li class="breadcrumb-item active " aria-current="page">
-                      졸업 도우미
+                      FAQ
                     </li>
                   </ol>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
-                <h1 class="h2 text-white mb-2">졸업 도우미</h1>
+                <h1 class="h2 text-white mb-2">FAQ</h1>
               </div>
             </div>
           </div>
@@ -96,20 +119,20 @@
             <div class="card-body p-4 p-lg-7">
                 <div class="message user-message">안녕하세요! 챗봇입니다.</div>
                 <!-- 메시지를 표시할 영역 -->
-                <div id="message-area"></div>
+                <div id="message-area" class="chat-container"></div>
                 <!-- 사용자 입력을 받을 입력 필드 -->
+              <div>
+                <button onclick="chatBotAjax(`전문교양`)">전문교양</button>
+                <button onclick="chatBotAjax(`msc/bsm`)">msc/bsm</button>
+                <button onclick="chatBotAjax(`설계학점`)">설계학점</button>
+                <button onclick="chatBotAjax(`전공학점`)">전공학점</button>
+                <button onclick="chatBotAjax(`총학점`)">총학점</button>
+                <button onclick="chatBotAjax(`특이사항`)">특이사항</button>
+                <button onclick="chatBotAjax(`전체공학인증`)">전체공학인증</button>
+              </div>
                 <div class="input-container">
                   <input type="text" id="user-input" placeholder="메시지를 입력하세요">
                 </div>
-<%--              <div>--%>
-<%--                <button onclick="testFunction(`전문교양`)">전문교양</button>--%>
-<%--                <button onclick="testFunction(`msc/bsm`)">msc/bsm</button>--%>
-<%--                <button onclick="testFunction(`설계학점`)">설계학점</button>--%>
-<%--                <button onclick="testFunction(`전공학점`)">전공학점</button>--%>
-<%--                <button onclick="testFunction(`총학점`)">총학점</button>--%>
-<%--                <button onclick="testFunction(`특이사항`)">특이사항</button>--%>
-<%--                <button onclick="testFunction(`전체공학인증`)">전체공학인증</button>--%>
-<%--              </div>--%>
             </div>
           </div>
         </div>

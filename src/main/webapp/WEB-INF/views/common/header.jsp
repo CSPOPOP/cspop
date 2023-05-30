@@ -8,7 +8,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-default">
             <a class="navbar-brand" href="/api/home">
-                <img src="../../../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
+                <img src="../../../../assets/images/cspop_logo.png" alt="" width="100em">
             </a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar-default" aria-controls="navbar-default"

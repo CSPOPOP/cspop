@@ -29,7 +29,7 @@
             <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0">
             <br>
             <a href="/api/home" class="d-flex justify-content-center align-items-center">
-                <img src="../../../../assets/images/fitness/cspop_logo.png" alt="" width="130em">
+                <img src="../../../../assets/images/cspop_logo.png" alt="" width="130em">
             </a>
             <br>
             <!-- Form -->
