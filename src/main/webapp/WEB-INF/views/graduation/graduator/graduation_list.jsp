@@ -126,7 +126,7 @@
                                                 <div class="th-inner sortable both">상태</div>
                                             </th>
                                             <th data-field="otherQualifications">
-                                                <div class="th-inner sortable both">기타 자격</div>
+                                                <div class="th-inner sortable both">자격</div>
                                             </th>
                                             <th data-field="capstoneCompletion">
                                                 <div class="th-inner sortable both">캡스톤 이수</div>

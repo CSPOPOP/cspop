@@ -66,14 +66,6 @@
                                     공지사항 세부
                                 </p>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <form>
-                                        <span class="position-absolute ps-3 pt-1 mt-1">
-                                            <i class="fe fe-search"></i>
-                                        </span>
-                                    <input type="search" class="form-control ps-6 mb-2 border-0" placeholder="search"/>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,7 +126,6 @@
     </div>
 </section>
 <%@include file="../../common/commonJS.jsp" %>
-<script src="../../../../assets/js/detailPage.js"></script>
 <script>
     var noticeId ={
       "noticeBoardId" : ${detailView.id}

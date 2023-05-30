@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,4 +19,6 @@ public interface ExcelBoardRepository extends JpaRepository<ExcelBoard,Long> {
 
     Page<ExcelBoard> findByStudentNameContainingOrderById(String word, Pageable pageable);
     Page<ExcelBoard> findByStudentNameContainingAndStepOrderById(String studentName,String step, Pageable pageable);
+    List<ExcelBoard> findExcelBoardByStep(String step);
 }
+

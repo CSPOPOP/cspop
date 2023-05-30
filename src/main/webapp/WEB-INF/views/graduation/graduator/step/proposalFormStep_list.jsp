@@ -126,7 +126,7 @@
                         <div class="th-inner sortable both">상태</div>
                       </th>
                       <th data-field="otherQualifications">
-                        <div class="th-inner sortable both">기타 자격</div>
+                        <div class="th-inner sortable both">자격</div>
                       </th>
                       <th data-field="capstoneCompletion">
                         <div class="th-inner sortable both">캡스톤 이수</div>
@@ -200,7 +200,7 @@
             </div>
             <!-- 페이징 영역 끝 -->
           </div>
-          <form action="graduate_management.download" method="get" onsubmit="return confirm('다운로드 하시겠습니까?')>
+          <form action="graduate_proposalForm.downloadProposalFormStep" method="get" onsubmit="return confirm('다운로드 하시겠습니까?')>
             <button class="btn btn-primary btn-sm float-right">다운로드</button>
           </form>
         </div>

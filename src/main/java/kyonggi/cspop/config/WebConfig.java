@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/sql/**", "/assets/**", "/*.ico", "/error/**", "/", "/api/home",
                         "/api/signup", "/api/login", "/api/passwordReset", "/api/user/**",
                         "/api/login/auth", "/api/passwordQuestion", "/api/answerPassword", "/api/logout",
-                        "/api/editPassword/**", "/notice/find", "/api/notice/search", "/notice/view/detail/**");
+                        "/api/editPassword/**", "/notice/find", "/api/notice/search", "/notice/view/detail/**", "/api/img/**", "/webapp/assets/css/**");
 
         registry.addInterceptor(new AdminCheckInterceptor())
                 .order(2)
@@ -29,8 +29,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/graduation/guide", "/api/graduation/schedule", "/api/userStatus",
                         "/api/submitForm", "/api/proposalForm", "/api/interimForm", "/api/finalForm",
                         "/api/otherForm", "/api/userStatus/modifySubmitForm", "/api/attach/**",
-                        "/api/userStatus/modifyProposalForm", "/api/userStatus/modifyInterimForm",
-                        "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm", "/api/chatBot", "/api/chatBotPage");
+                        "/api/userStatus/modifyProposalForm", "/api/userStatus/modifyInterimForm", "/attach/**",
+                        "/api/userStatus/modifyFinalForm", "/api/userStatus/modifyOtherForm", "/api/chatBot", "/api/chatBotPage", "/api/img/**", "/webapp/assets/css/**");
 
     }
 }

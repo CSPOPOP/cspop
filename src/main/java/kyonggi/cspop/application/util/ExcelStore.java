@@ -44,6 +44,54 @@ public class ExcelStore {
         };
     }
 
+    public File getTmpSubmitFormFile() throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        File tmpFile = getSubmitFile(workbook);
+        OutputStream fos = new FileOutputStream(tmpFile);
+        workbook.write(fos);
+        return tmpFile;
+    }
+
+    public File getTmpProposalFormFile() throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        File tmpFile = getProposalFile(workbook);
+        OutputStream fos = new FileOutputStream(tmpFile);
+        workbook.write(fos);
+        return tmpFile;
+    }
+
+    public File getTmpInterimFormFile() throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        File tmpFile = getInterimFile(workbook);
+        OutputStream fos = new FileOutputStream(tmpFile);
+        workbook.write(fos);
+        return tmpFile;
+    }
+
+    public File getTmpFinalFormFile() throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        File tmpFile = getFinalFile(workbook);
+        OutputStream fos = new FileOutputStream(tmpFile);
+        workbook.write(fos);
+        return tmpFile;
+    }
+
+    public File getTmpOtherFormFile() throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        File tmpFile = getOtherFile(workbook);
+        OutputStream fos = new FileOutputStream(tmpFile);
+        workbook.write(fos);
+        return tmpFile;
+    }
+
+    public File getTmpFinalPassFile() throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        File tmpFile = getFinalPassFile(workbook);
+        OutputStream fos = new FileOutputStream(tmpFile);
+        workbook.write(fos);
+        return tmpFile;
+    }
+
     public File getCertificationTmpFile() throws IOException {
         Workbook workbook = new XSSFWorkbook();
         File tmpFile = getCertificationFile(workbook);
@@ -62,11 +110,66 @@ public class ExcelStore {
     }
 
     private File getFile(Workbook workbook) throws IOException {
-        Sheet sheet = workbook.createSheet("졸업 대상자 조회");
+        Sheet sheet = workbook.createSheet("졸업 대상자 전체 조회");
         int rowNo = 0;
         CellStyle headStyle = getHeadStyle(workbook);
         rowNo = createHeader(sheet, rowNo, headStyle);
         createBody(sheet, rowNo);
+        setColumnSize(sheet);
+        return File.createTempFile("TMP~", ".xlsx");
+    }
+
+    private File getSubmitFile(Workbook workbook) throws IOException {
+        Sheet sheet = workbook.createSheet("신청접수 단계 대상자 조회");
+        int rowNo = 0;
+        CellStyle headStyle = getHeadStyle(workbook);
+        rowNo = createHeader(sheet, rowNo, headStyle);
+        createSubmitFormBody(sheet, rowNo);
+        setColumnSize(sheet);
+        return File.createTempFile("TMP~", ".xlsx");
+    }
+    private File getProposalFile(Workbook workbook) throws IOException {
+        Sheet sheet = workbook.createSheet("제안서 단계 대상자 조회");
+        int rowNo = 0;
+        CellStyle headStyle = getHeadStyle(workbook);
+        rowNo = createHeader(sheet, rowNo, headStyle);
+        createProposalFormBody(sheet, rowNo);
+        setColumnSize(sheet);
+        return File.createTempFile("TMP~", ".xlsx");
+    }
+    private File getInterimFile(Workbook workbook) throws IOException {
+        Sheet sheet = workbook.createSheet("중간보고서 단계 대상자 조회");
+        int rowNo = 0;
+        CellStyle headStyle = getHeadStyle(workbook);
+        rowNo = createHeader(sheet, rowNo, headStyle);
+        createInterimFormBody(sheet, rowNo);
+        setColumnSize(sheet);
+        return File.createTempFile("TMP~", ".xlsx");
+    }
+    private File getFinalFile(Workbook workbook) throws IOException {
+        Sheet sheet = workbook.createSheet("최종보고서 단계 대상자 조회");
+        int rowNo = 0;
+        CellStyle headStyle = getHeadStyle(workbook);
+        rowNo = createHeader(sheet, rowNo, headStyle);
+        createFinalFormBody(sheet, rowNo);
+        setColumnSize(sheet);
+        return File.createTempFile("TMP~", ".xlsx");
+    }
+    private File getOtherFile(Workbook workbook) throws IOException {
+        Sheet sheet = workbook.createSheet("기타자격 대상자 조회");
+        int rowNo = 0;
+        CellStyle headStyle = getHeadStyle(workbook);
+        rowNo = createHeader(sheet, rowNo, headStyle);
+        createOtherFormBody(sheet, rowNo);
+        setColumnSize(sheet);
+        return File.createTempFile("TMP~", ".xlsx");
+    }
+    private File getFinalPassFile(Workbook workbook) throws IOException {
+        Sheet sheet = workbook.createSheet("최종통과 대상자 조회");
+        int rowNo = 0;
+        CellStyle headStyle = getHeadStyle(workbook);
+        rowNo = createHeader(sheet, rowNo, headStyle);
+        createFinalPassBody(sheet, rowNo);
         setColumnSize(sheet);
         return File.createTempFile("TMP~", ".xlsx");
     }
@@ -97,6 +200,96 @@ public class ExcelStore {
         }
     }
 
+    private void createSubmitFormBody(Sheet sheet, int rowNo) {
+        List<ExcelBoard> dataList = excelBoardService.findStepList("신청접수");
+        for (ExcelBoard excelBoard : dataList) {
+            Row row = sheet.createRow(rowNo++);
+            row.createCell(0).setCellValue(excelBoard.getStudentId());
+            row.createCell(1).setCellValue(excelBoard.getStudentName());
+            row.createCell(2).setCellValue(excelBoard.getProfessorName());
+            row.createCell(3).setCellValue(excelBoard.getGraduationDate());
+            row.createCell(4).setCellValue(excelBoard.getStep());
+            row.createCell(5).setCellValue(excelBoard.getState());
+            row.createCell(6).setCellValue(excelBoard.getQualifications());
+            row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
+        }
+    }
+
+    private void createProposalFormBody(Sheet sheet, int rowNo) {
+        List<ExcelBoard> dataList = excelBoardService.findStepList("제안서");
+        for (ExcelBoard excelBoard : dataList) {
+            Row row = sheet.createRow(rowNo++);
+            row.createCell(0).setCellValue(excelBoard.getStudentId());
+            row.createCell(1).setCellValue(excelBoard.getStudentName());
+            row.createCell(2).setCellValue(excelBoard.getProfessorName());
+            row.createCell(3).setCellValue(excelBoard.getGraduationDate());
+            row.createCell(4).setCellValue(excelBoard.getStep());
+            row.createCell(5).setCellValue(excelBoard.getState());
+            row.createCell(6).setCellValue(excelBoard.getQualifications());
+            row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
+        }
+    }
+
+    private void createInterimFormBody(Sheet sheet, int rowNo) {
+        List<ExcelBoard> dataList = excelBoardService.findStepList("중간보고서");
+        for (ExcelBoard excelBoard : dataList) {
+            Row row = sheet.createRow(rowNo++);
+            row.createCell(0).setCellValue(excelBoard.getStudentId());
+            row.createCell(1).setCellValue(excelBoard.getStudentName());
+            row.createCell(2).setCellValue(excelBoard.getProfessorName());
+            row.createCell(3).setCellValue(excelBoard.getGraduationDate());
+            row.createCell(4).setCellValue(excelBoard.getStep());
+            row.createCell(5).setCellValue(excelBoard.getState());
+            row.createCell(6).setCellValue(excelBoard.getQualifications());
+            row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
+        }
+    }
+
+    private void createFinalFormBody(Sheet sheet, int rowNo) {
+        List<ExcelBoard> dataList = excelBoardService.findStepList("최종보고서");
+        for (ExcelBoard excelBoard : dataList) {
+            Row row = sheet.createRow(rowNo++);
+            row.createCell(0).setCellValue(excelBoard.getStudentId());
+            row.createCell(1).setCellValue(excelBoard.getStudentName());
+            row.createCell(2).setCellValue(excelBoard.getProfessorName());
+            row.createCell(3).setCellValue(excelBoard.getGraduationDate());
+            row.createCell(4).setCellValue(excelBoard.getStep());
+            row.createCell(5).setCellValue(excelBoard.getState());
+            row.createCell(6).setCellValue(excelBoard.getQualifications());
+            row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
+        }
+    }
+
+    private void createOtherFormBody(Sheet sheet, int rowNo) {
+        List<ExcelBoard> dataList = excelBoardService.findStepList("기타자격");
+        for (ExcelBoard excelBoard : dataList) {
+            Row row = sheet.createRow(rowNo++);
+            row.createCell(0).setCellValue(excelBoard.getStudentId());
+            row.createCell(1).setCellValue(excelBoard.getStudentName());
+            row.createCell(2).setCellValue(excelBoard.getProfessorName());
+            row.createCell(3).setCellValue(excelBoard.getGraduationDate());
+            row.createCell(4).setCellValue(excelBoard.getStep());
+            row.createCell(5).setCellValue(excelBoard.getState());
+            row.createCell(6).setCellValue(excelBoard.getQualifications());
+            row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
+        }
+    }
+
+    private void createFinalPassBody(Sheet sheet, int rowNo) {
+        List<ExcelBoard> dataList = excelBoardService.findStepList("최종통과");
+        for (ExcelBoard excelBoard : dataList) {
+            Row row = sheet.createRow(rowNo++);
+            row.createCell(0).setCellValue(excelBoard.getStudentId());
+            row.createCell(1).setCellValue(excelBoard.getStudentName());
+            row.createCell(2).setCellValue(excelBoard.getProfessorName());
+            row.createCell(3).setCellValue(excelBoard.getGraduationDate());
+            row.createCell(4).setCellValue(excelBoard.getStep());
+            row.createCell(5).setCellValue(excelBoard.getState());
+            row.createCell(6).setCellValue(excelBoard.getQualifications());
+            row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
+        }
+    }
+
     private static int createHeader(Sheet sheet, int rowNo, CellStyle headStyle) {
         Row headerRow = sheet.createRow(rowNo++);
         headerRow.createCell(0).setCellValue("학번");
@@ -105,7 +298,7 @@ public class ExcelStore {
         headerRow.createCell(3).setCellValue("졸업 날짜");
         headerRow.createCell(4).setCellValue("단계");
         headerRow.createCell(5).setCellValue("상태");
-        headerRow.createCell(6).setCellValue("기타 자격");
+        headerRow.createCell(6).setCellValue("자격");
         headerRow.createCell(7).setCellValue("캡스톤 이수");
 
         for (int i = 0; i <= 7; i++) {

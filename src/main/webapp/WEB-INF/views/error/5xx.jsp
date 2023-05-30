@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
 <br>
 <br>
 <center>
-    <img alt="500에러이미지" src="/error/error500_remove.png" width="380">
+    <img alt="500에러이미지" src="/assets/images/error/error500_remove.png" width="380">
     <br>
     <br>
     <h4>서비스 이용에 불편을 드려 죄송합니다.</h4>

@@ -25,13 +25,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.util.UriUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,13 +71,17 @@ public class NoticeBoardController {
     }
 
     @PostMapping("api/graduation/form")
-    public String saveNoticeBoard(HttpServletRequest request, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
+    public String saveNoticeBoard(MultipartHttpServletRequest request, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
             model.addAttribute("data", noticeBoardRequestDto.getText() != null ? noticeBoardRequestDto.getText() : "");
             return "graduation/notice/noticeForm";
         }
         UserSessionDto adminSession = (UserSessionDto) request.getSession().getAttribute(SessionFactory.CSPOP_SESSION_KEY);
         Admins findAdmin = adminsRepository.findByAdminId(adminSession.getStudentId()).get();
+
+        String x = exceptionOfNoticeUploadFile(request, model);
+        if (x != null) return x;
+
         List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
         NoticeBoard noticeBoard = NoticeBoard.createNoticeBoard(noticeBoardRequestDto.getTitle(), noticeBoardRequestDto.getText(), false, 0, findAdmin, storeFiles);
         noticeBoardService.saveNoticeBoard(noticeBoard, storeFiles);
@@ -106,10 +112,13 @@ public class NoticeBoardController {
     }
 
     @PostMapping("api/graduation/modifyForm/{noticeBoardId}")
-    public String noticeModify(@PathVariable Long noticeBoardId, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
+    public String noticeModify(MultipartHttpServletRequest request, @PathVariable Long noticeBoardId, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
             return "graduation/notice/noticeModifyForm";
         }
+        String x = exceptionOfNoticeUploadFile(request, model);
+        if (x != null) return x;
+
         List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
         noticeBoardService.updateNoticeBoard(noticeBoardId, noticeBoardRequestDto, storeFiles);
         return "redirect:/notice/find?page=0&size=10";
@@ -147,5 +156,15 @@ public class NoticeBoardController {
         model.addAttribute("startBlockPage", startAndEndBlockPage[0]);
         model.addAttribute("endBlockPage", startAndEndBlockPage[1]);
         model.addAttribute("allNoticeBoard", allNoticeBoard);
+    }
+    private static String exceptionOfNoticeUploadFile(MultipartHttpServletRequest request, Model model) {
+        Map<String, MultipartFile> fileMap = request.getFileMap();
+        for (MultipartFile multipartFile : fileMap.values()) {
+            if (multipartFile.getSize() > 10485760L) {
+                model.addAttribute("errorMessage2", true);
+                return "graduation/notice/noticeForm";
+            }
+        }
+        return null;
     }
 }

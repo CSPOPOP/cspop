@@ -41,6 +41,11 @@
 
 <%@include file="../../common/sessionController.jsp" %>
 <body>
+<c:if test="${errorMessage2 eq true}">
+    <script>
+        alert("파일 용량 제한을 초과하였습니다.");
+    </script>
+</c:if>
 <%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->

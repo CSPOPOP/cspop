@@ -84,6 +84,11 @@ public class ExcelBoard extends BaseEntity {
         this.state = "미승인";
     }
 
+    public void updateExcelFinalPass(){
+        this.step = Step.FINAL_PASS.getStepToString();
+        this.state = "승인";
+    }
+
     public void updateExcelBySubmitForm(String professorName, String graduationDate, String capstoneCompletion) {
         this.professorName = professorName;
         this.graduationDate = graduationDate;
