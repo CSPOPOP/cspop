@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSPOP</title>
-    <link rel="stylesheet" href="../assets/css/theme.min.css">
+    <link rel="stylesheet" href="/assets/css/theme.min.css">
 </head>
 <body>
 <br>
