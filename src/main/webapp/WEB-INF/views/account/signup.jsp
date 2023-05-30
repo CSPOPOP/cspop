@@ -55,7 +55,7 @@
                 </div>
                 <div class="mb-3 ">
                     <label for="password" class="form-label">비밀번호</label>
-                    <input type="password" id="password" class="form-control" placeholder="8~16자 영문 대소문자,특수문자를 사용하세요."
+                    <input type="password" id="password" class="form-control" placeholder="8~16자 영문,특수문자를 사용하세요."
                         required="">
                 </div>
                 <div class="mb-3 ">

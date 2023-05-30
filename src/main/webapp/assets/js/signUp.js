@@ -125,6 +125,10 @@ function signUp(event) {
         return;
     }
 
+    if (!confirm('회원가입 하시겠습니까?')) {
+        return;
+    }
+
     let userData = {
         studentId: $(`#id`).val(),
         studentPassword: $(`#password`).val(),

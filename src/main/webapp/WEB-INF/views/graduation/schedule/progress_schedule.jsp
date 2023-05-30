@@ -230,6 +230,9 @@
     // 삭제하지 마세요
 
     function dateSubmit(){ // tableId값을 통해 어떤 row값이 수정되는지 체크하여 업데이트함
+        if(!confirm('수정하시겠습니까?')) {
+            return;
+        }
         let tableId = $(`#tableId`).val()
         let startDate = $(`#start-date`).val()
         let endDate = $(`#end-date`).val()
@@ -250,6 +253,9 @@
     }
 
     function textSubmit(){
+        if(!confirm('수정하시겠습니까?')){
+            return;
+        }
         let selectValue = $('#selectValue').val()
         // let modifyText = CKEDITOR.instances.editor.getData();
         let modifyText = $('#editor').val()

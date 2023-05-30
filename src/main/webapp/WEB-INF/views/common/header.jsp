@@ -2,6 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- header -->
+<style>
+    .userName {
+      color: white;
+    }
+</style>
+<c:set var="userName" value="<%= userName %>" scope="page" />
 <c:set var="userId" value="<%= userId %>" scope="page" />
 <div class="header fixed-top border-3 border-top border-primary border-sm">
     <!-- navigation start -->
@@ -69,6 +75,11 @@
                         </li>
                     </c:if>
                 </ul>
+                <c:if test="${(userId != 'NotLogin')}">
+                    <a class="nav-link">
+                        <span class="userName">${userName}님<span style="font-size: 1.5em;">&#127891;</span></span>
+                    </a>
+                </c:if>
                 <div id="userCheck"></div>
             </div>
         </nav>
