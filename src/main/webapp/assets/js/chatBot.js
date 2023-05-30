@@ -13,17 +13,15 @@ userInput.on('keyup', (event) => {
 });
 
 function scrollToBottom() {
-    const chatContainer = $('#message-area');
+    // const chatContainer = $('#message-area')
+    const chatContainer = document.getElementById('message-area');
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
 function chatBotAjax(mode) {
     messageArea.append(
-        '<div class="card float-left container" style="width: 18rem;">\n' +
-        '  <div class="card-body">\n' +
-        '    <h5 class="card-title">Card title</h5>\n' +
+        '<div class="alert" role="alert">'+
         '    <p class="card-text">' + mode + '</p>\n' +
-        '  </div>\n' +
         '</div>'
     );
     let jsonData = {
@@ -35,16 +33,13 @@ function chatBotAjax(mode) {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(jsonData),
         success: (data) => {
-            // messageArea.append('<div class="message user-message">' + data.answer + '</div>')
             messageArea.append(
-                '<div class="card float-right container" style="width: 18rem;">\n' +
-                '  <div class="card-body">\n' +
-                '    <h5 class="card-title">ChatBot</h5>\n' +
+                '<div class="alert alert-secondary" role="alert">'+
                 '    <p class="card-text">' + data.answer + '</p>\n' +
-                '  </div>\n' +
-                '</div>')
+                '</div>'
+                )
             scrollToBottom()
         },
-        error: (error) => alert("유효하지 않은 접근 입니다")
+        error: () => alert("유효하지 않은 접근 입니다")
     })
 }
