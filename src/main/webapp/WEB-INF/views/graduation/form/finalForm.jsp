@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../../../../assets/libs/magnific-popup/dist/magnific-popup.css">
     <!-- 부트스트랩 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- 부트스트랩 테이블 -->
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
     <!-- Theme CSS -->
@@ -44,7 +44,7 @@
         }
     </style>
 </head>
-<%@include file="../../common/sessionController.jsp"%>
+<%@include file="../../common/sessionController.jsp" %>
 <body>
 <c:if test="${errorMessage eq true}">
     <script>
@@ -56,7 +56,7 @@
         alert("파일 용량 제한을 초과하였습니다.");
     </script>
 </c:if>
-<%@include file="../../common/header.jsp"%>
+<%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -115,12 +115,12 @@
                                     <div class="card" style="padding: 5px;">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" id="category1" name="division"
-                                                value="option1" required>
+                                                   value="option1" required>
                                             <label class="form-check-label" for="category1">구현논문</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" id="category2" name="division"
-                                                value="option2">
+                                                   value="option2">
                                             <label class="form-check-label" for="category2">조사(이론)논문</label>
                                         </div>
                                     </div>
@@ -130,18 +130,18 @@
                                     <div class="card" style="padding: 5px;">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="qualification"
-                                                id="category3" value="option1" required>
+                                                   id="category3" value="option1" required>
                                             <label class="form-check-label" for="category3">논문양식파일사용</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="qualification"
-                                            id="category4" value="option2" required>
+                                                   id="category4" value="option2" required>
                                             <label class="form-check-label" for="category4">목차,서론,본론,결론,참고문헌
                                                 포함</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="qualification"
-                                            id="category5" value="option3" required>
+                                                   id="category5" value="option3" required>
                                             <label class="form-check-label" for="category5">본인이 직접 작성한 파일임을
                                                 확인함</label>
                                         </div>
@@ -153,7 +153,7 @@
                                         <div class="row">
                                             <div class="col-lg-2 col-3">
                                                 <input type="number" min="1" class="form-control" name="pageNumber"
-                                                    id="pageNumber" required>
+                                                       id="pageNumber" required>
                                             </div>
                                             <div class="col align-self-center">
                                                 쪽 (서론/본론/결론/참고문헌 부분 쪽수, 표지/목차 제외)
@@ -164,19 +164,21 @@
                                 <div class="form-group">
                                     <label><b>파일 제출</b>(파일 크기는 10MB 이하여야 합니다.)</label>
                                     <div class="card" style="padding: 5px;">
-                                        <input id="inputFile" type="file" name="finalFormUploadFile"required>
+                                        <input id="inputFile" type="file" name="finalFormUploadFile" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group" style="text-align: right; margin-top: 5px;">
                                 <label for="sign">서명</label>
                                 <input type="text" class="form-control" name="sign" id="sign" placeholder="본인의 이름을 입력"
-                                    style="display: inline-block; width: 200px;">
+                                       style="display: inline-block; width: 200px;">
                                 <br>
                                 <button type="submit" class="btn btn-lg btn-primary"
-                                    style="width: 13%; height: 10%;">제출</button>
+                                        style="width: 13%; height: 10%;">제출
+                                </button>
                                 <button type="button" class="btn btn-lg btn-secondary"
-                                    style="width: 13%; height: 10%;">취소</button>
+                                        style="width: 13%; height: 10%;">취소
+                                </button>
                             </div>
                         </form>
                     </div>

@@ -124,7 +124,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="content">내용</label>
-                                    <textarea type="text" class="form-control" id="content" name="text" placeholder="입력하세요" required></textarea>
+                                    <textarea type="text" class="form-control" id="content" name="text"
+                                              placeholder="입력하세요" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-primary" style="width: 10%">제출</button>
                             </form>

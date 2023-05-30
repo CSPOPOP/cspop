@@ -38,9 +38,9 @@
     <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
     <script src="../../../../assets/js/certification.js"></script>
 </head>
-<%@include file="../../common/sessionController.jsp"%>
+<%@include file="../../common/sessionController.jsp" %>
 <body>
-<%@include file="../../common/header.jsp"%>
+<%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -87,19 +87,19 @@
                                         <thead class="table-dark">
                                         <tr style="text-align: center">
                                             <th data-field="no">
-                                              <div class="th-inner sortable both">#</div>
+                                                <div class="th-inner sortable both">#</div>
                                             </th>
                                             <th data-field="department">
-                                              <div class="th-inner sortable both">소속학과</div>
+                                                <div class="th-inner sortable both">소속학과</div>
                                             </th>
                                             <th data-field="studentId">
-                                              <div class="th-inner sortable both">학번</div>
+                                                <div class="th-inner sortable both">학번</div>
                                             </th>
                                             <th data-field="studentName">
-                                              <div class="th-inner sortable both">이름</div>
+                                                <div class="th-inner sortable both">이름</div>
                                             </th>
                                             <th data-field="currentSemester">
-                                              <div class="th-inner sortable both">현재학기</div>
+                                                <div class="th-inner sortable both">현재학기</div>
                                             </th>
                                             <th data-field="professionalEducation">
                                                 <div class="th-inner sortable both">전문교양</div>
@@ -153,22 +153,28 @@
                             </div>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="modifyTable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="modifyTable" data-bs-backdrop="static" data-bs-keyboard="false"
+                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h3>파일 올리기</h3>
                                         </div>
-                                        <form action="certification_management.read" id="certificationForm" method="post" enctype="multipart/form-data">
+                                        <form action="certification_management.read" id="certificationForm"
+                                              method="post" enctype="multipart/form-data">
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <input type="file" name="file" />
-                                                    
+                                                    <input type="file" name="file"/>
+
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                <button type="submit" class="btn btn-primary" onclick="uploadExcel(event)">업로드</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    취소
+                                                </button>
+                                                <button type="submit" class="btn btn-primary"
+                                                        onclick="uploadExcel(event)">업로드
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -182,8 +188,11 @@
                                 <c:choose>
                                     <c:when test="${certification.first}"></c:when>
                                     <c:otherwise>
-                                        <li class="page-item"><a class="page-link" href="/api/graduation/certification_management?page=0&size=10">처음</a></li>
-                                        <li class="page-item"><a class="page-link" href="/api/graduation/certification_management?page=${certification.number-1}&size=10">이전</a>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="/api/graduation/certification_management?page=0&size=10">처음</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="/api/graduation/certification_management?page=${certification.number-1}&size=10">이전</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
@@ -192,11 +201,13 @@
                                 <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
                                     <c:choose>
                                         <c:when test="${certification.pageable.pageNumber+1 == i}">
-                                            <li class="page-item disabled"><a class="page-link" href="/api/graduation/certification_management?page=${i-1}&size=10">${i}</a>
+                                            <li class="page-item disabled"><a class="page-link"
+                                                                              href="/api/graduation/certification_management?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:when>
                                         <c:otherwise>
-                                            <li class="page-item"><a class="page-link" href="/api/graduation/certification_management?page=${i-1}&size=10">${i}</a>
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="/api/graduation/certification_management?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:otherwise>
                                     </c:choose>
@@ -205,18 +216,25 @@
                                 <c:choose>
                                     <c:when test="${certification.last}"></c:when>
                                     <c:otherwise>
-                                        <li class="page-item "><a class="page-link" href="/api/graduation/certification_management?page=${certification.number+1}&size=10">다음</a></li>
-                                        <li class="page-item "><a class="page-link" href="/api/graduation/certification_management?page=${certification.totalPages-1}&size=10">마지막</a></li>
+                                        <li class="page-item "><a class="page-link"
+                                                                  href="/api/graduation/certification_management?page=${certification.number+1}&size=10">다음</a>
+                                        </li>
+                                        <li class="page-item "><a class="page-link"
+                                                                  href="/api/graduation/certification_management?page=${certification.totalPages-1}&size=10">마지막</a>
+                                        </li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
                         </div>
                         <!-- 페이징 영역 끝 -->
                     </div>
-                    <form action="certification_management.download" method="get" onclick="return confirm('다운로드 하시겠습니까?')">
+                    <form action="certification_management.download" method="get"
+                          onclick="return confirm('다운로드 하시겠습니까?')">
                         <button class="btn btn-primary btn-sm float-right">다운로드</button>
                     </form>
-                    <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyTable">파일 올리기</button>
+                    <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal"
+                            data-bs-target="#modifyTable">파일 올리기
+                    </button>
                 </div>
             </div>
         </div>

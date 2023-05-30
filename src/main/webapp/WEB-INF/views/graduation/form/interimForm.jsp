@@ -41,7 +41,7 @@
         }
     </style>
 </head>
-<%@include file="../../common/sessionController.jsp"%>
+<%@include file="../../common/sessionController.jsp" %>
 <body>
 <c:if test="${errorMessage eq true}">
     <script>
@@ -53,7 +53,7 @@
         alert("파일 용량 제한을 초과하였습니다.");
     </script>
 </c:if>
-<%@include file="../../common/header.jsp"%>
+<%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -111,11 +111,13 @@
                                     <label><b>구분</b></label>
                                     <div class="card" style="padding: 5px;">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="category1" name="division" value="option1" required>
+                                            <input class="form-check-input" type="radio" id="category1" name="division"
+                                                   value="option1" required>
                                             <label class="form-check-label" for="category1">구현논문</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="category2" name="division" value="option2">
+                                            <input class="form-check-input" type="radio" id="category2" name="division"
+                                                   value="option2">
                                             <label class="form-check-label" for="category2">조사(이론)논문</label>
                                         </div>
                                     </div>
@@ -123,19 +125,21 @@
                                 <div class="form-group">
                                     <label><b>파일 제출</b>(파일 크기는 10MB 이하여야 합니다.)</label>
                                     <div class="card" style="padding: 5px;">
-                                        <input id="inputFile" type="file" name="interimFormUploadFile"required>
+                                        <input id="inputFile" type="file" name="interimFormUploadFile" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="content"><b>진행 내용</b></label>
                                     <div class="card" style="padding: 5px;">
-                                        <textarea type="text" class="form-control" id="content" name="text" placeholder="입력하세요" required></textarea>
+                                        <textarea type="text" class="form-control" id="content" name="text"
+                                                  placeholder="입력하세요" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="plan"><b>향후 계획</b></label>
                                     <div class="card" style="padding: 5px;">
-                                        <textarea class="form-control" id="plan" name="plan" placeholder="입력하세요" required></textarea>
+                                        <textarea class="form-control" id="plan" name="plan" placeholder="입력하세요"
+                                                  required></textarea>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-primary" style="width: 10%">제출</button>

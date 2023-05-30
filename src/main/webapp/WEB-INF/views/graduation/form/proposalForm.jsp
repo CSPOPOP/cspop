@@ -39,6 +39,7 @@
         img {
             margin-top: 5%;
         }
+
         .smaller-p {
             font-size: 0.9em;
             color: gray;
@@ -46,14 +47,14 @@
         }
     </style>
 </head>
-<%@include file="../../common/sessionController.jsp"%>
+<%@include file="../../common/sessionController.jsp" %>
 <body>
 <c:if test="${errorMessage eq true}">
     <script>
         alert("비어있는 항목이 있어 제출할 수 없습니다.")
     </script>
 </c:if>
-<%@include file="../../common/header.jsp"%>
+<%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -94,7 +95,7 @@
                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8">
                     <div class="row">
                         <div class="card">
-                            <form method="POST" >
+                            <form method="POST">
                                 <input type="hidden" name="studentId" value=${userDetail.studentId}>
                                 <input type="hidden" name="studentName" value=${userDetail.studentName}>
                                 <input type="hidden" name="department" value=${userDetail.department}>
@@ -108,15 +109,18 @@
                                 <div class="form-group">
                                     <label>구분</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="category1" name="division" value="option1" required>
+                                        <input class="form-check-input" type="radio" id="category1" name="division"
+                                               value="option1" required>
                                         <label class="form-check-label" for="category1">구현논문</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="category2" name="division" value="option2">
+                                        <input class="form-check-input" type="radio" id="category2" name="division"
+                                               value="option2">
                                         <label class="form-check-label" for="category2">조사(이론)논문</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="category3" name="division" value="option3">
+                                        <input class="form-check-input" type="radio" id="category3" name="division"
+                                               value="option3">
                                         <label class="form-check-label" for="category3">기타자격</label>
                                     </div>
                                 </div>
@@ -126,7 +130,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="content">내용</label>
-                                    <textarea class="form-control" id="content" name="text" placeholder="입력하세요" required></textarea>
+                                    <textarea class="form-control" id="content" name="text" placeholder="입력하세요"
+                                              required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-primary" style="width: 10%">제출</button>
                             </form>

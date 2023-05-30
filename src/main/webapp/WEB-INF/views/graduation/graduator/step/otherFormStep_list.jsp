@@ -29,9 +29,11 @@
         img {
             margin-top: 5%;
         }
+
         ul {
             list-style: none;
         }
+
         li {
             float: left;
         }
@@ -139,7 +141,8 @@
                                             <tr style="text-align: center">
                                                 <td>${count.count}</td>
                                                 <td><c:out value="${data.studentId}"/></td>
-                                                <td><a href="/api/userStatus/approvalUser/${data.studentId}"><c:out value="${data.studentName}"/></a></td>
+                                                <td><a href="/api/userStatus/approvalUser/${data.studentId}"><c:out
+                                                        value="${data.studentName}"/></a></td>
                                                 <td><c:out value="${data.professorName}"/></td>
                                                 <td><c:out value="${data.graduationDate}"/></td>
                                                 <td><c:out value="${data.step}"/></td>
@@ -200,7 +203,8 @@
                         </div>
                         <!-- 페이징 영역 끝 -->
                     </div>
-                    <form action="graduate_otherForm.downloadOtherQualificationStep" method="get" onsubmit="return confirm('다운로드 하시겠습니까?')>
+                    <form action="graduate_otherForm.downloadOtherQualificationStep" method="get"
+                          onsubmit="return confirm('다운로드 하시겠습니까?')">
                         <button class="btn btn-primary btn-sm float-right">다운로드</button>
                     </form>
                 </div>
