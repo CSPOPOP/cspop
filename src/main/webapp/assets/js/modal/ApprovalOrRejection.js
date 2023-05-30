@@ -1,5 +1,8 @@
 // 신청접수 외의 승인버튼 --버튼 쪼개기
 function ApproveProposalButton(id, studentId,loginId) {
+    if(!confirm('승인하시겠습니까?')) {
+        return;
+    }
     $.ajax({
         url: "/api/userStatus/approvalUserProposalForm/"+studentId,
         type: "post",
@@ -12,6 +15,9 @@ function ApproveProposalButton(id, studentId,loginId) {
 }
 
 function ApproveInterimButton(id, studentId,loginId) {
+    if(!confirm('승인하시겠습니까?')) {
+        return;
+    }
     $.ajax({
         url: "/api/userStatus/approvalUserInterimForm/"+studentId,
         type: "post",
@@ -24,6 +30,9 @@ function ApproveInterimButton(id, studentId,loginId) {
 }
 
 function ApproveFinalButton(id, studentId,loginId) {
+    if(!confirm('승인하시겠습니까?')) {
+        return;
+    }
     $.ajax({
         url: "/api/userStatus/approvalUserFinalForm/"+studentId,
         type: "post",
@@ -36,6 +45,9 @@ function ApproveFinalButton(id, studentId,loginId) {
 }
 
 function ApproveOtherButton(id, studentId,loginId) {
+    if(!confirm('승인하시겠습니까?')) {
+        return;
+    }
     $.ajax({
         url: "/api/userStatus/approvalUserOtherForm/"+studentId,
         type: "post",
@@ -49,6 +61,9 @@ function ApproveOtherButton(id, studentId,loginId) {
 
 // 신청접수 승인 버튼
 function ApplicationReceived(studentId){
+    if(!confirm('승인하시겠습니까?')) {
+        return;
+    }
     const formData = $("#submitFormApproveModal")[0];
     const data = new FormData(formData)
     $.ajax({

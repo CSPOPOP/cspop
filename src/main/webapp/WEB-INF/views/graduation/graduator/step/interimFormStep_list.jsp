@@ -34,7 +34,6 @@
         }
         li {
             float: left;
-            margin-right: 15px;
         }
     </style>
     <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
@@ -201,7 +200,7 @@
                         </div>
                         <!-- 페이징 영역 끝 -->
                     </div>
-                    <form action="graduate_interimForm.downloadInterimFormStep" method="get">
+                    <form action="graduate_interimForm.downloadInterimFormStep" method="get" onsubmit="return confirm('다운로드 하시겠습니까?')>
                         <button class="btn btn-primary btn-sm float-right">다운로드</button>
                     </form>
                 </div>

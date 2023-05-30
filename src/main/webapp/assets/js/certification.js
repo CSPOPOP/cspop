@@ -1,5 +1,8 @@
 function uploadExcel(event) {
     event.preventDefault();
+    if(!confirm('업로드 하시겠습니까?')) {
+        return;
+    }
     // Get form         
     var form = $('#certificationForm')[0];  	    
     // Create an FormData object          

@@ -2,13 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- header -->
+<style>
+    .userName {
+      color: white;
+    }
+</style>
+<c:set var="userName" value="<%= userName %>" scope="page" />
 <c:set var="userId" value="<%= userId %>" scope="page" />
 <div class="header fixed-top border-3 border-top border-primary border-sm">
     <!-- navigation start -->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-default">
             <a class="navbar-brand" href="/api/home">
-                <img src="../../../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
+                <img src="../../../../assets/images/cspop_logo.png" alt="" width="100em">
             </a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar-default" aria-controls="navbar-default"
@@ -61,13 +67,6 @@
                             </a>
                         </li>
                     </c:if>
-                    <c:if test="${not fn:contains(userId, 'admin')}">
-                        <li class="nav-item">
-                            <a class="nav-link " href="/api/graduation/graduation_status" data-bs-display="static">
-                                졸업 조회
-                            </a>
-                        </li>
-                    </c:if>
                     <c:if test="${fn:contains(userId, 'admin')}">
                         <li class="nav-item">
                             <a class="nav-link " href="/api/graduation/application_management" data-bs-display="static">
@@ -76,6 +75,11 @@
                         </li>
                     </c:if>
                 </ul>
+                <c:if test="${(userId != 'NotLogin')}">
+                    <a class="nav-link">
+                        <span class="userName">${userName}님<span style="font-size: 1.5em;">&#127891;</span></span>
+                    </a>
+                </c:if>
                 <div id="userCheck"></div>
             </div>
         </nav>

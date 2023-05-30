@@ -39,6 +39,11 @@
         img {
             margin-top: 5%;
         }
+        .smaller-p {
+            font-size: 0.9em;
+            color: gray;
+            margin-top: 0.3em;
+        }
     </style>
 </head>
 <%@include file="../../common/sessionController.jsp"%>
@@ -110,9 +115,13 @@
                                         <input class="form-check-input" type="radio" id="category2" name="division" value="option2">
                                         <label class="form-check-label" for="category2">조사(이론)논문</label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="category3" name="division" value="option3">
+                                        <label class="form-check-label" for="category3">기타자격</label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="keywords">키워드</label>
+                                    <label for="keywords">키워드</label> <span class="smaller-p">(논문일경우 키워드를 넣고, 기타 자격일 경우 대체 졸업 요건을 적어주세요)</span>
                                     <input type="text" class="form-control" id="keywords" name="keyword" required>
                                 </div>
                                 <div class="form-group">

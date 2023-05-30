@@ -83,7 +83,7 @@
                 <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
                     <div class="card">
                         <div class="card-body p-4 p-lg-7">
-                            <form id="myForm" method="post">
+                            <form id="myForm" method="post" onsubmit="return confirm('수정하시겠습니까?')">
                                 <div class="form-group">
                                     <spring:hasBindErrors name="guidanceBoardRequestDto">
                                         <c:if test="${errors.hasFieldErrors('text')}">

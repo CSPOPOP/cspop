@@ -151,6 +151,9 @@
 
     $(()=>{
         $('#deleteNotice').on('click', ()=> { // 글을 삭제하는 기능
+            if(!confirm('삭제하시겠습니까?')) {
+                return;
+            }
             $.ajax({
                 url: "/api/notice/delete",
                 type: "post",
