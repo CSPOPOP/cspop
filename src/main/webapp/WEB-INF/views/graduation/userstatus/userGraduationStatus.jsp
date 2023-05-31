@@ -327,9 +327,6 @@
                                                                 <div class="th-inner sortable both">제출</div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner sortable both">이동</div>
-                                                            </th>
-                                                            <th>
                                                                 <div class="th-inner sortable both">비고</div>
                                                             </th>
                                                         </tr>
