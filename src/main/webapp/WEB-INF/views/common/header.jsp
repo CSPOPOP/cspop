@@ -23,7 +23,7 @@
                 <span class="icon-bar middle-bar"></span>
                 <span class="icon-bar bottom-bar"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbar-default">
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbar-default" aria-controls="navbar-default"
@@ -76,11 +76,11 @@
                     </c:if>
                 </ul>
                 <c:if test="${(userId != 'NotLogin')}">
-                    <a class="nav-link">
-                        <span class="userName">${userName}님<span style="font-size: 1.5em;">&#127891;</span></span>
-                    </a>
+                    <ul class="nav-item userName">
+                        <a class="nav-link float-right">${userName}님<span style="font-size: 1.5em;">&#127891;</span></a>
+                    </ul>
                 </c:if>
-                <div id="userCheck"></div>
+                <div id="userCheck" class="float-right"></div>
             </div>
         </nav>
     </div>
