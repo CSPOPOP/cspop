@@ -3,7 +3,7 @@ package kyonggi.cspop.application.controller.form.interimForm;
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.form.interimForm.dto.InterimFormDto;
-import kyonggi.cspop.application.util.FileStore;
+import kyonggi.cspop.application.util.common.FileHandler;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.interimform.InterimForm;
@@ -41,7 +41,7 @@ public class InterimFormController {
     private final InterimFormService interimFormService;
     private final ExcelBoardService excelBoardService;
 
-    private final FileStore fileStore;
+    private final FileHandler fileHandler;
 
     @GetMapping("api/interimForm")
     public String saveInterimForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
@@ -66,7 +66,7 @@ public class InterimFormController {
         }
         String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
         if (x != null) return x;
-        InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
+        InterimFormUploadFile interimFormUploadFile = fileHandler.storeInterimFile(interimFormDto.getInterimFormUploadFile());
         InterimForm interimForm = InterimForm.createInterimForm(interimFormDto.getTitle(), interimFormDto.getDivision(), interimFormDto.getText(), interimFormDto.getPlan(), interimFormUploadFile);
         Long interimFormId = interimFormService.saveInterimForm(interimForm);
         usersService.updateUserByInterimForm(user.getId(), interimFormId);
@@ -80,7 +80,7 @@ public class InterimFormController {
         String storeFileName = interimForm.getInterimFormUploadFile().getStoreFileName();
         String uploadFileName = interimForm.getInterimFormUploadFile().getUploadFileName();
 
-        UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
+        UrlResource resource = new UrlResource("file:" + fileHandler.getFullPath(storeFileName));
 
         String encodedUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
         String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";

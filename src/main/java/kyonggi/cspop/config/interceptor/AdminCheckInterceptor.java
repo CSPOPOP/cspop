@@ -1,4 +1,4 @@
-package kyonggi.cspop.interceptor;
+package kyonggi.cspop.config.interceptor;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;

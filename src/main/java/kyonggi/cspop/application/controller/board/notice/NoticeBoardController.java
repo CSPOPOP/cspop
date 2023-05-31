@@ -4,8 +4,8 @@ import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.notice.dto.NoticeBoardRequestDto;
 import kyonggi.cspop.application.controller.board.notice.dto.NoticeNumberJsonRequest;
 import kyonggi.cspop.application.controller.board.notice.dto.NoticeViewDto;
-import kyonggi.cspop.application.util.FileStore;
-import kyonggi.cspop.application.util.PageStore;
+import kyonggi.cspop.application.util.common.FileHandler;
+import kyonggi.cspop.application.util.common.PageHandler;
 import kyonggi.cspop.domain.admins.Admins;
 import kyonggi.cspop.domain.admins.repository.AdminsRepository;
 import kyonggi.cspop.domain.board.notice.NoticeBoard;
@@ -41,8 +41,8 @@ public class NoticeBoardController {
 
     private final NoticeBoardService noticeBoardService;
     private final AdminsRepository adminsRepository;
-    private final FileStore fileStore;
-    private final PageStore pageStore;
+    private final FileHandler fileHandler;
+    private final PageHandler pageHandler;
 
     @GetMapping("api/graduation/form")
     public String noticeForm() {return "graduation/notice/noticeForm";}
@@ -53,7 +53,7 @@ public class NoticeBoardController {
     @GetMapping("/notice/find")
     public String findAllNoticeBoard(Pageable pageable, Model model) {
         Page<NoticeBoardResponseDto> allNoticeBoard = noticeBoardService.findAllNoticeBoard(pageable);
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allNoticeBoard.getPageable().getPageNumber(), allNoticeBoard.getTotalPages());
+        int[] startAndEndBlockPage = pageHandler.getStartAndEndBlockPage(allNoticeBoard.getPageable().getPageNumber(), allNoticeBoard.getTotalPages());
         putPagingInf(model, allNoticeBoard, startAndEndBlockPage);
         return "graduation/notice/notice";
     }
@@ -65,7 +65,7 @@ public class NoticeBoardController {
             model.addAttribute("errorMessage", true);
             return "graduation/notice/notice";
         }
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allNoticeBoard.getPageable().getPageNumber(), allNoticeBoard.getTotalPages());
+        int[] startAndEndBlockPage = pageHandler.getStartAndEndBlockPage(allNoticeBoard.getPageable().getPageNumber(), allNoticeBoard.getTotalPages());
         putPagingInf(model, allNoticeBoard, startAndEndBlockPage);
         return "graduation/notice/notice";
     }
@@ -82,7 +82,7 @@ public class NoticeBoardController {
         String x = exceptionOfNoticeUploadFile(request, model);
         if (x != null) return x;
 
-        List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
+        List<NoticeBoardUploadFile> storeFiles = fileHandler.storeFiles(noticeBoardRequestDto.getFiles());
         NoticeBoard noticeBoard = NoticeBoard.createNoticeBoard(noticeBoardRequestDto.getTitle(), noticeBoardRequestDto.getText(), false, 0, findAdmin, storeFiles);
         noticeBoardService.saveNoticeBoard(noticeBoard, storeFiles);
         return "redirect:/notice/find?page=0&size=10";
@@ -119,7 +119,7 @@ public class NoticeBoardController {
         String x = exceptionOfNoticeUploadFile(request, model);
         if (x != null) return x;
 
-        List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
+        List<NoticeBoardUploadFile> storeFiles = fileHandler.storeFiles(noticeBoardRequestDto.getFiles());
         noticeBoardService.updateNoticeBoard(noticeBoardId, noticeBoardRequestDto, storeFiles);
         return "redirect:/notice/find?page=0&size=10";
     }
@@ -143,7 +143,7 @@ public class NoticeBoardController {
             if (uploadFile.getUploadFileName().equals(uploadFileName)) {
                 String storeFileName = uploadFile.getStoreFileName();
                 String dbUploadFileName = uploadFile.getUploadFileName();
-                UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
+                UrlResource resource = new UrlResource("file:" + fileHandler.getFullPath(storeFileName));
                 String encodedUploadFileName = UriUtils.encode(dbUploadFileName, StandardCharsets.UTF_8);
                 String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
                 return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);

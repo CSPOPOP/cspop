@@ -3,7 +3,7 @@ package kyonggi.cspop.application.controller.form.otherform;
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.form.otherform.dto.OtherFormDto;
-import kyonggi.cspop.application.util.FileStore;
+import kyonggi.cspop.application.util.common.FileHandler;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.otherform.OtherForm;
@@ -41,7 +41,7 @@ public class OtherFormController {
     private final OtherFormService otherFormService;
     private final ExcelBoardService excelBoardService;
 
-    private final FileStore fileStore;
+    private final FileHandler fileHandler;
 
     @GetMapping("api/otherForm")
     public String saveOtherForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
@@ -69,7 +69,7 @@ public class OtherFormController {
         }
         String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
         if (x != null) return x;
-        OtherFormUploadFile otherFormUploadFile = fileStore.storeOtherFile(otherFormDto.getOtherFormUploadFile());
+        OtherFormUploadFile otherFormUploadFile = fileHandler.storeOtherFile(otherFormDto.getOtherFormUploadFile());
         OtherForm otherForm = OtherForm.createOtherForm(otherFormDto.getTitle(), otherFormDto.getDivision(), otherFormDto.getText(), otherFormUploadFile);
         Long otherFormId = otherFormService.saveOtherForm(otherForm);
         usersService.updateUserByOtherForm(user.getId(), otherFormId);
@@ -83,7 +83,7 @@ public class OtherFormController {
         String storeFileName = otherForm.getOtherFormUploadFile().getStoreFileName();
         String uploadFileName = otherForm.getOtherFormUploadFile().getUploadFileName();
 
-        UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
+        UrlResource resource = new UrlResource("file:" + fileHandler.getFullPath(storeFileName));
 
         String encodedUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
         String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";

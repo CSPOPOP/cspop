@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.util;
+package kyonggi.cspop.application.util.common;
 
 import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
 import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class FileStore {
+public class FileHandler {
 
     @Value("${file.dir}")
     private String fileDir;

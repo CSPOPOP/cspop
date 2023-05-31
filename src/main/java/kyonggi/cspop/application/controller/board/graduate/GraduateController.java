@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.controller.board.excel.graduate;
+package kyonggi.cspop.application.controller.board.graduate;
 
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
@@ -8,8 +8,8 @@ import kyonggi.cspop.application.controller.form.interimForm.dto.InterimViewDto;
 import kyonggi.cspop.application.controller.form.otherform.dto.OtherViewDto;
 import kyonggi.cspop.application.controller.form.proposalform.dto.ProposalViewDto;
 import kyonggi.cspop.application.controller.form.submitform.dto.SubmitViewDto;
-import kyonggi.cspop.application.util.ExcelStore;
-import kyonggi.cspop.application.util.PageStore;
+import kyonggi.cspop.application.util.common.ExcelHandler;
+import kyonggi.cspop.application.util.common.PageHandler;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardSubmitFormDto;
@@ -53,7 +53,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-public class GraduateCheckController {
+public class GraduateController {
 
     private final UsersService usersService;
     private final ExcelBoardService excelBoardService;
@@ -63,15 +63,15 @@ public class GraduateCheckController {
     private final InterimFormService interimFormService;
     private final OtherFormService otherFormService;
     private final FinalFormService finalFormService;
-    private final PageStore pageStore;
-    private final ExcelStore excelStore;
+    private final PageHandler pageHandler;
+    private final ExcelHandler excelHandler;
 
 
     @GetMapping("api/graduation/graduate_management")
     public String graduateForm(Pageable pageable, Model model) {
         Page<ExcelBoardResponseDto> allExcelBoard = excelBoardService.findAllExcelBoard(pageable);
 
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allExcelBoard.getPageable().getPageNumber(), allExcelBoard.getTotalPages());
+        int[] startAndEndBlockPage = pageHandler.getStartAndEndBlockPage(allExcelBoard.getPageable().getPageNumber(), allExcelBoard.getTotalPages());
         putPagingInf(model, allExcelBoard, startAndEndBlockPage);
         return "graduation/graduator/graduation_list";
     }
@@ -162,8 +162,8 @@ public class GraduateCheckController {
     @SneakyThrows
     @GetMapping("api/graduation/graduate_management.download")
     public ResponseEntity<InputStreamResource> downloadGraduationExcelFile() {
-        File tmpFile = excelStore.getTmpFile();
-        InputStream excelFile = excelStore.getExcelFile(tmpFile);
+        File tmpFile = excelHandler.getTmpFile();
+        InputStream excelFile = excelHandler.getExcelFile(tmpFile);
         return ResponseEntity.ok().contentLength(tmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=graduation.xlsx").body(new InputStreamResource(excelFile));
     }
 

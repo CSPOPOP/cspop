@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.util;
+package kyonggi.cspop.application.util.common;
 
 import kyonggi.cspop.domain.board.certification.CertificationBoard;
 import kyonggi.cspop.domain.board.certification.service.CertificationBoardService;
@@ -22,7 +22,7 @@ import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
-public class ExcelStore {
+public class ExcelHandler {
 
     private final ExcelBoardService excelBoardService;
     private final CertificationBoardService certificationBoardService;

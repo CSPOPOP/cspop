@@ -1,7 +1,7 @@
-package kyonggi.cspop.application.controller.board.excel.certification;
+package kyonggi.cspop.application.controller.board.certification;
 
-import kyonggi.cspop.application.util.ExcelStore;
-import kyonggi.cspop.application.util.PageStore;
+import kyonggi.cspop.application.util.common.ExcelHandler;
+import kyonggi.cspop.application.util.common.PageHandler;
 import kyonggi.cspop.domain.board.certification.CertificationBoard;
 import kyonggi.cspop.domain.board.certification.dto.CertificationBoardResponseDto;
 import kyonggi.cspop.domain.board.certification.service.CertificationBoardService;
@@ -26,16 +26,16 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("api/graduation")
-public class CertificationExcelBoardController {
+public class EngineeringCertificationController {
 
     private final CertificationBoardService certificationBoardService;
-    private final PageStore pageStore;
-    private final ExcelStore excelStore;
+    private final PageHandler pageHandler;
+    private final ExcelHandler excelHandler;
 
     @GetMapping("/certification_management")
     public String certificationForm(Pageable pageable, Model model) {
         Page<CertificationBoardResponseDto> allCertificationBoard = certificationBoardService.findAllCertificationBoard(pageable);
-        int[] startAndEndBlockPage = pageStore.getStartAndEndBlockPage(allCertificationBoard.getPageable().getPageNumber(), allCertificationBoard.getTotalPages());
+        int[] startAndEndBlockPage = pageHandler.getStartAndEndBlockPage(allCertificationBoard.getPageable().getPageNumber(), allCertificationBoard.getTotalPages());
         putPagingInf(model, allCertificationBoard, startAndEndBlockPage);
         return "graduation/certification/certification_list";
     }
@@ -49,8 +49,8 @@ public class CertificationExcelBoardController {
     @SneakyThrows
     @GetMapping("/certification_management.download")
     public ResponseEntity<InputStreamResource> downloadCertificationExcelFile() {
-        File certificationTmpFile = excelStore.getCertificationTmpFile();
-        InputStream certificationExcelFile = excelStore.getCertificationExcelFile(certificationTmpFile);
+        File certificationTmpFile = excelHandler.getCertificationTmpFile();
+        InputStream certificationExcelFile = excelHandler.getCertificationExcelFile(certificationTmpFile);
         return ResponseEntity.ok().contentLength(certificationTmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=certification.xlsx").body(new InputStreamResource(certificationExcelFile));
     }
 
@@ -61,7 +61,7 @@ public class CertificationExcelBoardController {
     }
 
     private void deleteExistentFileAndUploadCertificationExcelFile(MultipartFile file, Model model) throws IOException {
-        List<CertificationBoard> certificationBoardList = excelStore.checkCertificationExcelFile(file);
+        List<CertificationBoard> certificationBoardList = excelHandler.checkCertificationExcelFile(file);
         certificationBoardService.deleteExcelListAndUploadCertificationList(certificationBoardList);
         model.addAttribute("certification", certificationBoardList);
     }
