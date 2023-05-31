@@ -27,6 +27,12 @@
         img {
             margin-top: 5%;
         }
+        .btn-test {
+            display: block;
+            width: 100%;
+            text-align: center;
+
+        }
     </style>
 </head>
 <%@include file="common/sessionController.jsp"%>
@@ -83,6 +89,11 @@
     </div>
 </div>
 
+<div class="offset-xxl-2 col-xxl-5 offset-lg-1 col-lg-5 col-md-6 col-12 mb-n2 d-md-none">
+    <a class="btn-primary me-3 btn-test" href="/api/chatBotPage">
+        ChatBot
+    </a>
+</div>
 <!-- link section -->
 <div class="py-7 pt-lg-18 pb-lg-8">
     <div class="container">
