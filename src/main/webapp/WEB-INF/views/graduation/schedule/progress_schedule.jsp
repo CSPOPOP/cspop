@@ -236,6 +236,7 @@
         let tableId = $(`#tableId`).val()
         let startDate = $(`#start-date`).val()
         let endDate = $(`#end-date`).val()
+
         const data = {
             "startDate" :startDate,
             "endDate": endDate
@@ -248,6 +249,13 @@
             success: ()=>{
                 alert("데이터 변경완료")
                 window.location.reload();
+            },
+            error: (err) => {
+                if(err.status == 500) {
+                    alert('시작 날짜는 종료 날짜보다 앞설 수 없습니다.');
+                } else {
+                    alert('날짜를 지정해야 합니다.');
+                }
             }
         })
     }
