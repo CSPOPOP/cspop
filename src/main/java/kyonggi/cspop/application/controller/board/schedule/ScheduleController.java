@@ -72,8 +72,8 @@ public class ScheduleController {
     }
 
     @PostMapping("/schedule/modify/{id}")
-    public ResponseEntity<Void> scheduleModify(@PathVariable Long id, @Validated @RequestBody ScheduleDto scheduleDto) {
-        if (scheduleDto.getEndDate() == null || scheduleDto.getStartDate() == null) {
+    public ResponseEntity<Void> scheduleModify(@PathVariable Long id, @Validated @RequestBody ScheduleDto scheduleDto, BindingResult result) {
+        if (result.hasFieldErrors()) {
             throw new CsPopException(CsPopErrorCode.SCHEDULE_HAS_NULL_CONTENT);
         }
         if (scheduleDto.getEndDate().isBefore(scheduleDto.getStartDate())) {

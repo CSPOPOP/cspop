@@ -3,6 +3,7 @@ package kyonggi.cspop.application;
 import kyonggi.cspop.application.controller.board.excel.certification.CertificationExcelBoardController;
 import kyonggi.cspop.application.controller.board.excel.graduate.GraduateCheckController;
 import kyonggi.cspop.application.controller.board.notice.NoticeBoardController;
+import kyonggi.cspop.application.controller.board.schedule.ScheduleController;
 import kyonggi.cspop.application.controller.board.userstatus.UserStatusController;
 import kyonggi.cspop.application.controller.chatbot.ChatBotController;
 import kyonggi.cspop.application.controller.users.UsersController;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
         GraduateCheckController.class,
         CertificationExcelBoardController.class,
         NoticeBoardController.class,
+        ScheduleController.class,
         UserStatusController.class,
         ChatBotController.class
 })
