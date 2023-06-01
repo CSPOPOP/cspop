@@ -1,6 +1,5 @@
 package kyonggi.cspop.domain.board.schedule;
 
-import kyonggi.cspop.application.controller.board.schedule.dto.ScheduleBoardDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -43,15 +42,6 @@ public class ScheduleBoard extends BaseEntity {
     @Comment("기타자격 본문")
     @Column(nullable = false)
     private String otherQualificationsText;
-
-    public void updateInfo(ScheduleBoardDto scheduleBoardDto) {
-        this.receivedText = scheduleBoardDto.getReceivedText();
-        this.proposalText = scheduleBoardDto.getProposalText();
-        this.interimReportText = scheduleBoardDto.getInterimReportText();
-        this.finalReportText = scheduleBoardDto.getFinalReportText();
-        this.finalPassText = scheduleBoardDto.getFinalPassText();
-        this.otherQualificationsText = scheduleBoardDto.getOtherQualificationsText();
-    }
 
     public void updateReceivedText(String receivedText) {
         this.receivedText = receivedText;

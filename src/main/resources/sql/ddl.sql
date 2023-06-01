@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS notice_board_upload_file;
-DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS notice_board;
 DROP TABLE IF EXISTS admins;
 DROP TABLE IF EXISTS other_qualifications;
@@ -52,25 +51,6 @@ CREATE TABLE notice_board
     CONSTRAINT `fk_notice_board_to_admin`
         FOREIGN KEY (admins_id)
             REFERENCES admins (id)
-)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `test`.`comments`
--- -----------------------------------------------------
-CREATE TABLE comments
-(
-    `id`                 BIGINT       NOT NULL AUTO_INCREMENT,
-    `created_date`       DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
-    `comment`            VARCHAR(255) NULL DEFAULT NULL COMMENT '댓글',
-    `notice_board_id`    BIGINT       NULL DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `fk_comments_to_notice_board`
-        FOREIGN KEY (notice_board_id)
-            REFERENCES notice_board (id)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
