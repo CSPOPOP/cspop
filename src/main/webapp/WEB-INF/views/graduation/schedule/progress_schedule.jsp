@@ -236,10 +236,11 @@
         let tableId = $(`#tableId`).val()
         let startDate = $(`#start-date`).val()
         let endDate = $(`#end-date`).val()
+
         const data = {
             "startDate" :startDate,
             "endDate": endDate
-        }
+        };
         $.ajax({
             url: "/api/graduation/schedule/modify/"+tableId,
             type: "post",
@@ -248,6 +249,9 @@
             success: ()=>{
                 alert("데이터 변경완료")
                 window.location.reload();
+            },
+            error: (error) => {
+                alert(error.responseJSON.errorMessage);
             }
         })
     }
