@@ -401,8 +401,8 @@
 
                                                                                         </c:if>
                                                                                         <c:if test="${userSchedule.submitStatus eq '완료'}">
-                                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#otherFormModify"
-                                                                                                    onclick="getOtherForm(${userOtherFormInfo.id})">
+                                                                                            <button class="btn btn-primary-soft btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
+                                                                                                    onclick="getProposalForm(${userProposalFormInfo.id})">
                                                                                                     ${userSchedule.submitStatus}
                                                                                             </button>
                                                                                         </c:if>
