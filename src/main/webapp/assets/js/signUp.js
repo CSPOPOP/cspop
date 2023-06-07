@@ -150,6 +150,7 @@ function signUp(event) {
         data: JSON.stringify(userData),
         contentType: "application/json; charset=utf-8",
         success: function (url) {
+            alert("회원가입 완료")
             window.location.replace(url);
         },error: (error) => alert(error.responseJSON.errorMessage)
     })

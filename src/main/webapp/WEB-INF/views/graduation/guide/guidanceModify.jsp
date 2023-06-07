@@ -91,7 +91,7 @@
                                         </c:if>
                                     </spring:hasBindErrors>
                                     <textarea id="editor" name="text">${data.text}</textarea>
-                                    <button type="submit" class="btn btn-primary">쓰기</button>
+                                    <button type="submit" class="btn btn-primary float-right">수정완료</button>
                                 </div>
                             </form>
                         </div>
