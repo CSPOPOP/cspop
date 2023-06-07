@@ -67,13 +67,6 @@
                             </a>
                         </li>
                     </c:if>
-                    <c:if test="${fn:contains(userId, 'admin')}">
-                        <li class="nav-item">
-                            <a class="nav-link " href="/api/graduation/application_management" data-bs-display="static">
-                                졸업 논문 관리
-                            </a>
-                        </li>
-                    </c:if>
                 </ul>
                 <c:if test="${(userId != 'NotLogin')}">
                     <ul class="nav-item userName">
