@@ -1,7 +1,6 @@
 package kyonggi.cspop.domain.board.notice;
 
 import kyonggi.cspop.domain.admins.Admins;
-import kyonggi.cspop.domain.comments.Comments;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
 import lombok.AccessLevel;
@@ -35,9 +34,6 @@ public class NoticeBoard extends BaseEntity {
 
     @Comment("조회수")
     private Integer views;
-
-    @OneToMany(mappedBy = "noticeBoard", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comments> comments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admins_id", foreignKey = @ForeignKey(name = "fk_notice_board_to_admin"))
