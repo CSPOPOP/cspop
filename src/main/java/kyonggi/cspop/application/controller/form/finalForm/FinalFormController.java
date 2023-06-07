@@ -3,7 +3,7 @@ package kyonggi.cspop.application.controller.form.finalForm;
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.form.finalForm.dto.FinalFormDto;
-import kyonggi.cspop.application.util.FileStore;
+import kyonggi.cspop.application.util.common.FileHandler;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.finalform.FinalForm;
@@ -41,7 +41,7 @@ public class FinalFormController {
     private final FinalFormService finalFormService;
     private final ExcelBoardService excelBoardService;
 
-    private final FileStore fileStore;
+    private final FileHandler fileHandler;
 
     @GetMapping("api/finalForm")
     public String saveFinalForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
@@ -70,7 +70,7 @@ public class FinalFormController {
         String x = exceptionOfFile((MultipartHttpServletRequest) request, model, user, excelByStudentId);
         if (x != null)
             return x;
-        FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
+        FinalFormUploadFile finalFormUploadFile = fileHandler.storeFinalFile(finalFormDto.getFinalFormUploadFile());
         FinalForm finalForm = FinalForm.createFinalForm(finalFormDto.getTitle(), finalFormDto.getDivision(), finalFormDto.getQualification(), finalFormDto.getPageNumber(), finalFormUploadFile);
         Long finalFormId = finalFormService.saveFinalForm(finalForm);
         usersService.updateUserByFinalForm(user.getId(), finalFormId);
@@ -83,7 +83,7 @@ public class FinalFormController {
         FinalForm finalForm = finalFormService.findFinalForm(finalFormId);
         String storeFileName = finalForm.getFinalFormUploadFile().getStoreFileName();
         String uploadFileName = finalForm.getFinalFormUploadFile().getUploadFileName();
-        UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
+        UrlResource resource = new UrlResource("file:" + fileHandler.getFullPath(storeFileName));
         String encodedUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
         String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);

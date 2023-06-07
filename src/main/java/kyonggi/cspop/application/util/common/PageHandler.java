@@ -1,9 +1,9 @@
-package kyonggi.cspop.application.util;
+package kyonggi.cspop.application.util.common;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class PageStore {
+public class PageHandler {
 
     private final static int PAGE_BLOCK = 10;
     private int startBlockPage;

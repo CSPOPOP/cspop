@@ -17,7 +17,7 @@ import kyonggi.cspop.application.controller.form.proposalform.dto.ProposalReject
 import kyonggi.cspop.application.controller.form.proposalform.dto.ProposalViewDto;
 import kyonggi.cspop.application.controller.form.submitform.dto.SubmitFormDto;
 import kyonggi.cspop.application.controller.form.submitform.dto.SubmitViewDto;
-import kyonggi.cspop.application.util.FileStore;
+import kyonggi.cspop.application.util.common.FileHandler;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.finalform.FinalForm;
@@ -73,7 +73,7 @@ public class UserStatusController {
     private final OtherFormService otherFormService;
     private final FinalFormService finalFormService;
 
-    private final FileStore fileStore;
+    private final FileHandler fileHandler;
 
     @GetMapping
     public String userStatusHome(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
@@ -173,7 +173,7 @@ public class UserStatusController {
         if (interimFormDto.getInterimFormUploadFile().getSize() > 10485760L) {
             throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
         }
-        InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
+        InterimFormUploadFile interimFormUploadFile = fileHandler.storeInterimFile(interimFormDto.getInterimFormUploadFile());
         interimFormService.updateUserInterimForm(interimFormId, interimFormDto, interimFormUploadFile);
         return ResponseEntity.noContent().build();
     }
@@ -187,7 +187,7 @@ public class UserStatusController {
         if (finalFormDto.getFinalFormUploadFile().getSize() > 10485760L) {
             throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
         }
-        FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
+        FinalFormUploadFile finalFormUploadFile = fileHandler.storeFinalFile(finalFormDto.getFinalFormUploadFile());
         finalFormService.updateUserFinalForm(finalFormId, finalFormDto, finalFormUploadFile);
         return ResponseEntity.noContent().build();
     }
@@ -201,7 +201,7 @@ public class UserStatusController {
         if (otherFormDto.getOtherFormUploadFile().getSize() > 10485760L) {
             throw new CsPopException(CsPopErrorCode.FILE_INVALID_SIZE);
         }
-        OtherFormUploadFile otherFormUploadFile = fileStore.storeOtherFile(otherFormDto.getOtherFormUploadFile());
+        OtherFormUploadFile otherFormUploadFile = fileHandler.storeOtherFile(otherFormDto.getOtherFormUploadFile());
         otherFormService.updateUserOtherForm(otherFormId, otherFormDto, otherFormUploadFile);
         return ResponseEntity.noContent().build();
     }

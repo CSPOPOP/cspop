@@ -1,4 +1,4 @@
-package kyonggi.cspop.interceptor;
+package kyonggi.cspop.config.interceptor;
 
 import kyonggi.cspop.application.SessionFactory;
 import lombok.extern.slf4j.Slf4j;

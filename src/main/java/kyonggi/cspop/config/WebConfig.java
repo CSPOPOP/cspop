@@ -1,7 +1,7 @@
 package kyonggi.cspop.config;
 
-import kyonggi.cspop.interceptor.AdminCheckInterceptor;
-import kyonggi.cspop.interceptor.LoginCheckInterceptor;
+import kyonggi.cspop.config.interceptor.AdminCheckInterceptor;
+import kyonggi.cspop.config.interceptor.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
