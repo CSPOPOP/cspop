@@ -101,6 +101,7 @@
         </div>
     </div>
 </section>
+<%--Test message--%>
 <%@include file="../../common/commonJS.jsp" %>
 <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
 <script>
