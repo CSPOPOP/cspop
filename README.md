@@ -1,5 +1,6 @@
 # 경기대학교 컴퓨터공학부 졸업 신청 시스템 - CSPOP
-[CSPOP 최종보고서](https://github.com/CSPOPOP/cspop/files/12903882/3._CSPOP.pdf)
+[[3팀_CSPOP]산학협력 프로젝트 최종보고서.pdf](https://github.com/CSPOPOP/.github/files/12903887/3._CSPOP.pdf)
+
 
 ## 목차
   - [개요](#개요) 
