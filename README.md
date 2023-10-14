@@ -1,43 +1,97 @@
+# 경기대학교 컴퓨터공학부 졸업 신청 시스템 - CSPOP
 
-# cspop, 경기대학교 컴퓨터공학부 졸업 신청 시스템
+## 목차
+  - [개요](#개요) 
+  - [사용 기술](#사용-기술)
+  - [화면 구성](#주요-화면-구성)
+  - [주요 기능](#주요-기능)
 
-### 협업 방식
-#### conflict를 최소화 하기 위해 역할 분담을 제대로 하자!!
+<hr>
 
-1. 브랜치는 항상 master 브랜치에서 만든다.
-2. 새로운 기능을 추가하기 위해 브랜치를 만든다면 이름을 명확히 작성한다. ex) feature/login
-3. 편의를 위해 깃 브랜치 전략을 따로 사용하지 않고, feature 브랜치만 사용한다.
-4. 피드백이나 도움이 필요할 때, 그리고 기능 구현이 완료되어 merge 준비가 됐을 때는 pull request(PR)을 생성한다.
-5. 팀원들의 PR에 대한 코드 리뷰 후 master 브랜치로 merge를 한다. 
----
-### 깃 커밋 컨벤션
-#### 깃 브랜치 전략을 사용하지 않기때문에 본문에 자신이 구현한 기능에 대해 최대한 자세하게 작성하자!!
+## 개요
+- 학생들이 학위 취득을 위해 필요한 졸업 신청 절차를 간편하게 수행할 수 있도록 하는 온라인 플랫폼
+- 학생들의 편의를 위해 개발되었으며, 학사 관리 부서 및 학생 자체에게도 효율적인 업무 처리를 지원
+- 프로젝트 개발 기간: 2023.02-2023.06
+  
+### 프로젝트 멤버
+|      정경원       |          유명한         |       한상범         |                                                                                                               
+| :------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|   <img width="160px" src="https://avatars.githubusercontent.com/u/103038606?v=4.png" />    |                      <img width="160px" src="https://avatars.githubusercontent.com/u/75025163?v=4.png" />    |                   <img width="160px" src="https://avatars.githubusercontent.com/u/90328527?v=4.png"/>   |
+|   [@kw99j10](https://github.com/kw99j10 )   |    [@yumyeonghan](https://github.com/yumyeonghan)  | [@SangBeom-Hahn](https://github.com/SangBeom-Hahn)  |
+| 팀장 & 백엔드 | 백엔드 | 인공지능 |
 
-1. 커밋 메세지는 제목, 본문으로 나눈다.
-2. 제목 작성 후 본묵 작성시 Enter로 한칸 띄운다.
-3. 제목은 한글로 간결하게 요점만 작성한다.
-4. 본문은 형식 없이 자신이 무엇을 작업했는지 최대한 자세하게 작성한다.
 
-#### 제목 타입
+|      함현준      |          고은아        |       이도현       |                                                                                                               
+| :------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | 
+|   <img width="160px" src="https://avatars.githubusercontent.com/u/85290394?v=4.png" />    |                      <img width="160px" src="https://avatars.githubusercontent.com/u/93309561?v=4.png" />    |                   <img width="160px" src="https://avatars.githubusercontent.com/u/68594605?v=4.png"/>   |
+|   [@noahyunjun](https://github.com/noahyunjun)   |    [@euna0104](https://github.com/euna0104)  | [@ehgus8](https://github.com/ehgus8)  |
+| 프론트엔드 | 프론트엔드 | 프론트엔드 |
 
-- feat: 새로운 기능 추가
-- fix: 버그 수정
-- docs: 문서 수정
-- refactor: 코드 리펙토링
-- test: 테스트 코드 작성
+<hr>
 
-#### 커밋 예시
-ex)
 
-feat: "회원가입 페이지 추가"
+## 사용 기술
 
-이름, 아이디, 비밀번호, ... 을 입력할 수 있는 회원가입 페이지를 추가한다.
+### Development
 
----
+#### Front-End
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white)
+![Jquery](https://img.shields.io/badge/Jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
+![JSP](https://img.shields.io/badge/JSP-FA6423?style=for-the-badge&logo=sparkpost&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap&logoColor=white)
 
-### Pull Request 제목 작성
-#### Pull Request 본문은 커밋 메세지를 상세하게 작성한다는 가정하에 생략한다.
+#### Back-End
+![Java](https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=OpenJDK&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Boot&logoColor=white)
+![JPA](https://img.shields.io/badge/JPA%20(Hibernate)-00485B?style=for-the-badge&logo=Hibernate&logoColor=white)
 
-- "작업 내용 요약" | {작업 브랜치} => {master} 
-  - ex) 로그인 기능 구현 | {feature/login} => {master}
+#### DB
+![Mysql](https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
+<br>
+
+### Idle & Support Tool
+![Apache tomcat](https://img.shields.io/badge/apache%20tomcat-F8DC75?style=for-the-badge&logo=apache%20tomcat&logoColor=white)
+![Intellij IDEA](https://img.shields.io/badge/intellij%20idea-000000?style=for-the-badge&logo=intellij%20idea&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white)
+![Github](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)
+![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)
+
+
+<hr>
+
+## 주요 화면 구성
+| 메인 페이지 |  로그인 페이지   |
+| :-------------------------------------------: | :------------: |
+|  <img width="500" height="400" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/72f7cf245f3a8fcede238c93e585c3f92c070ffb/webapp/WebContent/main.png"/> |  <img width="500" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/16ffdae69d4b9fc5b9dd0664db0ef0c31f501e9a/webapp/WebContent/login.png"/>|  
+
+| 졸업 현황 페이지 |  졸업 신청 페이지   |
+| :-------------------------------------------: | :------------: |
+|  <img width="500" height="400" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/ab391d5adb8b128176b0b73bf327ef896767adfe/webapp/WebContent/user-status.png"/> |  <img width="500" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/ab391d5adb8b128176b0b73bf327ef896767adfe/webapp/WebContent/user-apply.png"/>|  
+
+|  졸업자 조회 페이지  |  사용자 관리 페이지   |  
+| :-------------------------------------------: | :------------: |
+| <img width="500" height="400" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/ab391d5adb8b128176b0b73bf327ef896767adfe/webapp/WebContent/admin-view.png"/>   |  <img width="500" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/ab391d5adb8b128176b0b73bf327ef896767adfe/webapp/WebContent/admin-management.jpg"/>     |
+
+<hr>
+
+## 주요 기능
+
+  ### 📚 공통 기능
+  - 공지사항, 안내 및 내규, 진행 일정, 나의 졸업 현황 페이지 조회 가능
+  - 로그인, 회원가입, 챗봇 기능
+  
+  ### 📚 사용자 기능
+  - 단계별 졸업 신청서 작성, 필요시 파일 첨부 가능
+  - 관리자 미승인 시 신청서 수정 가능
+  
+  ### 📚 관리자 기능
+  - 공지사항, 안내 및 내규, 진행 일정 작성, 수정 및 삭제 가능
+  - 단계별 졸업자 조회 가능
+  - 사용자가 제출한 신청서 승인 및 반려 가능
+  - 사용자의 공학인증 현황 엑셀 파일을 업로드 및 다운로드 가능
+
+ <hr>
