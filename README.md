@@ -1,4 +1,5 @@
 # 경기대학교 컴퓨터공학부 졸업 신청 시스템 - CSPOP
+[CSPOP 최종보고서](https://github.com/CSPOPOP/cspop/files/12903882/3._CSPOP.pdf)
 
 ## 목차
   - [개요](#개요) 
@@ -64,17 +65,25 @@
 <hr>
 
 ## 주요 화면 구성
-| 메인 페이지 |  로그인 페이지   |
+| 메인 |  챗봇   |
 | :-------------------------------------------: | :------------: |
-|  <img width="500" height="400" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/72f7cf245f3a8fcede238c93e585c3f92c070ffb/webapp/WebContent/main.png"/> |  <img width="500" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/16ffdae69d4b9fc5b9dd0664db0ef0c31f501e9a/webapp/WebContent/login.png"/>|  
+|  <img width="500" height='400' src="https://github.com/CSPOPOP/cspop/assets/75025163/e8f0e57f-6bcc-4632-b2c5-32fe6ae5d98c"> |  <img width="500" height='400' alt="image" src="https://github.com/CSPOPOP/cspop/assets/75025163/1df70e73-8ea7-4c18-8f68-178a26d2b0df">
 
-| 졸업 현황 페이지 |  졸업 신청 페이지   |
-| :-------------------------------------------: | :------------: |
-|  <img width="500" height="400" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/ab391d5adb8b128176b0b73bf327ef896767adfe/webapp/WebContent/user-status.png"/> |  <img width="500" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/ab391d5adb8b128176b0b73bf327ef896767adfe/webapp/WebContent/user-apply.png"/>|  
 
-|  졸업자 조회 페이지  |  사용자 관리 페이지   |  
+| 회원 가입 |  로그인   |
 | :-------------------------------------------: | :------------: |
-| <img width="500" height="400" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/ab391d5adb8b128176b0b73bf327ef896767adfe/webapp/WebContent/admin-view.png"/>   |  <img width="500" src="https://raw.githubusercontent.com/kw99j10/WebDesign-3-2/ab391d5adb8b128176b0b73bf327ef896767adfe/webapp/WebContent/admin-management.jpg"/>     |
+|  <img width="500" height='400' alt="image" src="https://github.com/CSPOPOP/cspop/assets/75025163/a5c1e3d6-2903-4dba-a71c-dbf9d7ca2574"> |  <img width="500" height='400' alt="image" src="https://github.com/CSPOPOP/cspop/assets/75025163/89e5edfe-6502-4354-8871-5851fe17187e">
+ 
+
+| 졸업 현황 |  공학인증   |
+| :-------------------------------------------: | :------------: |
+|  <img width="500" height='400' alt="image" src="https://github.com/CSPOPOP/cspop/assets/75025163/624b1c01-83e0-4d69-894a-a7e9a858d88b"> |  <img width="500" height='400' alt="image" src="https://github.com/CSPOPOP/cspop/assets/75025163/7bf06db3-dae2-4ecf-adca-342b869bc344">
+
+
+|  졸업자  |  공지사항   |  
+| :-------------------------------------------: | :------------: |
+| <img width="500" height='400' alt="image" src="https://github.com/CSPOPOP/cspop/assets/75025163/8cf22c76-8518-46c2-8d47-bb70bba8d88a">  |  <img width="500" height='400' alt="image" src="https://github.com/CSPOPOP/cspop/assets/75025163/a3851d4b-1150-46c0-9f32-32acc6119c65">
+  
 
 <hr>
 
